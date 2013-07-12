@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class NetworkManager : MonoBehaviour
+public class NetworkManager : MonoSingleton<NetworkManager>
 {
     public interface IPlayer
     {
@@ -61,8 +61,10 @@ public class NetworkManager : MonoBehaviour
         
     }
 
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         networkView.group = 1;
     }
 
