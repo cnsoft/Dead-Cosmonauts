@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+[RequireComponent(typeof(NetworkView))]
 public class NetworkManager : MonoSingleton<NetworkManager>
 {
     public interface IPlayer
@@ -64,7 +65,10 @@ public class NetworkManager : MonoSingleton<NetworkManager>
     protected override void Awake()
     {
         base.Awake();
-
+        if (networkView == null)
+        {
+            gameObject.AddComponent<NetworkView>();
+        }
         networkView.group = 1;
     }
 
@@ -242,7 +246,7 @@ public class NetworkManager : MonoSingleton<NetworkManager>
     {
         List<GameEvent> eventsToEvaluate = events.FindAll(e => e.turn <= communicationsTurn - simulationDelay);
 
-        int latestProcessed = -1;
+        int latestProcessed = 0;
 
         foreach (GameEvent e in eventsToEvaluate)
         {
