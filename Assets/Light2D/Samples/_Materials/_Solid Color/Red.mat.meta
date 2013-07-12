@@ -1,4 +1,21 @@
 fileFormatVersion: 2
-guid: 8611f1768e757894ea45a184f7740300
+guid: 06840ba3fa02c0942bed5d48647bbc03
+labels:
+- 2d
+- light
+- physics
+- fov
+- effect
+- mechanics
+- event
+- events
+- script
+- tool
+- volumetric
+- lighting
+- reverie
+- interactive
+- jake
+- fletcher
 NativeFormatImporter:
   userData: 

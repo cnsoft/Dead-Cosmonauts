@@ -1,5 +1,27 @@
 fileFormatVersion: 2
-guid: 4eaf9ee75bb237f498ca871bc4060800
+guid: 6f7c19dab50beaa46a6ef0f4d9edad91
+labels:
+- 2d
+- light
+- physics
+- fov
+- effect
+- mechanics
+- event
+- events
+- script
+- tool
+- volumetric
+- lighting
+- reverie
+- interactive
+- jake
+- fletcher
+- jacob
+- editor
+- shader
+- shadow
+- 2dvls
 MonoImporter:
   serializedVersion: 2
   defaultReferences: []

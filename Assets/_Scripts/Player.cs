@@ -1,24 +1,4 @@
-using UnityEngine;[RequireComponent(typeof(CharacterController))]public class Player : MonoBehaviour{    private const string AxisNameHorizontal = "Horizontal";    private const string AxisNameVertical = "Vertical";    /// <summary>    /// Your player's current movement.    /// </summary>    public Vector3 currentMovement;    /// <summary>    /// Your character's move speed.    /// </summary>    public float moveSpeed = 5;    /// <summary>    /// A pointer to the character controller, initialized by default.    /// </summary>    public CharacterController controller;
-
-    private Vector3 _maxMagnitude = new Vector3(1,1,1);
-
-    /// <summary>
-    /// Constrain the magnitude of the axes.
-    /// </summary>
-    public float maxMagnitude
-    {
-        get { return _maxMagnitude[0]; }
-        set
-        {
-            _maxMagnitude = new Vector3(value,value,value);
-        }
-    }	// Use this for initialization	void Awake ()	{        if (controller == null)        {            controller = GetComponent<CharacterController>();        }	}		// Update is called once per frame	void Update ()
+using UnityEngine;public class Player : MonoBehaviour{    private const string AxisNameHorizontal = "Horizontal";    private const string AxisNameVertical = "Vertical";	    public Vector3 currentMovement;    public float moveSpeed = 5;    public CharacterController controller;		void Awake ()	{        if (controller == null)        {            controller = GetComponent<CharacterController>();        }	}	void Update ()
 	{
 	    currentMovement[0] = Input.GetAxisRaw(AxisNameHorizontal);
-        currentMovement[1] = Input.GetAxisRaw(AxisNameVertical);
-
-	    if (currentMovement.magnitude > maxMagnitude)
-	    {
-	        currentMovement.Normalize();
-            currentMovement.Scale(_maxMagnitude);
-	    }	    controller.Move(currentMovement*moveSpeed*Time.deltaTime);	}}
+        currentMovement[1] = Input.GetAxisRaw(AxisNameVertical);	    //controller.Move(currentMovement*moveSpeed*Time.deltaTime);		float y = Input.GetAxisRaw("RSVertical");		float x = Input.GetAxisRaw("RSHorizontal");		transform.localEulerAngles = new Vector3(0,0, (Mathf.Atan2(y, x))*180/(Mathf.PI));		//transform.LookAt(transform.position+new Vector3(Input.GetAxisRaw("RSVertical"), Input.GetAxisRaw("RSHorizontal"),0), Vector3.up);		print (Input.GetAxisRaw("Horizontal") + " " + Input.GetAxisRaw("Vertical"));		print (currentMovement);	}}
