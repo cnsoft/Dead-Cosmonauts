@@ -5,8 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-[RequireComponent(typeof(NetworkView))]
-public class NetworkManager : MonoSingleton<NetworkManager>
+public class NetworkManager : MonoBehaviour
 {
     public interface IPlayer
     {
@@ -62,9 +61,8 @@ public class NetworkManager : MonoSingleton<NetworkManager>
         
     }
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
         if (networkView == null)
         {
             gameObject.AddComponent<NetworkView>();
@@ -114,7 +112,11 @@ public class NetworkManager : MonoSingleton<NetworkManager>
             e == MasterServerEvent.RegistrationFailedGameType ||
             e == MasterServerEvent.RegistrationFailedGameName)
         {
-            CreateGame();
+
+        }
+        else
+        {
+            OnConnectedToServer();
         }
     }
 
@@ -158,6 +160,26 @@ public class NetworkManager : MonoSingleton<NetworkManager>
     {
         AddPlayerData(joinedPlayer);
         networkEventHandler.OnOtherPlayerConnected(joinedPlayer);
+
+
+        if (Network.isServer)
+        {
+            int? oldestCommunicationsTurn = null;
+
+            foreach (PlayerData player in _playerDatas.Values)
+            {
+                if (oldestCommunicationsTurn == null)
+                {
+                    oldestCommunicationsTurn = player.lastCommunicationsTurn;
+                } else if (oldestCommunicationsTurn > player.lastCommunicationsTurn)
+                {
+                    oldestCommunicationsTurn = player.lastCommunicationsTurn;
+                }
+            }
+
+            networkView.RPC("StartingGameData",joinedPlayer,oldestCommunicationsTurn.GetValueOrDefault());
+        }
+        
     }
 
     private void AddPlayerData(NetworkPlayer joinedPlayer)
@@ -239,6 +261,15 @@ public class NetworkManager : MonoSingleton<NetworkManager>
         if (playersUpToSpeed && simulationTurn < communicationsTurn - simulationDelay)
         {
             Evaluate();
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        Network.Disconnect();
+        if (Network.isServer)
+        {
+            MasterServer.UnregisterHost();
         }
     }
 
