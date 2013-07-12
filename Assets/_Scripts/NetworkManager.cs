@@ -12,10 +12,13 @@ public class NetworkManager : MonoBehaviour
         void Move(Vector3 moveAmount);
         void Look(float direction);
         void Shoot(float direction);
+        void Hit();
     }
-    public interface IJoinGameHandler
+    public interface INetworkEventHandler
     {
-        IPlayer OnPlayerJoined(NetworkPlayer player);
+        void OnThisPlayerConnected();
+        void OnOtherPlayerConnected(NetworkPlayer player);
+        IPlayer CreateGameObjectForPlayer(NetworkPlayer player);
     }
 
     class PlayerData
@@ -24,7 +27,7 @@ public class NetworkManager : MonoBehaviour
         public int lastCommunicationsTurn;
     }
 
-    public IJoinGameHandler joinGameHandler;
+    public INetworkEventHandler networkEventHandler;
     public int communicationsTurn;
     public int simulationTurn;
     public int simulationDelay = 2;
@@ -46,6 +49,16 @@ public class NetworkManager : MonoBehaviour
     public class MoveEvent : GameEvent
     {
         public Vector3 move;
+    }
+
+    public class FireEvent : GameEvent
+    {
+        public float direction;
+    }
+
+    public class HitEvent : GameEvent
+    {
+        
     }
 
     void Awake()
@@ -101,7 +114,9 @@ public class NetworkManager : MonoBehaviour
 
     private void OnConnectedToServer()
     {
+        AddPlayerData(networkView.owner);
         networkView.RPC("JoinedGame",RPCMode.OthersBuffered,networkView.owner);
+        networkEventHandler.OnThisPlayerConnected();
     }
 
     public void MoveMe(Vector3 move, bool shouldPredict = false)
@@ -123,13 +138,28 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
+    public void HitMe(bool shouldPredict = false)
+    {
+        networkView.RPC("HitPlayer",RPCMode.OthersBuffered,communicationsTurn);
+        if (shouldPredict)
+        {
+            _playerDatas[networkView.owner.guid].player.Hit();
+        }
+    }
+
     [RPC]
     public void JoinedGame(NetworkPlayer joinedPlayer)
+    {
+        AddPlayerData(joinedPlayer);
+        networkEventHandler.OnOtherPlayerConnected(joinedPlayer);
+    }
+
+    private void AddPlayerData(NetworkPlayer joinedPlayer)
     {
         _playerDatas[joinedPlayer.guid] = new PlayerData()
             {
                 lastCommunicationsTurn = 0,
-                player = joinGameHandler.OnPlayerJoined(joinedPlayer)
+                player = networkEventHandler.CreateGameObjectForPlayer(joinedPlayer)
             };
     }
 
@@ -164,10 +194,7 @@ public class NetworkManager : MonoBehaviour
             });
     }
 
-    public class FireEvent : GameEvent
-    {
-        public float direction;
-    }
+
 
     [RPC]
     public void ReachedTurn(NetworkPlayer inPlayer, int reachedTurn)
@@ -217,16 +244,32 @@ public class NetworkManager : MonoBehaviour
 
         foreach (GameEvent e in eventsToEvaluate)
         {
-            MoveEvent moveEvent = e as MoveEvent;
-            if (moveEvent != null && _playerDatas.ContainsKey(moveEvent.playerGuid))
+            if (e is MoveEvent)
             {
+                MoveEvent moveEvent = e as MoveEvent;
+
                 _playerDatas[moveEvent.playerGuid].player.Move(moveEvent.move);
-                moveEvent.processed = true;
-                if (latestProcessed < moveEvent.turn)
-                {
-                    latestProcessed = moveEvent.turn;
-                }
+                
+            } else if (e is FireEvent)
+            {
+                FireEvent fireEvent = e as FireEvent;
+                _playerDatas[fireEvent.playerGuid].player.Shoot(fireEvent.direction);
+
+            } else if (e is HitEvent)
+            {
+                _playerDatas[e.playerGuid].player.Hit();
             }
+            else
+            {
+                continue;
+            }
+
+            e.processed = true;
+            if (latestProcessed < e.turn)
+            {
+                latestProcessed = e.turn;
+            }
+
         }
         
         if (latestProcessed > simulationTurn)
