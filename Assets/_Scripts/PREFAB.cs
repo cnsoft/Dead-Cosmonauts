@@ -5,11 +5,13 @@ public class PREFAB : MonoBehaviour {
 
 	public static GameObject		BULLET;
 	public static GameObject		DAMAGE_TEXT;
+	public static GameObject		EXPLOSION;
 	
 	void Awake()
 	{
 		BULLET = (GameObject)Resources.Load("Bullet");
 		DAMAGE_TEXT = (GameObject)Resources.Load("DamageText");
+		EXPLOSION = (GameObject)Resources.Load("Explosion");
 	}
 	
 	public static Transform SpawnPrefab (GameObject obj, Vector3 pos, string pool)

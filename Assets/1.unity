@@ -170,7 +170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &366817601
 Transform:
   m_ObjectHideFlags: 0
@@ -198,13 +198,13 @@ MonoBehaviour:
   sweepStart: 0
   coneStart: -49.4449997
   sweepSize: 98.8899994
-  lightColor: {r: .925373137, g: .0828692243, b: .77219075, a: 0}
+  lightColor: {r: .0828692243, g: .324426144, b: .925373137, a: 0}
   lightDetail: 499
   lightMaterial: {fileID: 2100000, guid: 4872e55d3e634564881455d24d9f2e97, type: 2}
   shadowLayer:
     serializedVersion: 2
     m_Bits: 4294967295
-  useEvents: 0
+  useEvents: 1
   isShadowCaster: 0
   lightEnabled: 1
   ignoreOptimizations: 0

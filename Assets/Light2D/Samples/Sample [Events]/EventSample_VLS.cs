@@ -30,10 +30,8 @@ public class EventSample_VLS : MonoBehaviour
         // If it is talking to us then we change the color of the light which sent the event [light]
         if (go.GetInstanceID() == gameObject.GetInstanceID())
         {
-            if (screenText != null)
-                screenText.text = "DANGER!";
-
-            light.LightColor = collidedColor;
+            //light.LightColor = collidedColor;
+			renderer.material.color = collidedColor;
         }
     }
 
@@ -50,10 +48,9 @@ public class EventSample_VLS : MonoBehaviour
         // If it is talking to us then we change the color of the light which sent the event [light]
         if (go.GetInstanceID() == gameObject.GetInstanceID())
         {
-            if (screenText != null)
-                screenText.text = "SAFE";
 
-            light.LightColor = nonCollidedColor;
+            //light.LightColor = nonCollidedColor;
+			renderer.material.color = nonCollidedColor;
         }
     }
 }

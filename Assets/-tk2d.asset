@@ -11,7 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d7108e6a32b16149b771cb51c9a2526, type: 3}
   m_Name: -tk2d
   version: 4
-  spriteAnimationIndex: []
+  spriteAnimationIndex:
+  - assetGUID: 52475fe6ab5d24ee6b99bf361852372c
+    dataGUID: 
+    managed: 0
+    loadable: 0
   fontIndex:
   - assetGUID: 69696b77a24a64cee93b2949f5ab9637
     dataGUID: 4cf63ff638dc445eeb34140dbcef1741
@@ -27,6 +31,64 @@ MonoBehaviour:
     - 2f6935637a53d4ea0a0dcb6bafac24e8
     spriteTextureTimeStamps:
     - 1373214941
+    managedSpriteCollection: 0
+    loadable: 0
+    assetName: 
+    version: 3
+  - name: 16Bit
+    spriteCollectionGUID: efcf80d4dde7e466d8a739827740fc08
+    spriteCollectionDataGUID: 4b4793a80820e4266b5a492351b555cc
+    spriteNames:
+    - GFX_EXPLOSION1_0005
+    - GFX_EXPLOSION1_0011
+    - GFX_EXPLOSION1_0010
+    - GFX_EXPLOSION1_0009
+    - GFX_EXPLOSION1_0001
+    - GFX_EXPLOSION1_0008
+    - GFX_EXPLOSION1_0014
+    - GFX_EXPLOSION1_0015
+    - GFX_EXPLOSION1_0007
+    - GFX_EXPLOSION1_0004
+    - GFX_EXPLOSION1_0012
+    - GFX_EXPLOSION1_0003
+    - GFX_EXPLOSION1_0002
+    - GFX_EXPLOSION1_0006
+    - GFX_EXPLOSION1_0013
+    - EMPTY
+    spriteTextureGUIDs:
+    - 1398270fc8c1147ecab285ef0e5b8102
+    - 14904e671ada74cb7b18ba7dcad7d93f
+    - 2ce09139a8814480ca481f71d0dadbf8
+    - 48b301be14730457cb9f3733ef3b31d0
+    - 550d0d7132df647219baa6f67d430977
+    - 62f98af1e7a6d47e193b1ef551b47f66
+    - 75938e08ec00a4c488a1d0e0c90c9764
+    - 8e17a802b27994c85a3aad2543453b4f
+    - 9699d04108c86415a80a5ba729747718
+    - acf2f4ce6935640d0b8c3d44a5c3f7ab
+    - bbf7999d7c2144840b5ae05366055266
+    - bc77fa631c9e344a9ad406969dbf4e88
+    - d2a736720fdf949c98d5fe7cbc8f2234
+    - f59a93269d6134194a708cf650e178f4
+    - f74b42d1759554e818a255574911b48d
+    - 37b786272798c4c9fa8af3634e646075
+    spriteTextureTimeStamps:
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1349275893
+    - 1373140609
     managedSpriteCollection: 0
     loadable: 0
     assetName: 
