@@ -11,7 +11,7 @@ public class NetworkManager : MonoBehaviour
     {
         void Move(Vector3 moveAmount);
         void Look(float direction);
-        void Shoot(int gunType);
+        void Shoot(float direction);
     }
     public interface IJoinGameHandler
     {
@@ -114,6 +114,15 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
+    public void FireMe(float direction, bool shouldPredict = false)
+    {
+        networkView.RPC("FirePlayer",RPCMode.OthersBuffered,communicationsTurn,direction);
+        if (shouldPredict)
+        {
+            _playerDatas[networkView.owner.guid].player.Shoot(direction);
+        }
+    }
+
     [RPC]
     public void JoinedGame(NetworkPlayer joinedPlayer)
     {
@@ -142,6 +151,22 @@ public class NetworkManager : MonoBehaviour
                 playerGuid = inPlayer.guid,
                 turn = inTurn
             });
+    }
+
+    [RPC]
+    public void FirePlayer(NetworkPlayer inPlayer, int inTurn, float direction)
+    {
+        events.Add(new FireEvent()
+            {
+                turn = inTurn,
+                playerGuid = inPlayer.guid,
+                direction = direction
+            });
+    }
+
+    public class FireEvent : GameEvent
+    {
+        public float direction;
     }
 
     [RPC]
