@@ -7,15 +7,17 @@ public class PowerUp : MonoBehaviour {
 
 	public int weaponId = 2;
 
-	void Awake()
+	/*void Awake(uLink.NetworkMessageInfo info) {
 	{
 		player = (Player)GameObject.FindObjectOfType(typeof(Player));
-	}
+	}*/
 
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Player"))
 		{
+			player = (Player)GameObject.FindObjectOfType(typeof(Player));
+		
 			player.ChangeWeapon(weaponId);
 			TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, other.transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
 

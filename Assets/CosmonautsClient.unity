@@ -805,7 +805,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffa7302b2a1904f98826accb64eaaac3, type: 3}
   m_Name: 
-  weaponId: 2
+  weaponId: 1
 --- !u!23 &500563281
 Renderer:
   m_ObjectHideFlags: 0

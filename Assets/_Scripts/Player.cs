@@ -131,7 +131,7 @@ public class Player : uLink.MonoBehaviour
 					PREFAB.SpawnPrefab(PREFAB.BULLET_SHOTGUN, transform.position, transform.localEulerAngles-new Vector3(0,0,76+(i*7)), "1");
 				}
 
-				weaponTimer = weaponCooldown*4.5f;
+				weaponTimer = weaponCooldown*4f;
 				weaponAmmo -= 1;
 			}
 		}
