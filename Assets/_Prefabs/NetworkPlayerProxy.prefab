@@ -50,6 +50,8 @@ GameObject:
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400008}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400004}
+  - 114: {fileID: 11400010}
   m_Layer: 0
   m_Name: NetworkPlayerProxy
   m_TagString: Player
@@ -223,6 +225,32 @@ MonoBehaviour:
   isShadowCaster: 0
   lightEnabled: 1
   ignoreOptimizations: 0
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93c314494caad74da5f6361d28c70d4, type: 3}
+  m_Name: 
+  currentMovement: {x: 0, y: 0, z: 0}
+  moveSpeed: 9
+  controller: {fileID: 0}
+  weaponCooldown: .180000007
+  rotationSpeed: 14
+  leftStickAxis:
+  - Horizontal
+  - Vertical
+  rightStickAxis:
+  - RSHorizontal
+  - RSVertical
+  weaponId: 0
+  weaponAmmo: 0
+  health: 10
+  damageCooldown: .200000003
+  healthBar: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -255,11 +283,24 @@ MonoBehaviour:
   _children: []
   stateSynchronization: 2
   securable: 0
-  observed: {fileID: 11400006}
+  observed: {fileID: 11400010}
   _manualViewID: 0
   rpcReceiver: 2
   listOfGameObjects: []
   _prefabRoot: {fileID: 100004}
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dd19f028d9551941b4c037dc097876c, type: 3}
+  m_Name: 
+  observedList:
+  - {fileID: 11400004}
+  - {fileID: 11400006}
 --- !u!143 &14300000
 CharacterController:
   m_ObjectHideFlags: 1
