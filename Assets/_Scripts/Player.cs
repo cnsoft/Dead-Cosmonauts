@@ -150,10 +150,10 @@ public class Player : uLink.MonoBehaviour
             PREFAB.SpawnPrefab (PREFAB.BULLET, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
             break;
         case 2:
-            for (int i = 0; i < 5; i++)
-            {
-                PREFAB.SpawnPrefab(PREFAB.BULLET_SHOTGUN, transform.position, transform.localEulerAngles-new Vector3(0,0,76+(i*7)), "1");
+            for (int i = 0; i < 5; i++) {
+                PREFAB.SpawnPrefab (PREFAB.BULLET_SHOTGUN, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 76 + (i * 7)), "1");
             }
+            break;
         }
     }
 
