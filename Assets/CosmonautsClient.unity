@@ -2943,6 +2943,7 @@ MonoBehaviour:
   maxX: 30
   minY: -30
   maxY: 30
+  playerTransform: {fileID: 0}
 --- !u!1 &2072629465
 GameObject:
   m_ObjectHideFlags: 0

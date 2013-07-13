@@ -11,7 +11,7 @@ public class CameraFollow : MonoBehaviour {
 	public float		minY = 0;
 	public float		maxY = 10;
 	
-	private Transform	_player;
+	public Transform	playerTransform;
 	private float		_curSmoothX;
 	private float		_curSmoothY;
 	private Camera		_cam;
@@ -21,35 +21,38 @@ public class CameraFollow : MonoBehaviour {
 	
 	
 	void Start () {
-		_player = GameObject.FindGameObjectWithTag("Player").transform;
-		if(_player == null)
-			Debug.LogError("CameraFollow: Start: Couldn't find Player");
-		
 		_cam = Camera.mainCamera;
 	}
 	
 	void Update () {
+        if (playerTransform == null) {
+            return;
+        }
+        _distanceX  = Mathf.Abs (Vector3.Distance(new Vector3(transform.position.x, 0,0), new Vector3(playerTransform.position.x, 0,0)));
+        _distanceY  = Mathf.Abs (Vector3.Distance(new Vector3(0, transform.position.y,0), new Vector3(0, playerTransform.position.y, 0)));
+        
+        if (_distanceX > 0.1f)
+            _curSmoothX = smoothing * Time.deltaTime;
+        else
+            _curSmoothX = smoothing * Time.deltaTime * 4;
+        
+        if (_distanceY > 0.025f)
+            _curSmoothY = smoothing * Time.deltaTime * 0.85f;
+        else
+            _curSmoothY = smoothing * Time.deltaTime * 2;
+
 		
-		_distanceX  = Mathf.Abs (Vector3.Distance(new Vector3(transform.position.x, 0,0), new Vector3(_player.position.x, 0,0)));
-		_distanceY  = Mathf.Abs (Vector3.Distance(new Vector3(0, transform.position.y,0), new Vector3(0, _player.position.y, 0)));
-		
-		if (_distanceX > 0.1f)
-			_curSmoothX = smoothing * Time.deltaTime;
-		else
-			_curSmoothX = smoothing * Time.deltaTime * 4;
-		
-		if (_distanceY > 0.025f)
-			_curSmoothY = smoothing * Time.deltaTime * 0.85f;
-		else
-			_curSmoothY = smoothing * Time.deltaTime * 2;
 		
 		//print (_distanceX.ToString("f3") +" " + _distanceY.ToString("f3"));
 	}
 	
 	void LateUpdate()
 	{
-		transform.position = new Vector3(Mathf.Lerp (transform.position.x, _player.position.x + offset.x, _curSmoothX),
-						 				 Mathf.Lerp (transform.position.y, _player.position.y + offset.y, _curSmoothY),
+        if (playerTransform == null) {
+            return;
+        }
+		transform.position = new Vector3(Mathf.Lerp (transform.position.x, playerTransform.position.x + offset.x, _curSmoothX),
+						 				 Mathf.Lerp (transform.position.y, playerTransform.position.y + offset.y, _curSmoothY),
 										 -10);
 		transform.position = new Vector3(Mathf.Clamp (transform.position.x, minX+_cam.orthographicSize*_cam.aspect, maxX-_cam.orthographicSize*_cam.aspect), Mathf.Clamp (transform.position.y, minY+_cam.orthographicSize, maxY-_cam.orthographicSize), -10);
 	}
