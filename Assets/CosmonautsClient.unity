@@ -385,7 +385,7 @@ GameObject:
   - 33: {fileID: 276296618}
   - 114: {fileID: 276296617}
   m_Layer: 0
-  m_Name: Tiled Sprite
+  m_Name: HealthBarSliced
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
