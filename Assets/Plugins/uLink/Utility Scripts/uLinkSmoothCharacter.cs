@@ -164,7 +164,7 @@ public class uLinkSmoothCharacter : uLink.MonoBehaviour
 		
 		if (moveCharacter)
 		{
-			character.SimpleMove(velocity);
+			character.Move(velocity*Time.deltaTime);
 			
 			targetDistance -= speed * Time.deltaTime;
 		}
