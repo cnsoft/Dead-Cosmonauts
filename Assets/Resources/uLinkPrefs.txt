@@ -3,7 +3,7 @@
 Network.symmetricKeySize=128
 Network.incomingPassword=
 Network.maxManualViewIDs=1000
-Network.sendRate=15
+Network.sendRate=30
 Network.trackRate=2
 Network.trackMaxDelta=2
 Network.isAuthoritativeServer=False
@@ -13,7 +13,7 @@ Network.useRedirect=False
 Network.redirectIP=
 Network.redirectPort=0
 Network.useDifferentStateForOwner=True
-Network.rpcTypeSafe=1
+Network.rpcTypeSafe=0
 Network.useProxy=False
 Network.requireSecurityForConnecting=False
 Network.emulation.maxBandwidth=0

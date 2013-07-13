@@ -49,7 +49,7 @@ MonoBehaviour:
   enableWhenGUI: []
   disableWhenGUI: []
   reloadOnDisconnect: 1
-  targetFrameRate: 60
+  targetFrameRate: 30
   guiSkin: {fileID: 0}
   guiDepth: 0
   dontDestroyOnLoad: 0

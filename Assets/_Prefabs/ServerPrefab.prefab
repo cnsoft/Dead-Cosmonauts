@@ -41,7 +41,7 @@ MonoBehaviour:
   maxConnections: 64
   cleanupAfterPlayers: 1
   registerHost: 1
-  targetFrameRate: 60
+  targetFrameRate: 30
   dontDestroyOnLoad: 0
   instantiateOnConnected:
     startPosition: {x: 0, y: 0, z: 0}
