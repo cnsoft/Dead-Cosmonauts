@@ -16,6 +16,7 @@ Library/
 iOSBuild/
 Assets/smcs.rsp
 Assets/smcs.rsp.meta
+Assets/Light2D/
 
 #NGUI examples
 Assets/NGUI/Examples/
