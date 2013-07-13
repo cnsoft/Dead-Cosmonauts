@@ -63,6 +63,7 @@ MonoBehaviour:
     - GFX_IMPACT_0002
     - GFX_IMPACT_0000
     - GFX_IMPACT_0003
+    - GUI_WHITE
     spriteTextureGUIDs:
     - 1398270fc8c1147ecab285ef0e5b8102
     - 14904e671ada74cb7b18ba7dcad7d93f
@@ -84,6 +85,7 @@ MonoBehaviour:
     - d25d181d0d0ce44c1af895559f3f8183
     - d85bd9e3b32fc4e0abac76cbb1865995
     - dd0674923391c4c308e7f09fc9cb72e1
+    - e99221d0898a24a84a423f339f37d5c3
     spriteTextureTimeStamps:
     - 1349275893
     - 1349275893
@@ -105,6 +107,7 @@ MonoBehaviour:
     - 1348732431
     - 1348732431
     - 1348732431
+    - 1373672214
     managedSpriteCollection: 0
     loadable: 0
     assetName: 
