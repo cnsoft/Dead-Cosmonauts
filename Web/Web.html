@@ -1,0 +1,14 @@
+<head>
+<title>Web</title>
+</head>
+
+<body>
+{{> radarTemplate}}
+</body>
+
+<template name="radarTemplate">
+    {{#each players}}
+    <div>_id: {{_id}} playerId: {{playerId}} x: {{x}} y: {{y}} orientation:
+        {{rotationZ}}</div>
+    {{/each}}
+</template>

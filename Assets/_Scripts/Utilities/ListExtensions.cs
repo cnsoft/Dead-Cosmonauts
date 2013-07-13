@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scopely.GDK.Extensions {
+namespace Extensions {
     public static partial class ListExtensions {
         public static List<T> Shuffle<T>(this List<T> list)  
         {  
