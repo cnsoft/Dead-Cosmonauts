@@ -3,12 +3,17 @@
 </head>
 
 <body>
-{{> radarTemplate}}
+<div
+        style="width:320px; height:480px; display: block !important;
+        position: relative; margin: 0; padding:0;">
+    {{> radarTemplate}}
+</div>
 </body>
 
 <template name="radarTemplate">
     {{#each players}}
-    <div>_id: {{_id}} playerId: {{playerId}} x: {{x}} y: {{y}} orientation:
-        {{rotationZ}}</div>
+    <div class="player" id="{{_id}}"
+         style="-webkit-transform: translate3d({{x}}px, {{y}}px, 0px)
+         rotate({{rotationZ}}deg); background-color: {{color}};"></div>
     {{/each}}
 </template>
