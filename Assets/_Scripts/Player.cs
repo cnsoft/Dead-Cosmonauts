@@ -47,8 +47,10 @@ public class Player : uLink.MonoBehaviour
 	}
 
     void uLink_OnNetworkInstantiate(uLink.NetworkMessageInfo info) {
-        _cameraFollow = GameObject.Find ("_Cam").GetComponent<CameraFollow> ();
-        _cameraFollow.playerTransform = this.transform;
+        if (info.networkView.isOwner) {
+            _cameraFollow = GameObject.Find ("_Cam").GetComponent<CameraFollow> ();
+            _cameraFollow.playerTransform = this.transform;
+        }
     }
 
 	void Update ()
