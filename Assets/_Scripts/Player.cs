@@ -109,52 +109,53 @@ public class Player : uLink.MonoBehaviour
 	}
 
     void WeaponShoot() {
-        networkView.RPC ("WeaponShootNetwork", uLink.RPCMode.All, weaponId);
+        if (weaponId == 0)
+        {
+            if (weaponTimer <= 0)
+            {
+                weaponTimer = weaponCooldown;
+                networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
+            }
+        }else if (weaponId == 1)
+        {
+            if (weaponTimer <= 0)
+            {
+                weaponTimer = weaponCooldown*0.8f;
+                weaponAmmo -= 1;
+                networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
+
+            }
+        }
+        else if (weaponId == 2)
+        {
+            if (weaponTimer <= 0)
+            {
+                weaponTimer = weaponCooldown*4f;
+                weaponAmmo -= 1;
+                networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
+
+            }
+        }
+
+       UpdateAmmoHUD();
     }
 
     [RPC]
-	void WeaponShootNetwork(int _weaponId)
-	{
-		if (_weaponId == 0)
-		{
-			if (weaponTimer <= 0)
-			{
-				PREFAB.SpawnPrefab(PREFAB.BULLET, transform.position, transform.localEulerAngles-new Vector3(0,0,90), "1");
-                if (networkView.isOwner) {
-				    weaponTimer = weaponCooldown;
-                }
-			}
-		}else if (_weaponId == 1)
-		{
-			if (weaponTimer <= 0)
-			{
-				PREFAB.SpawnPrefab(PREFAB.BULLET, transform.position, transform.localEulerAngles-new Vector3(0,0,90), "1");
-                if (networkView.isOwner) {
-    				weaponTimer = weaponCooldown*0.8f;
-    				weaponAmmo -= 1;
-                }
-			}
-		}
-		else if (_weaponId == 2)
-		{
-			if (weaponTimer <= 0)
-			{
-
-				for (int i = 0; i < 5; i++)
-				{
-					PREFAB.SpawnPrefab(PREFAB.BULLET_SHOTGUN, transform.position, transform.localEulerAngles-new Vector3(0,0,76+(i*7)), "1");
-				}
-                if (networkView.isOwner) {
-    				weaponTimer = weaponCooldown*4f;
-    				weaponAmmo -= 1;
-                }
-			}
-		}
-
-        if (networkView.isOwner) {
-            UpdateAmmoHUD();
+    void SpawnBullets(int _weaponId) {
+        switch (_weaponId) {
+        case 0:
+            PREFAB.SpawnPrefab (PREFAB.BULLET, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
+            break;
+        case 1:
+            PREFAB.SpawnPrefab (PREFAB.BULLET, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
+            break;
+        case 2:
+            for (int i = 0; i < 5; i++)
+            {
+                PREFAB.SpawnPrefab(PREFAB.BULLET_SHOTGUN, transform.position, transform.localEulerAngles-new Vector3(0,0,76+(i*7)), "1");
+            }
         }
-	}
+    }
 
 	public void ChangeWeapon (int id)
 	{
