@@ -11,8 +11,13 @@ public class Bullet : MonoBehaviour {
 	public bool launched;
 
 	void OnSpawned () {
+		//renderer.material.color = Color.blue;
+
+		tag = "Untagged";
+
 		CancelInvoke();
 		Invoke("Despawn", lifetime);
+		Invoke("TagObject", 0.04f);
 	}
 
 	void Update () {
@@ -25,7 +30,13 @@ public class Bullet : MonoBehaviour {
 		PREFAB.DespawnPrefab(this.transform, "1");
 	}
 
-	void OnTriggerEnter(Collider other)
+	void TagObject()
+	{
+		gameObject.tag = "Bullet";
+		//renderer.material.color = Color.red;
+	}
+
+	/*void OnTriggerEnter(Collider other)
 	{
 		if (other.CompareTag("Enemy"))
 		{
@@ -34,6 +45,6 @@ public class Bullet : MonoBehaviour {
 			AudioSource.PlayClipAtPoint(PREFAB.audio.hitSound, transform.position);
 			PREFAB.DespawnPrefab(this.transform, "1");
 		}
-	}
+	}*/
 	
 }
