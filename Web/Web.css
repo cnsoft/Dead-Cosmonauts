@@ -1,1 +1,26 @@
 /* CSS declarations go here */
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; /* Disable selection/Copy of UIWebView */
+}
+
+body {
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+}
+
+.player {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    display: block !important;
+    position: absolute;
+    overflow: hidden;
+    opacity: 1;
+    transition-property: transform, background-color;
+    transition-duration: 1.0s;
+    -webkit-transition-property: -webkit-transform, background-color;
+    -webkit-transition-duration: 1.0s;
+}

@@ -1,13 +1,19 @@
 Players = new Meteor.Collection("players");
 
+defaultPreserve = {
+  'div[id]': function (node) {
+    return node.id;
+  }
+};
+
 if (Meteor.isServer) {
-  Meteor.Router.add('/update/:playerId/:x/:y/:rotationZ','GET',function(playerId,x,y,rotationZ) {
+  Meteor.Router.add('/update/:playerId/:x/:y/:rotationZ/:color','GET',function(playerId,x,y,rotationZ,color) {
     var id = 0;
     try {
       if (Players.find({playerId:playerId}).count() > 0) {
-        Players.update({playerId:playerId},{$set:{x:x,y:y,rotationZ:rotationZ}});
+        Players.update({playerId:playerId},{$set:{x:x,y:y,rotationZ:rotationZ,color:color}});
       } else {
-        id = Players.insert({playerId:playerId,x:x,y:y,rotationZ:rotationZ});
+        id = Players.insert({playerId:playerId,x:x,y:y,rotationZ:rotationZ,color:color});
       }
     } catch (e) {
       return [500,'0'];
@@ -27,12 +33,8 @@ if (Meteor.isServer) {
 
 if (Meteor.isClient) {
   Template.radarTemplate.players = function () {
-    return Players.find();
+    return Players.find({}).fetch();
   }
+
+  Template.radarTemplate.preserve = defaultPreserve;
 }
-
-Meteor.methods({
-  updateHandler:function(playerId,x,y,rotationZ) {
-
-  }
-})
