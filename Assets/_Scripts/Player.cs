@@ -176,7 +176,7 @@ public class Player : uLink.MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.CompareTag("Bullet") && damageCooldownTimer <= 0)
+		if (other.CompareTag("Bullet") && damageCooldownTimer <= 0 && networkView.isOwner)
 		{
 			Bullet bullet = other.GetComponent<Bullet>();
 			TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
