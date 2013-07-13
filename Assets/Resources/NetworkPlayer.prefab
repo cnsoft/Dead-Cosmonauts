@@ -31,6 +31,9 @@ GameObject:
   - 23: {fileID: 2300002}
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400006}
+  - 114: {fileID: 11400008}
+  - 114: {fileID: 11400010}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -243,6 +246,58 @@ MonoBehaviour:
   meshCollider: {fileID: 0}
   meshColliderPositions: []
   meshColliderMesh: {fileID: 0}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9be5429cbf387c4f9140f7d1908fb9c, type: 3}
+  m_Name: 
+  proxyPrefab: 
+  ownerPrefab: 
+  serverPrefab: 
+  _parent: {fileID: 0}
+  _childIndex: -1
+  _children: []
+  stateSynchronization: 2
+  securable: 0
+  observed: {fileID: 11400008}
+  _manualViewID: 1
+  rpcReceiver: 2
+  listOfGameObjects: []
+  _prefabRoot: {fileID: 0}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c1eb949a92b66546af2eb1c65bab5a4, type: 3}
+  m_Name: 
+  maxSpeed: 8
+  maxDistance: 10
+  arrivalDistance: 1
+  velocity: {x: 0, y: 0, z: 0}
+  moveCharacter: 1
+  arrivalSpeed: 0
+  rotationDamping: .850000024
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9024318d30b734ab4bfad196cb7fc9, type: 3}
+  m_Name: 
+  othersPrefab: {fileID: 100002}
+  appendLoginData: 1
 --- !u!143 &14300000
 CharacterController:
   m_ObjectHideFlags: 1
