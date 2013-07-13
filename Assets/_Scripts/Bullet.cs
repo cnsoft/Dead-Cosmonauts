@@ -6,13 +6,18 @@ public class Bullet : MonoBehaviour {
 	public float flySpeed = 5;
 	public float lifetime = 2;
 
+	public int damage = 1;
+
+	public bool launched;
+
 	void OnSpawned () {
 		CancelInvoke();
 		Invoke("Despawn", lifetime);
 	}
 
 	void Update () {
-		transform.Translate(Vector3.up * flySpeed * Time.deltaTime);
+		if (launched)
+			transform.Translate(Vector3.up * flySpeed * Time.deltaTime);
 	}
 
 	void Despawn()
@@ -30,4 +35,5 @@ public class Bullet : MonoBehaviour {
 			PREFAB.DespawnPrefab(this.transform, "1");
 		}
 	}
+	
 }
