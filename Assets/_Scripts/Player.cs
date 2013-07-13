@@ -50,16 +50,22 @@ public class Player : uLink.MonoBehaviour
 	}
 
     void uLink_OnNetworkInstantiate(uLink.NetworkMessageInfo info) {
-        if (info.networkView.isOwner) {
-            _cameraFollow = GameObject.Find ("_Cam").GetComponent<CameraFollow> ();
-            _cameraFollow.playerTransform = this.transform;
-			healthBar = GameObject.Find("HealthBarSliced").GetComponent<tk2dTiledSprite>();
-			UpdateHealth();
+        if (!info.networkView.isOwner) {
+            return;
         }
+
+        _cameraFollow = GameObject.Find ("_Cam").GetComponent<CameraFollow> ();
+        _cameraFollow.playerTransform = this.transform;
+		healthBar = GameObject.Find("HealthBarSliced").GetComponent<tk2dTiledSprite>();
+		UpdateHealth();
     }
 
 	void Update ()
 	{
+        if (!networkView.isOwner) {
+            return;
+        }
+
 		currentMovement[0] = Mathf.Abs(Input.GetAxis(leftStickAxis[0])) > 0.1f ? Input.GetAxis(leftStickAxis[0]) : 0;
 		currentMovement[1] = Mathf.Abs(Input.GetAxis(leftStickAxis[1])) > 0.1f ? Input.GetAxis(leftStickAxis[1]) : 0;
 
@@ -133,7 +139,6 @@ public class Player : uLink.MonoBehaviour
                 weaponTimer = weaponCooldown*4f;
                 weaponAmmo -= 1;
                 networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
-
             }
         }
 
