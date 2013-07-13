@@ -26,12 +26,13 @@ public class Player : uLink.MonoBehaviour
 	private tk2dTextMesh weaponText;
 
 	public float health = 10;
+	public float maxHealth = 10;
 	public float damageCooldown = 0.2f;
 	private float damageCooldownTimer;
 
     private CameraFollow _cameraFollow;
 
-	public tk2dSlicedSprite healthBar;
+	public tk2dTiledSprite healthBar;
 
 	void Awake ()
 	{
@@ -43,6 +44,8 @@ public class Player : uLink.MonoBehaviour
 		ammoText = GameObject.Find("AmmoText").GetComponent<tk2dTextMesh>();
 		weaponText = GameObject.Find("WeaponText").GetComponent<tk2dTextMesh>();
 
+		health = maxHealth;
+
 		UpdateAmmoHUD();
 	}
 
@@ -50,6 +53,8 @@ public class Player : uLink.MonoBehaviour
         if (info.networkView.isOwner) {
             _cameraFollow = GameObject.Find ("_Cam").GetComponent<CameraFollow> ();
             _cameraFollow.playerTransform = this.transform;
+			healthBar = GameObject.Find("HealthBarSliced").GetComponent<tk2dTiledSprite>();
+			UpdateHealth();
         }
     }
 
@@ -169,6 +174,8 @@ public class Player : uLink.MonoBehaviour
 			AudioSource.PlayClipAtPoint(PREFAB.audio.hitSound, transform.position);
 
 			StartCoroutine(Blink());
+
+			UpdateHealth();
 		}
 	}
 
@@ -181,7 +188,13 @@ public class Player : uLink.MonoBehaviour
 
 	void UpdateHealth()
 	{
-
+		if (health > 0)
+		{
+			healthBar.dimensions = new Vector2((health / maxHealth)*200,healthBar.dimensions.y);
+		}else
+		{
+			healthBar.dimensions = new Vector2(0,healthBar.dimensions.y);
+		}
 	}
 
 	void UpdateAmmoHUD()
