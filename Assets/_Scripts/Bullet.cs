@@ -25,7 +25,8 @@ public class Bullet : MonoBehaviour {
 		if (other.CompareTag("Enemy"))
 		{
 			other.SendMessage("BulletDamage", SendMessageOptions.DontRequireReceiver);
-			print (other.name);
+			PREFAB.SpawnPrefab(PREFAB.HIT_IMPACT, transform.position - new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f),2), "1");
+			AudioSource.PlayClipAtPoint(PREFAB.audio.hitSound, transform.position);
 			PREFAB.DespawnPrefab(this.transform, "1");
 		}
 	}

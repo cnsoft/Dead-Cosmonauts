@@ -633,6 +633,154 @@ MonoBehaviour:
     colliderIndicesBack: 
     colliderConvex: 0
     colliderSmoothSphereCollisions: 0
+  - name: GFX_IMPACT_0001
+    boundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: .4375, y: .4375, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 1, y: 1, z: 0}
+    texelSize: {x: .03125, y: .03125}
+    positions:
+    - {x: -.21875, y: -.21875, z: 0}
+    - {x: .21875, y: -.21875, z: 0}
+    - {x: -.21875, y: .21875, z: 0}
+    - {x: .21875, y: .21875, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: .656253934, y: .181642577}
+    - {x: .710933566, y: .181642577}
+    - {x: .656253934, y: .208982423}
+    - {x: .710933566, y: .208982423}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 2da40f5b757b64481baf88ccb940acd3, type: 2}
+    materialId: 0
+    sourceTextureGUID: a29b18bf9389945958fce2e757172327
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    colliderType: 0
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+  - name: GFX_IMPACT_0002
+    boundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: .4375, y: .4375, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 1, y: 1, z: 0}
+    texelSize: {x: .03125, y: .03125}
+    positions:
+    - {x: -.21875, y: -.21875, z: 0}
+    - {x: .21875, y: -.21875, z: 0}
+    - {x: -.21875, y: .21875, z: 0}
+    - {x: .21875, y: .21875, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: .656253934, y: .208986327}
+    - {x: .710933566, y: .208986327}
+    - {x: .656253934, y: .236326173}
+    - {x: .710933566, y: .236326173}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 2da40f5b757b64481baf88ccb940acd3, type: 2}
+    materialId: 0
+    sourceTextureGUID: d25d181d0d0ce44c1af895559f3f8183
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    colliderType: 0
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+  - name: GFX_IMPACT_0000
+    boundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: .375, y: .375, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 1, y: 1, z: 0}
+    texelSize: {x: .03125, y: .03125}
+    positions:
+    - {x: -.1875, y: -.1875, z: 0}
+    - {x: .1875, y: -.1875, z: 0}
+    - {x: -.1875, y: .1875, z: 0}
+    - {x: .1875, y: .1875, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: .656253934, y: .236330077}
+    - {x: .703121066, y: .236330077}
+    - {x: .656253934, y: .259763658}
+    - {x: .703121066, y: .259763658}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 2da40f5b757b64481baf88ccb940acd3, type: 2}
+    materialId: 0
+    sourceTextureGUID: d85bd9e3b32fc4e0abac76cbb1865995
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    colliderType: 0
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
+  - name: GFX_IMPACT_0003
+    boundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: .5, y: .5, z: 0}
+    untrimmedBoundsData:
+    - {x: 0, y: 0, z: 0}
+    - {x: 1, y: 1, z: 0}
+    texelSize: {x: .03125, y: .03125}
+    positions:
+    - {x: -.25, y: -.25, z: 0}
+    - {x: .25, y: -.25, z: 0}
+    - {x: -.25, y: .25, z: 0}
+    - {x: .25, y: .25, z: 0}
+    normals: []
+    tangents: []
+    uvs:
+    - {x: .656253934, y: .150392577}
+    - {x: .718746066, y: .150392577}
+    - {x: .656253934, y: .181638673}
+    - {x: .718746066, y: .181638673}
+    indices: 000000000300000001000000020000000300000000000000
+    material: {fileID: 2100000, guid: 2da40f5b757b64481baf88ccb940acd3, type: 2}
+    materialId: 0
+    sourceTextureGUID: dd0674923391c4c308e7f09fc9cb72e1
+    extractRegion: 0
+    regionX: 0
+    regionY: 0
+    regionW: 0
+    regionH: 0
+    flipped: 0
+    complexGeometry: 0
+    colliderType: 0
+    colliderVertices: []
+    colliderIndicesFwd: 
+    colliderIndicesBack: 
+    colliderConvex: 0
+    colliderSmoothSphereCollisions: 0
   premultipliedAlpha: 0
   material: {fileID: 0}
   materials:
@@ -646,7 +794,7 @@ MonoBehaviour:
   loadable: 0
   invOrthoSize: .100000001
   halfTargetHeight: 320
-  buildKey: 100231320
+  buildKey: 490102889
   dataGuid: 4b4793a80820e4266b5a492351b555cc
   managedSpriteCollection: 0
   hasPlatformData: 0

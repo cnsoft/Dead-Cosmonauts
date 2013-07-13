@@ -55,6 +55,10 @@ MonoBehaviour:
     - GFX_EXPLOSION1_0006
     - GFX_EXPLOSION1_0013
     - EMPTY
+    - GFX_IMPACT_0001
+    - GFX_IMPACT_0002
+    - GFX_IMPACT_0000
+    - GFX_IMPACT_0003
     spriteTextureGUIDs:
     - 1398270fc8c1147ecab285ef0e5b8102
     - 14904e671ada74cb7b18ba7dcad7d93f
@@ -72,6 +76,10 @@ MonoBehaviour:
     - f59a93269d6134194a708cf650e178f4
     - f74b42d1759554e818a255574911b48d
     - 37b786272798c4c9fa8af3634e646075
+    - a29b18bf9389945958fce2e757172327
+    - d25d181d0d0ce44c1af895559f3f8183
+    - d85bd9e3b32fc4e0abac76cbb1865995
+    - dd0674923391c4c308e7f09fc9cb72e1
     spriteTextureTimeStamps:
     - 1349275893
     - 1349275893
@@ -89,6 +97,10 @@ MonoBehaviour:
     - 1349275893
     - 1349275893
     - 1373140609
+    - 1348732431
+    - 1348732431
+    - 1348732431
+    - 1348732431
     managedSpriteCollection: 0
     loadable: 0
     assetName: 

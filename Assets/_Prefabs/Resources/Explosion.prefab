@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 649d5285a0d9d4d889f54dad0558512e, type: 3}
   m_Name: 
   pool: 1
-  lifetime: .699999988
+  lifetime: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
