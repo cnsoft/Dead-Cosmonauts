@@ -246,6 +246,9 @@ MonoBehaviour:
   - RSHorizontal
   - RSVertical
   weaponId: 0
+  health: 10
+  damageCooldown: .200000003
+  healthBar: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
