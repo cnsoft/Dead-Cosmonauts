@@ -21,6 +21,10 @@ MonoBehaviour:
     dataGUID: 4cf63ff638dc445eeb34140dbcef1741
     managed: 0
     loadable: 0
+  - assetGUID: c67e528769c7646eeb2fb1e9f8277f33
+    dataGUID: f2e74534df7ec415780d46e59d77c357
+    managed: 0
+    loadable: 0
   spriteCollectionIndex:
   - name: 1
     spriteCollectionGUID: 42cb5d7a81c134346871bca58c2495c6
