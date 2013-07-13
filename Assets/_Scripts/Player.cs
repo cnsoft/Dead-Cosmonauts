@@ -103,25 +103,34 @@ public class Player : uLink.MonoBehaviour
 		damageCooldownTimer -= Time.deltaTime;
 	}
 
-	void WeaponShoot()
+    void WeaponShoot() {
+        networkView.RPC ("WeaponShootNetwork", uLink.RPCMode.All, weaponId);
+    }
+
+    [RPC]
+	void WeaponShootNetwork(int _weaponId)
 	{
-		if (weaponId == 0)
+		if (_weaponId == 0)
 		{
 			if (weaponTimer <= 0)
 			{
 				PREFAB.SpawnPrefab(PREFAB.BULLET, transform.position, transform.localEulerAngles-new Vector3(0,0,90), "1");
-				weaponTimer = weaponCooldown;
+                if (networkView.isOwner) {
+				    weaponTimer = weaponCooldown;
+                }
 			}
-		}else if (weaponId == 1)
+		}else if (_weaponId == 1)
 		{
 			if (weaponTimer <= 0)
 			{
 				PREFAB.SpawnPrefab(PREFAB.BULLET, transform.position, transform.localEulerAngles-new Vector3(0,0,90), "1");
-				weaponTimer = weaponCooldown*0.8f;
-				weaponAmmo -= 1;
+                if (networkView.isOwner) {
+    				weaponTimer = weaponCooldown*0.8f;
+    				weaponAmmo -= 1;
+                }
 			}
 		}
-		else if (weaponId == 2)
+		else if (_weaponId == 2)
 		{
 			if (weaponTimer <= 0)
 			{
@@ -130,13 +139,16 @@ public class Player : uLink.MonoBehaviour
 				{
 					PREFAB.SpawnPrefab(PREFAB.BULLET_SHOTGUN, transform.position, transform.localEulerAngles-new Vector3(0,0,76+(i*7)), "1");
 				}
-
-				weaponTimer = weaponCooldown*4f;
-				weaponAmmo -= 1;
+                if (networkView.isOwner) {
+    				weaponTimer = weaponCooldown*4f;
+    				weaponAmmo -= 1;
+                }
 			}
 		}
 
-		UpdateAmmoHUD();
+        if (networkView.isOwner) {
+            UpdateAmmoHUD();
+        }
 	}
 
 	public void ChangeWeapon (int id)
