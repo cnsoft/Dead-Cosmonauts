@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -49,7 +49,7 @@ MonoBehaviour:
   enableWhenGUI: []
   disableWhenGUI: []
   reloadOnDisconnect: 1
-  targetFrameRate: 15
+  targetFrameRate: 60
   guiSkin: {fileID: 0}
   guiDepth: 0
   dontDestroyOnLoad: 0

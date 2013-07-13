@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: ServerPrefab
+  m_Name: RegistrationPrefabs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,21 +35,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70aca81a980d02644a47c438f68e4cfd, type: 3}
+  m_Script: {fileID: 11500000, guid: c373b5eedcf28e944a66cca5db95021c, type: 3}
   m_Name: 
-  port: 7100
-  maxConnections: 64
-  cleanupAfterPlayers: 1
-  registerHost: 1
-  targetFrameRate: 60
-  dontDestroyOnLoad: 0
-  instantiateOnConnected:
-    startPosition: {x: 0, y: 0, z: 0}
-    startRotation: {x: 0, y: 0, z: 0}
-    ownerPrefab: {fileID: 100000, guid: 2f241c2df1a9984478d5408d0c5f0c15, type: 2}
-    proxyPrefab: {fileID: 100004, guid: fc5e3386aefc93d43928cc4f9f719795, type: 2}
-    serverPrefab: {fileID: 100004, guid: fc5e3386aefc93d43928cc4f9f719795, type: 2}
-    appendLoginData: 1
+  prefabs:
+  - {fileID: 100000, guid: 2f241c2df1a9984478d5408d0c5f0c15, type: 2}
+  - {fileID: 100004, guid: fc5e3386aefc93d43928cc4f9f719795, type: 2}
+  replaceIfExists: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
