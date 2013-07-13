@@ -4,6 +4,7 @@ using System.Collections;
 public class PREFAB : MonoBehaviour {
 
 	public static GameObject		BULLET;
+	public static GameObject		BULLET_SHOTGUN;
 	public static GameObject		DAMAGE_TEXT;
 	public static GameObject		EXPLOSION;
 	public static GameObject		HIT_IMPACT;

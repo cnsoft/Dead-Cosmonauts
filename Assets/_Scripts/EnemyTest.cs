@@ -13,7 +13,8 @@ public class EnemyTest : MonoBehaviour {
 
 		if (health > 0){
 			StartCoroutine(Blink());
-		}else
+		}
+		else
 		{
 			PREFAB.SpawnPrefab(PREFAB.EXPLOSION, transform.position, "1");
 			AudioSource.PlayClipAtPoint(PREFAB.audio.explosionSound, transform.position);

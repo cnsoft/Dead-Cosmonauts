@@ -5,9 +5,8 @@ public class TextPopup : MonoBehaviour {
 
 	private tk2dTextMesh tk2dText;
 	private iTweenEvent tweenEvent;
-
-
-
+	public float lifetime = 0.7f;
+	
 	void OnSpawned()
 	{
 		if (tk2dText == null)
@@ -17,7 +16,7 @@ public class TextPopup : MonoBehaviour {
 
 		tweenEvent.Play();
 
-		Invoke("Despawn", 0.5f);
+		Invoke("Despawn", lifetime);
 	}
 
 	void Update()
@@ -28,9 +27,17 @@ public class TextPopup : MonoBehaviour {
 		}
 	}
 
-	void ChangeText(int dmg)
+	public void ChangeText(string txt)
 	{
-		tk2dText.text = dmg.ToString("f0");
+		tk2dText.text = txt;
+		tk2dText.color = Color.white;
+		tk2dText.Commit();
+	}
+
+	public void ChangeText(string txt, Color clr)
+	{
+		tk2dText.text = txt;
+		tk2dText.color = clr;
 		tk2dText.Commit();
 	}
 

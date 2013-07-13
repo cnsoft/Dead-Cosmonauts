@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 54: {fileID: 5400000}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: Bullet1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Name: 
   flySpeed: 35
   lifetime: 2
-  damage: 1
-  launched: 1
+  damage: 3
+  launched: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

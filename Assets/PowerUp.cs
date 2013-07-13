@@ -14,7 +14,7 @@ public class PowerUp : MonoBehaviour {
 	{
 		if (other.CompareTag("Player"))
 		{
-			player.ChangeWeapon(1);
+			player.ChangeWeapon(2);
 			gameObject.SetActive(false);
 		}
 	}
