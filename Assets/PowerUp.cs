@@ -5,6 +5,8 @@ public class PowerUp : MonoBehaviour {
 
 	private Player player;
 
+	public int weaponId = 2;
+
 	void Awake()
 	{
 		player = (Player)GameObject.FindObjectOfType(typeof(Player));
@@ -14,7 +16,15 @@ public class PowerUp : MonoBehaviour {
 	{
 		if (other.CompareTag("Player"))
 		{
-			player.ChangeWeapon(2);
+			player.ChangeWeapon(weaponId);
+			TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, other.transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
+
+			switch (weaponId)
+			{
+				case(1): txtPop.ChangeText("FAST MG", Color.yellow); break;
+				case(2): txtPop.ChangeText("SHOTGUN", Color.yellow); break;
+			}
+
 			gameObject.SetActive(false);
 		}
 	}

@@ -19,6 +19,7 @@ public class PREFAB : MonoBehaviour {
 		DAMAGE_TEXT = (GameObject)Resources.Load("DamageText");
 		EXPLOSION = (GameObject)Resources.Load("Explosion");
 		HIT_IMPACT = (GameObject)Resources.Load("HitImpact");
+		BULLET_SHOTGUN = (GameObject)Resources.Load("Bullet_Shotgun");
 
 		audio = GetComponent<AUDIO>();
 	}
