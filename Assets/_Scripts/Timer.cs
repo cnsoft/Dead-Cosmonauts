@@ -10,15 +10,18 @@ public class Timer : MonoBehaviour {
 	private float secondTime;
 	private float miliSecondTime;
 
+	public float startTime = 181;
+
 	void Start()
 	{
 		timerText = GetComponent<tk2dTextMesh>();
+		overAllTime = startTime;
 	}
 
 	void Update()
 	{
 
-		overAllTime += Time.deltaTime;
+		overAllTime -= Time.deltaTime;
 
 		minuteTime = Mathf.FloorToInt(overAllTime / 60f);
 		secondTime = overAllTime-(minuteTime*60f);

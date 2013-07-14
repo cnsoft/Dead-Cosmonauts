@@ -33,6 +33,7 @@ public class Player : uLink.MonoBehaviour
 	public float stamina = 10;
 	public float maxStamina = 10;
 	private bool staminaEmpty;
+	private bool dead;
 
 	public float damageCooldown = 0.2f;
 	private float damageCooldownTimer;
@@ -41,6 +42,13 @@ public class Player : uLink.MonoBehaviour
 
 	public tk2dTiledSprite healthBar;
 	public tk2dTiledSprite  staminaBar;
+
+	private Light2D flashlight;
+
+	private StatsScreen statsScreen;
+
+	private tk2dSprite sprite;
+	public Color runColor;
 
 	void Awake ()
 	{
@@ -54,6 +62,7 @@ public class Player : uLink.MonoBehaviour
 
 		health = maxHealth;
 		stamina = maxStamina;
+		flashlight = GetComponentInChildren<Light2D>();
 
 		UpdateAmmoHUD();
 	}
@@ -67,6 +76,8 @@ public class Player : uLink.MonoBehaviour
         _cameraFollow.playerTransform = this.transform;
 		healthBar = GameObject.Find("HealthBarSliced").GetComponent<tk2dTiledSprite>();
 		staminaBar = GameObject.Find("StaminaBarSliced").GetComponent<tk2dTiledSprite>();
+		statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
+		sprite = GetComponentInChildren<tk2dSprite>();
 		UpdateHealth();
     }
 
@@ -76,15 +87,32 @@ public class Player : uLink.MonoBehaviour
         	return;
         }
 
+		if (Input.GetButtonDown("Flashlight"))
+		{
+			print ("FLASH");
+
+
+			if (flashlight.LightRadius > 10)
+				flashlight.LightRadius = 0;
+			else
+				flashlight.LightRadius = 16;
+		}
+
+		if (Input.GetButtonDown("Stats"))
+		{
+			statsScreen.ToggleStats();
+		}
+
 		currentMovement[0] = Mathf.Abs(Input.GetAxis(leftStickAxis[0])) > 0.1f ? Input.GetAxis(leftStickAxis[0]) : 0;
 		currentMovement[1] = Mathf.Abs(Input.GetAxis(leftStickAxis[1])) > 0.1f ? Input.GetAxis(leftStickAxis[1]) : 0;
 
 		if (Input.GetAxisRaw("LeftTrigger") > -0.5f || staminaEmpty){
 	    	controller.Move(currentMovement*moveSpeed*Time.deltaTime);
-
+			sprite.color = Color.white;
 		}else if (!staminaEmpty){
 			controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.4f);
-			stamina -= Time.deltaTime * 4;
+			stamina -= Time.deltaTime * 2.5f;
+			sprite.color = runColor;
 		}
 
 		float y = Input.GetAxis(rightStickAxis[1]);
@@ -162,6 +190,8 @@ public class Player : uLink.MonoBehaviour
                 break;
             }
 
+			//AudioSource.PlayClipAtPoint(PREFAB.audio.shootSound, transform.position);
+
             networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
 
         }
@@ -235,6 +265,12 @@ public class Player : uLink.MonoBehaviour
     [RPC]
     void SubtractHealth(int damage) {
         health -= damage;
+
+		if (health <= 0 && !dead && networkView.isOwner)
+		{
+			dead = true;
+			print ("DEAD");
+		}
     }
 
     [RPC]
@@ -247,6 +283,11 @@ public class Player : uLink.MonoBehaviour
 		renderer.material.color = Color.red;
 		yield return new WaitForSeconds(0.1f);
 		renderer.material.color = Color.white;
+	}
+
+	void DeathEvent()
+	{
+
 	}
 
 	void UpdateHealth()

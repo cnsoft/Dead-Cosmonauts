@@ -7,6 +7,8 @@ public class PowerUp : uLink.MonoBehaviour {
     public const string meteorRoot = "http://cosmo.meteor.com";
     public string id;
 	private Player player;
+	private Light2D light;
+
 
 	public int weaponId = 2;
 
@@ -41,6 +43,8 @@ public class PowerUp : uLink.MonoBehaviour {
                 }
 
                 StartCoroutine (DeferredDestroy ());
+
+				AudioSource.PlayClipAtPoint( PREFAB.audio.collectSound, transform.position);
             }
 		}
 	}
