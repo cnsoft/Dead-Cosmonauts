@@ -303,9 +303,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c1eb949a92b66546af2eb1c65bab5a4, type: 3}
   m_Name: 
-  maxSpeed: 10.6000004
+  maxSpeed: 12.8000002
   maxDistance: 24
-  arrivalDistance: .100000001
+  arrivalDistance: 1
   velocity: {x: 0, y: 0, z: 0}
   moveCharacter: 0
   arrivalSpeed: 0

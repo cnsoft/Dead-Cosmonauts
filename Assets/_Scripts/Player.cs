@@ -267,19 +267,24 @@ public class Player : uLink.MonoBehaviour
     [RPC]
     void FullHealth() {
         health = maxHealth;
+        if (networkView.isOwner) {
+            UpdateHealth ();
+        }
     }
 
     [RPC]
     void SubtractHealth(int damage) {
         health -= damage;
 
-		if (health <= 0 && !dead && networkView.isOwner)
+		if (health <= 0 && !dead)
 		{
 			dead = true;
 
 			PREFAB.SpawnPrefab(PREFAB.EXPLOSION2, transform.position, "1");
 			PREFAB.audio.PlayRandomKillSound();
 			StopCoroutine("Blink");
+            sprite.color = Color.clear;
+            flashlight.LightRadius = 0;
 
 			StartCoroutine(DeathWait());
 		}
@@ -299,19 +304,18 @@ public class Player : uLink.MonoBehaviour
 
 	IEnumerator DeathWait()
 	{
-		int spawn = Random.Range(0, spawnPoints.spawnPoint.Length-1);
-
-		sprite.color = Color.clear;
-		flashlight.LightRadius = 0;
-
 
 		yield return new WaitForSeconds(5);
 
-		transform.position = spawnPoints.spawnPoint[spawn].position;
-		health = maxHealth;
-		stamina = maxStamina;
-		UpdateStaminaHUD();
-		UpdateHealth();
+        if (networkView.isOwner) {
+            int spawn = Random.Range(0, spawnPoints.spawnPoint.Length-1);
+            transform.position = spawnPoints.spawnPoint[spawn].position;
+            health = maxHealth;
+            stamina = maxStamina;
+            UpdateStaminaHUD();
+            UpdateHealth();
+        }
+
 
 		sprite.color = Color.white;
 

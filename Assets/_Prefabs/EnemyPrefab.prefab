@@ -102,7 +102,7 @@ MonoBehaviour:
   _manualViewID: 0
   rpcReceiver: 2
   listOfGameObjects: []
-  _prefabRoot: {fileID: 0}
+  _prefabRoot: {fileID: 100000}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
