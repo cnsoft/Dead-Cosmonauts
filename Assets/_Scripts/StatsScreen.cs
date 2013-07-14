@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class StatsScreen : MonoBehaviour {
+public class StatsScreen : uLink.MonoBehaviour {
 
 	public GameObject statsParent;
 	private bool statsActive;
@@ -40,5 +41,23 @@ public class StatsScreen : MonoBehaviour {
 			}
 		}
 	}
+
+    public void UpdateStats (List<Player.Stat> stats)
+    {
+        int[] sortOrder = new int[] {2,1,0,3,4};
+
+        stats.Sort ((a,b) => b.Kills - a.Kills);
+
+        for (int j = 0; j < stats.Count; j++) {
+            int i = sortOrder [j];
+            nameText [i].text = stats [j].name;
+            nameText [i].Commit ();
+            killsText[i].text = string.Format("KILLS\n{0}",stats [j].Kills);
+            killsText [i].Commit ();
+            deathsText[i].text = string.Format("DEATHS\n{0}",stats [j].Deaths);
+            deathsText [i].Commit ();
+        }
+
+    }
 }
 

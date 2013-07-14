@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : uLink.MonoBehaviour
 {
@@ -83,6 +84,8 @@ public class Player : uLink.MonoBehaviour
         if (!info.networkView.isOwner) {
             return;
         }
+        SetName (info.networkView.owner.id, name);
+        this.networkView.RPC ("SetName", uLink.RPCMode.Others, info.networkView.owner.id, name);
 
         _cameraFollow = GameObject.Find ("_Cam").GetComponent<CameraFollow> ();
         _cameraFollow.playerTransform = this.transform;
@@ -242,7 +245,7 @@ public class Player : uLink.MonoBehaviour
 
 			//AudioSource.PlayClipAtPoint(PREFAB.audio.shootSound, transform.position);
 
-            networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
+            this.networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
 
         }
 
@@ -252,20 +255,20 @@ public class Player : uLink.MonoBehaviour
     [RPC]
     void SpawnBullets(int _weaponId) {
         Transform instance = null;
-        bool mine = networkView.isOwner;
+        int owner = uLink.Network.player.id;
         switch (_weaponId) {
         case 0:
             instance = PREFAB.SpawnPrefab (PREFAB.BULLET, bulletSpawnPoint.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
-            instance.GetComponent<Bullet> ().mine = mine ;
+            instance.GetComponent<Bullet> ().owner = owner ;
             break;
         case 1:
 			instance = PREFAB.SpawnPrefab (PREFAB.BULLET, bulletSpawnPoint.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
-            instance.GetComponent<Bullet> ().mine = mine;
+            instance.GetComponent<Bullet> ().owner = owner ;
             break;
         case 2:
             for (int i = 0; i < 5; i++) {
 				instance = PREFAB.SpawnPrefab (PREFAB.BULLET_SHOTGUN, bulletSpawnPoint.position, transform.localEulerAngles - new Vector3 (0, 0, 76 + (i * 7)), "1");
-                instance.GetComponent<Bullet> ().mine = mine;
+                instance.GetComponent<Bullet> ().owner = owner ;
             }
             break;
         }
@@ -296,7 +299,7 @@ public class Player : uLink.MonoBehaviour
             if (damageCooldownTimer <= 0){
                 if (networkView.isOwner) {
                     int spawn = Random.Range(0, spawnPoints.spawnPoint.Length-1);
-                    networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage, spawn);
+                    networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage, bullet.owner);
                     UpdateHealth();
                 }
 
@@ -309,7 +312,7 @@ public class Player : uLink.MonoBehaviour
 
             }
 
-            HitCosmetics(damage, bullet.transform.position [0], bullet.transform.position [1]);
+            networkView.RPC("HitCosmetics", uLink.RPCMode.All, damage, bullet.transform.position [0], bullet.transform.position [1]);
 			PREFAB.DespawnPrefab(other.transform, "1");
 		}
 	}
@@ -332,8 +335,14 @@ public class Player : uLink.MonoBehaviour
         dead = isDead;
     }
 
+    string name {
+        get {
+            return (string)(uLink.Network.loginData.Length != 0 ? uLink.Network.loginData [0] : uLink.Network.player);
+        }
+    }
+
     [RPC]
-    void SubtractHealth(int damage, int potentialSpawnpoint) {
+    void SubtractHealth(int damage, int bulletOwner) {
         health -= damage;
 
 		if (health <= 0 && !dead)
@@ -343,20 +352,32 @@ public class Player : uLink.MonoBehaviour
             if (networkView.isOwner) {
                 dead = true;
 
-                StartCoroutine (UnsetDead (potentialSpawnpoint));
-
+                StartCoroutine (UnsetDead ());
+                networkView.RPC ("AddDeath", uLink.RPCMode.All, uLink.Network.player.id);
+                networkView.RPC ("AddKill", uLink.RPCMode.All, bulletOwner);
             }
 
             networkView.RPC ("SetDead", uLink.RPCMode.All, true);
 		}
     }
 
-    IEnumerator UnsetDead(int spawn) {
+    [RPC]
+    void SetName(int id, string name) {
+        Stat stat = stats.Find (s => s.id == id);
+        if (stat == null) {
+            stat = new Stat ();
+            stats.Add (stat);
+        }
+        stat.name = name;
+        stat.id = id;
+
+        if (networkView.isOwner) {
+            statsScreen.UpdateStats (stats);
+        }
+    }
+
+    IEnumerator UnsetDead() {
         yield return new WaitForSeconds (5.0f);
-
-        // fancy move
-        Vector3 destination = spawnPoints.spawnPoint[spawn].position;
-
 
         FullHealth();
         SetDead(false);
@@ -442,6 +463,46 @@ public class Player : uLink.MonoBehaviour
 		ammoText.Commit();
 		weaponText.Commit();
 	}
+
+    public class Stat {
+        public int id;
+        public string name;
+        public int Kills;
+        public int Deaths;
+    }
+
+    List<Stat> stats = new List<Stat>();
+
+    [RPC]
+    void AddKill (int id) {
+        Stat stat = stats.Find (s => s.id == id);
+        if (stat == null) {
+//            return;
+            stat = new Stat ();
+            stats.Add (stat);
+        }
+      
+        stat.Kills++;
+
+        if (networkView.isOwner) {
+            statsScreen.UpdateStats (stats);
+        }
+    }
+
+    [RPC]
+    void AddDeath (int id) {
+        Stat stat = stats.Find (s => s.id == id);
+        if (stat == null) {
+//            return;
+            stat = new Stat ();
+            stats.Add (stat);
+        }
+        stat.Deaths++;
+
+        if (networkView.isOwner) {
+            statsScreen.UpdateStats (stats);
+        }
+    }
 
 	void UpdateStaminaHUD()
 	{
