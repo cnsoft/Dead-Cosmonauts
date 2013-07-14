@@ -263,6 +263,7 @@ MonoBehaviour:
   prefabs:
   - {fileID: 100000, guid: 2f241c2df1a9984478d5408d0c5f0c15, type: 2}
   - {fileID: 100004, guid: fc5e3386aefc93d43928cc4f9f719795, type: 2}
+  - {fileID: 100000, guid: ed8ca81ba8b0c464eadafa872dfd21d6, type: 2}
   replaceIfExists: 1
 --- !u!4 &1423534996
 Transform:
@@ -284,6 +285,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1843553040}
   - 114: {fileID: 1843553039}
+  - 114: {fileID: 1843553041}
   m_Layer: 0
   m_Name: ServerPrefab
   m_TagString: Untagged
@@ -326,3 +328,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1843553041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 4a49a6c56ea17054b8e450786e72fb63,
+    type: 2}
+  m_PrefabInternal: {fileID: 961543433}
+  m_GameObject: {fileID: 1843553038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8738f0edb1a4d0ea75c3d41cb46aba, type: 3}
+  m_Name: 
+  simpleServer: {fileID: 1843553039}
+  players: []
+  powerupPrefab: {fileID: 400000, guid: ed8ca81ba8b0c464eadafa872dfd21d6, type: 2}
+  meteorRoot: http://cosmo.meteor.com
+  updateFrequency: .200000003
