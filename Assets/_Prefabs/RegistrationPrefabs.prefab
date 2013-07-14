@@ -41,6 +41,7 @@ MonoBehaviour:
   - {fileID: 100000, guid: 2f241c2df1a9984478d5408d0c5f0c15, type: 2}
   - {fileID: 100004, guid: fc5e3386aefc93d43928cc4f9f719795, type: 2}
   - {fileID: 100000, guid: ed8ca81ba8b0c464eadafa872dfd21d6, type: 2}
+  - {fileID: 100000, guid: 95bb109354b9b4eefb5937ca291a518d, type: 2}
   replaceIfExists: 1
 --- !u!1001 &100100000
 Prefab:
