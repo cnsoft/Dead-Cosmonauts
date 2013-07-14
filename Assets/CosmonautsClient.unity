@@ -131,6 +131,7 @@ MonoBehaviour:
   - {fileID: 100000, guid: 2f241c2df1a9984478d5408d0c5f0c15, type: 2}
   - {fileID: 100004, guid: fc5e3386aefc93d43928cc4f9f719795, type: 2}
   - {fileID: 100000, guid: ed8ca81ba8b0c464eadafa872dfd21d6, type: 2}
+  - {fileID: 100000, guid: 95bb109354b9b4eefb5937ca291a518d, type: 2}
   replaceIfExists: 1
 --- !u!4 &109188015
 Transform:
@@ -199,6 +200,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!23 &124142295
 Renderer:
@@ -1986,6 +1988,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!23 &557784368
 Renderer:
@@ -3993,6 +3996,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!23 &1007304539
 Renderer:
@@ -4484,6 +4488,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!23 &1113506798
 Renderer:
@@ -4562,6 +4567,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!23 &1131907566
 Renderer:
@@ -4877,6 +4883,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!23 &1170756363
 Renderer:
@@ -5099,6 +5106,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!23 &1223478066
 Renderer:
@@ -5678,6 +5686,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!23 &1339695008
 Renderer:
@@ -6074,6 +6083,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!23 &1449625024
 Renderer:
@@ -6705,6 +6715,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!23 &1565521003
 Renderer:
@@ -6799,6 +6810,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!23 &1570929064
 Renderer:
@@ -7426,6 +7438,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9d7bdae0c5344cd4a0f1fcc726ce378, type: 3}
   m_Name: 
+  id: 
   health: 10
 --- !u!1 &1715898740
 GameObject:
