@@ -64,6 +64,7 @@ MonoBehaviour:
   simpleServer: {fileID: 11400000}
   players: []
   powerupPrefab: {fileID: 400000, guid: ed8ca81ba8b0c464eadafa872dfd21d6, type: 2}
+  barricadePrefab: {fileID: 400000, guid: 95bb109354b9b4eefb5937ca291a518d, type: 2}
   meteorRoot: http://cosmo.meteor.com
   updateFrequency: .200000003
 --- !u!1001 &100100000

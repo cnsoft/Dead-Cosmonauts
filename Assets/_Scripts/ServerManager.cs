@@ -8,6 +8,7 @@ public class ServerManager : uLink.MonoBehaviour {
     public uLinkSimpleServer simpleServer;
 	public List<Player> players = new List<Player> ();
     public Transform powerupPrefab;
+    public Transform barricadePrefab;
     public string meteorRoot = "http://cosmo.meteor.com";
 
     public float updateFrequency = 0.1f;
@@ -65,8 +66,17 @@ public class ServerManager : uLink.MonoBehaviour {
 
         for (int i = 0; i < response.data.Count; i++) {
             PowerupResponseDto powerup = response.data [i];
+            Transform instance = null;
+            switch (powerup.type) {
+            case 1: // machinegun
+            case 2: // shotgun
+                instance = uLink.Network.Instantiate (powerupPrefab, new Vector3 (powerup.x, powerup.y, 0f), Quaternion.identity, 0, powerup._id, powerup.type);
+                break;
+            case 3: // barricade
+                instance = uLink.Network.Instantiate (barricadePrefab, new Vector3 (powerup.x, powerup.y, 0f), Random.rotationUniform, 0, powerup._id);
+                break;
+            }
 
-            Transform instance = uLink.Network.Instantiate (powerupPrefab, new Vector3 (powerup.x, powerup.y, 0f), Quaternion.identity, 0,powerup._id,powerup.type);
             Debug.Log ("powerup instantiated");
         }
     }

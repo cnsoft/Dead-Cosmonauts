@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(uLinkNetworkView))]
 public class EnemyTest : uLink.MonoBehaviour {
-
+    public string id;
 	public int health = 5;
 
     public void Start() {
@@ -13,6 +13,12 @@ public class EnemyTest : uLink.MonoBehaviour {
 
         if (networkView.observed == null) {
             networkView.observed = this;
+        }
+    }
+
+    void uLink_OnNetworkInstantiate(uLink.NetworkMessageInfo info) {
+        if (!info.networkView.initialData.TryRead<string> (out id)) {
+            Debug.LogError ("No initial id for barricade.");
         }
     }
 
@@ -50,12 +56,17 @@ public class EnemyTest : uLink.MonoBehaviour {
 			}
 
 			PREFAB.DespawnPrefab(other.transform, "1");
-
 		}
 	}
 
     IEnumerator DeferredDestroy() {
         yield return new WaitForEndOfFrame ();
+
+        if (!string.IsNullOrEmpty(id)) {
+            WWW www = new WWW (string.Format("{0}/powerups/pickup/{1}",Constants.METEOR_ROOT,id));
+            yield return www;
+        }
+
         uLink.Network.Destroy (this.gameObject);
     }
 }

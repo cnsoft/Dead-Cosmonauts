@@ -94,8 +94,8 @@ if (Meteor.isClient) {
   var powerupCounter = 0;
   var availablePowerups = [
     {type: 1, text: 'machinegun'},
-    {type: 2, text: 'shotgun'}
-//    {type: 3, text: 'barricade'},
+    {type: 2, text: 'shotgun'},
+    {type: 3, text: 'barricade'}
 //    {type: 4, text: '1x healthpack'},
 //    {type: 5, text: 'autocannon'}
   ];
@@ -128,6 +128,27 @@ if (Meteor.isClient) {
     iconAnchor: [16, 16],
     labelAnchor: [16, - 16]
   });
+
+  var brickIcons = _.shuffle([
+    L.icon({
+      iconUrl: '/brick0.png',
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      labelAnchor: [16, - 16]
+    }),
+    L.icon({
+      iconUrl: '/brick1.png',
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      labelAnchor: [16, - 16]
+    }),
+    L.icon({
+      iconUrl: '/brick2.png',
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
+      labelAnchor: [16, - 16]
+    })
+  ]);
 
   Template.mapTemplate.rendered = function () {
     loadPowerup();
@@ -177,7 +198,8 @@ if (Meteor.isClient) {
     var powerupsObserve = Powerups.find({}).observe({
       added: function (powerup) {
         markers[powerup._id] =
-          new L.Marker([powerup.x, powerup.y], {icon: powerupIcon});
+          new L.Marker([powerup.x, powerup.y], {icon: (
+            powerup.type == 3 ? _.first(_.shuffle(brickIcons)) : powerupIcon)});
         window.map.addLayer(markers[powerup._id]);
       },
       removed: function (powerup) {
