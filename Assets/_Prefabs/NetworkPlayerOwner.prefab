@@ -275,8 +275,11 @@ MonoBehaviour:
   weaponAmmo: 0
   health: 10
   maxHealth: 10
+  stamina: 10
+  maxStamina: 10
   damageCooldown: .200000003
   healthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
