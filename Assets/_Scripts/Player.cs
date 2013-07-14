@@ -47,10 +47,16 @@ public class Player : uLink.MonoBehaviour
 
 	private StatsScreen statsScreen;
 
-	private tk2dSprite sprite;
+	private tk2dSprite spriteTorso;
+	public tk2dSpriteAnimator torsoAnim;
+
 	public Color runColor;
 
 	private SpawnPoints spawnPoints;
+
+	public string heroColorName = "Blue";
+
+	public Transform bulletSpawnPoint;
 
 	void Awake ()
 	{
@@ -82,8 +88,12 @@ public class Player : uLink.MonoBehaviour
         _cameraFollow.playerTransform = this.transform;
 		healthBar = GameObject.Find("HealthBarSliced").GetComponent<tk2dTiledSprite>();
 		staminaBar = GameObject.Find("StaminaBarSliced").GetComponent<tk2dTiledSprite>();
-
+		statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
+		spriteTorso = GetComponentInChildren<tk2dSprite>();
+		spawnPoints = (SpawnPoints)FindObjectOfType(typeof(SpawnPoints));
 		UpdateHealth();
+
+		torsoAnim.Play(heroColorName+"_2");
     }
 
 	void Update ()
@@ -113,11 +123,11 @@ public class Player : uLink.MonoBehaviour
 
 		if (Input.GetAxisRaw("LeftTrigger") > -0.5f || staminaEmpty){
 	    	controller.Move(currentMovement*moveSpeed*Time.deltaTime);
-			sprite.color = Color.white;
+			spriteTorso.color = Color.white;
 		}else if (!staminaEmpty){
 			controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.4f);
 			stamina -= Time.deltaTime * 2.5f;
-			sprite.color = runColor;
+			spriteTorso.color = runColor;
 		}
 
 		float y = Input.GetAxis(rightStickAxis[1]);
@@ -173,6 +183,45 @@ public class Player : uLink.MonoBehaviour
         yield return www;
     }
 
+	void LateUpdate()
+	{
+		//torsoAnim.transform.eulerAngles = Vector3.zero;
+
+		//AngleAnimations();
+	}
+
+	void AngleAnimations()
+	{
+		if (transform.eulerAngles.z > 0 && transform.eulerAngles.z <= 22.5f)
+		{
+			torsoAnim.Play(heroColorName+"_6");
+		}else if (transform.eulerAngles.z > 22.5f && transform.eulerAngles.z <= 67.5f)
+		{
+			torsoAnim.Play(heroColorName+"_9");
+		}else if (transform.eulerAngles.z > 67.5f && transform.eulerAngles.z <= 112.5f)
+		{
+			torsoAnim.Play(heroColorName+"_8");
+		}else if (transform.eulerAngles.z > 112.5f && transform.eulerAngles.z <= 157.5f)
+		{
+			torsoAnim.Play(heroColorName+"_7");
+		}else if (transform.eulerAngles.z > 157.5f && transform.eulerAngles.z <= 202.5f)
+		{
+			torsoAnim.Play(heroColorName+"_4");
+		}else if (transform.eulerAngles.z > 202.5f && transform.eulerAngles.z <= 247.5f)
+		{
+			torsoAnim.Play(heroColorName+"_1");
+		}else if (transform.eulerAngles.z > 247.5f && transform.eulerAngles.z <= 292.5f)
+		{
+			torsoAnim.Play(heroColorName+"_2");
+		}else if (transform.eulerAngles.z > 292.5f && transform.eulerAngles.z <= 337.5f)
+		{
+			torsoAnim.Play(heroColorName+"_3");
+		}else
+		{
+			torsoAnim.Play(heroColorName+"_6");
+		}
+	}
+
     void WeaponShoot() {
         if (weaponTimer <= 0) {
             switch (weaponId) {
@@ -204,16 +253,16 @@ public class Player : uLink.MonoBehaviour
         bool mine = networkView.isOwner;
         switch (_weaponId) {
         case 0:
-            instance = PREFAB.SpawnPrefab (PREFAB.BULLET, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
+            instance = PREFAB.SpawnPrefab (PREFAB.BULLET, bulletSpawnPoint.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
             instance.GetComponent<Bullet> ().mine = mine ;
             break;
         case 1:
-            instance = PREFAB.SpawnPrefab (PREFAB.BULLET, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
+			instance = PREFAB.SpawnPrefab (PREFAB.BULLET, bulletSpawnPoint.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
             instance.GetComponent<Bullet> ().mine = mine;
             break;
         case 2:
             for (int i = 0; i < 5; i++) {
-                instance = PREFAB.SpawnPrefab (PREFAB.BULLET_SHOTGUN, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 76 + (i * 7)), "1");
+				instance = PREFAB.SpawnPrefab (PREFAB.BULLET_SHOTGUN, bulletSpawnPoint.position, transform.localEulerAngles - new Vector3 (0, 0, 76 + (i * 7)), "1");
                 instance.GetComponent<Bullet> ().mine = mine;
             }
             break;

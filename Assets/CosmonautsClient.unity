@@ -314,7 +314,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: .0196078438}
+  m_BackGroundColor: {r: .470149279, g: .168411687, b: .168411687, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -347,6 +347,7 @@ Transform:
   - {fileID: 1046218185}
   - {fileID: 1533334379}
   - {fileID: 870904326}
+  - {fileID: 924807146}
   - {fileID: 703420461}
   - {fileID: 315549575}
   - {fileID: 1305101900}
@@ -3638,6 +3639,102 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1905268643}
   m_GameObject: {fileID: 921658611}
   m_Mesh: {fileID: 0}
+--- !u!1 &924807145
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 924807146}
+  - 33: {fileID: 924807149}
+  - 23: {fileID: 924807148}
+  - 114: {fileID: 924807147}
+  m_Layer: 0
+  m_Name: TextMesh0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &924807146
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 924807145}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: .5, y: .5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 133308949}
+--- !u!114 &924807147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 924807145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b7a1e74ecc0d94f8a863c10406a076, type: 3}
+  m_Name: 
+  _font: {fileID: 0}
+  _text: 
+  _color: {r: 1, g: 1, b: 1, a: 1}
+  _color2: {r: 1, g: 1, b: 1, a: 1}
+  _useGradient: 0
+  _textureGradient: 0
+  _anchor: 6
+  _scale: {x: 1, y: 1, z: 1}
+  _kerning: 0
+  _maxChars: 16
+  _inlineStyling: 0
+  _formatting: 0
+  _wordWrapWidth: 0
+  spacing: 0
+  lineSpacing: 0
+  data:
+    version: 1
+    font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
+    text: YOU GOT KILLED BY BERMAN
+    color: {r: 1, g: 1, b: 1, a: 1}
+    color2: {r: 1, g: 1, b: 1, a: 1}
+    useGradient: 0
+    textureGradient: 0
+    anchor: 4
+    scale: {x: 1, y: 1, z: 1}
+    kerning: 0
+    maxChars: 24
+    inlineStyling: 0
+    formatting: 0
+    wordWrapWidth: 0
+    spacing: 0
+    lineSpacing: 0
+--- !u!23 &924807148
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 924807145}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 221d7d2ce186b4b84af51be6264a5405, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+--- !u!33 &924807149
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 924807145}
+  m_Mesh: {fileID: 0}
 --- !u!1 &939231720
 GameObject:
   m_ObjectHideFlags: 0
@@ -6621,6 +6718,15 @@ MonoBehaviour:
     cullMaxPerPass: 5
     _logMessages: 0
   - prefab: {fileID: 400000, guid: 09892973781b5437db9b9361bdd3c738, type: 2}
+    preloadAmount: 1
+    limitInstances: 0
+    limitAmount: 100
+    cullDespawned: 0
+    cullAbove: 50
+    cullDelay: 60
+    cullMaxPerPass: 5
+    _logMessages: 0
+  - prefab: {fileID: 400000, guid: d3a04a0391e154f089f1d035b0bdd9b5, type: 2}
     preloadAmount: 1
     limitInstances: 0
     limitAmount: 100
