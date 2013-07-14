@@ -7,6 +7,7 @@ public class Player : uLink.MonoBehaviour
     public float moveSpeed = 5;
     public CharacterController controller;
 
+    public string meteorRoot = "http://cosmo.meteor.com";
 
     public float meteorUpdateSpeed = 0.1f;
     private float meteorUpdateTimer = 0f;
@@ -133,8 +134,7 @@ public class Player : uLink.MonoBehaviour
 
         meteorUpdateTimer -= Time.deltaTime;
         if (meteorUpdateTimer < 0f) {
-
-
+            StartCoroutine (UpdateMeteor());
 
             meteorUpdateTimer = meteorUpdateSpeed;
         }
@@ -142,8 +142,8 @@ public class Player : uLink.MonoBehaviour
 	}
 
     IEnumerator UpdateMeteor() {
-//        WWW www = new WWW ();
-        yield return new WaitForEndOfFrame ();
+        WWW www = new WWW(string.Format("{0}/update/{1}/{2}/{3}/{4}/{5}",meteorRoot,networkView.owner.id,transform.position.x,transform.position.y,transform.eulerAngles.z,"white"));
+        yield return www;
     }
 
     void WeaponShoot() {
