@@ -70,6 +70,7 @@ public class ServerManager : uLink.MonoBehaviour {
             switch (powerup.type) {
             case 1: // machinegun
             case 2: // shotgun
+            case 4: // healthpack
                 instance = uLink.Network.Instantiate (powerupPrefab, new Vector3 (powerup.x, powerup.y, 0f), Quaternion.identity, 0, powerup._id, powerup.type);
                 break;
             case 3: // barricade

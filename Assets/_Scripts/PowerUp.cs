@@ -33,13 +33,21 @@ public class PowerUp : uLink.MonoBehaviour {
 			player = other.gameObject.GetComponent<Player>();
 
             if (player.networkView.isOwner) {
-                player.ChangeWeapon(weaponId);
                 TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, other.transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
 
-                switch (weaponId)
-                {
-                    case(1): txtPop.ChangeText("FAST MG", Color.yellow); break;
-                    case(2): txtPop.ChangeText("SHOTGUN", Color.yellow); break;
+                // is this a healthpack?
+                if (weaponId == 4) {
+                    player.Healthpack ();
+
+                    txtPop.ChangeText ("HEALTH", Color.red);
+                } else {
+                    player.ChangeWeapon(weaponId);
+
+                    switch (weaponId)
+                    {
+                        case(1): txtPop.ChangeText("FAST MG", Color.yellow); break;
+                        case(2): txtPop.ChangeText("SHOTGUN", Color.yellow); break;
+                    }
                 }
 
                 StartCoroutine (DeferredDestroy ());
