@@ -259,6 +259,16 @@ public class Player : uLink.MonoBehaviour
 		}
 	}
 
+    public void Healthpack ()
+    {
+        networkView.RPC ("FullHealth", uLink.RPCMode.All);
+    }
+
+    [RPC]
+    void FullHealth() {
+        health = maxHealth;
+    }
+
     [RPC]
     void SubtractHealth(int damage) {
         health -= damage;
