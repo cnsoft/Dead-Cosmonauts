@@ -58,6 +58,7 @@ if (Meteor.isServer) {
   });
 
   Meteor.Router.add('/delete/:id', 'GET', function (playerId) {
+    playerId = parseInt(playerId);
     Players.remove({playerId: playerId}, {multi: true});
     return [200, defaultHeaders, '1'];
   });
