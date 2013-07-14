@@ -190,16 +190,22 @@ public class Player : uLink.MonoBehaviour
 
 			int damage = bullet.damage;
 
-			if (networkView.isOwner) {
-				if (damageCooldownTimer <= 0){
-		            networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage);
-		            networkView.RPC ("HitCosmetics", uLink.RPCMode.OthersExceptOwner, damage, bullet.transform.position [0], bullet.transform.position [1]);
-					HitCosmetics(damage, bullet.transform.position [0], bullet.transform.position [1]);
-		            UpdateHealth();
-		            damageCooldownTimer = damageCooldown;
-				}
-			}
+            if (damageCooldownTimer <= 0){
+                if (networkView.isOwner) {
+                    networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage);
+                    UpdateHealth();
+                }
 
+                StartCoroutine(Blink());
+                TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
+                txtPop.ChangeText(damage.ToString("f0"));
+
+                damageCooldownTimer = damageCooldown;
+                AudioSource.PlayClipAtPoint(PREFAB.audio.hitSound, transform.position);
+
+            }
+
+            HitCosmetics(damage, bullet.transform.position [0], bullet.transform.position [1]);
 			PREFAB.DespawnPrefab(other.transform, "1");
 		}
 	}
@@ -211,11 +217,7 @@ public class Player : uLink.MonoBehaviour
 
     [RPC]
     void HitCosmetics(int damage, float positionX, float positionY) {
-        TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
-        txtPop.ChangeText(damage.ToString("f0"));
         PREFAB.SpawnPrefab(PREFAB.HIT_IMPACT, new Vector3(positionX,positionY,0.0f) - new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f),5), "1");
-        AudioSource.PlayClipAtPoint(PREFAB.audio.hitSound, transform.position);
-        StartCoroutine(Blink());
     }
 
 	IEnumerator Blink()
