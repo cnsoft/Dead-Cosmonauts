@@ -70,6 +70,10 @@ public class Player : uLink.MonoBehaviour
 	}
 
     void uLink_OnNetworkInstantiate(uLink.NetworkMessageInfo info) {
+        sprite = GetComponentInChildren<tk2dSprite>();
+        spawnPoints = (SpawnPoints)FindObjectOfType(typeof(SpawnPoints));
+        statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
+
         if (!info.networkView.isOwner) {
             return;
         }
@@ -78,9 +82,7 @@ public class Player : uLink.MonoBehaviour
         _cameraFollow.playerTransform = this.transform;
 		healthBar = GameObject.Find("HealthBarSliced").GetComponent<tk2dTiledSprite>();
 		staminaBar = GameObject.Find("StaminaBarSliced").GetComponent<tk2dTiledSprite>();
-		statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
-		sprite = GetComponentInChildren<tk2dSprite>();
-		spawnPoints = (SpawnPoints)FindObjectOfType(typeof(SpawnPoints));
+
 		UpdateHealth();
     }
 
