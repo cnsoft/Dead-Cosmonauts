@@ -39,9 +39,19 @@ if (Meteor.isServer) {
   });
 }
 
+var scale = 10;
+var origin = [160,240];
+
 if (Meteor.isClient) {
   Template.radarTemplate.players = function () {
-    return Players.find({}).fetch();
+    return _.map(Players.find({}).fetch(),function(p) {
+      p.y*=-1;
+      p.y*=scale;
+      p.x*=scale;
+      p.x+=origin[0];
+      p.y+=origin[0];
+      return p;
+    });
   }
 
   Template.radarTemplate.preserve = defaultPreserve;

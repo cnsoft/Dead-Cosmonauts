@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class ServerManager : uLink.MonoBehaviour {
     public uLinkSimpleServer simpleServer;
 	public List<Player> players = new List<Player> ();
+    public string meteorRoot = "http://cosmo.meteor.com";
 
     public float updateFrequency = 0.1f;
 
@@ -29,8 +30,13 @@ public class ServerManager : uLink.MonoBehaviour {
     {
         if (simpleServer.cleanupAfterPlayers)
         {
-
+            StartCoroutine (RemoveMeFromMeteor (player));
         }
+    }
+
+    IEnumerator RemoveMeFromMeteor(uLink.NetworkPlayer player) {
+        WWW www = new WWW (string.Format ("{0}/delete/{1}", meteorRoot, player.id));
+        yield return www;
     }
 
     void uLink_OnPlayerConnected(uLink.NetworkPlayer player)
