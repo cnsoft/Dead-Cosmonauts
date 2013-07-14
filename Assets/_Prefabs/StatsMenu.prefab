@@ -254,7 +254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100030
 GameObject:
   m_ObjectHideFlags: 1
@@ -306,7 +306,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100036
 GameObject:
   m_ObjectHideFlags: 1
@@ -504,7 +504,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100058
 GameObject:
   m_ObjectHideFlags: 1
@@ -654,7 +654,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100076
 GameObject:
   m_ObjectHideFlags: 1
@@ -876,7 +876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -2374,7 +2374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a93cec627655e4285965019341f977, type: 3}
   m_Name: 
   mMat: {fileID: 0}
-  mTex: {fileID: 2800000, guid: a6fcf0eb0bb694aeda19827cfed9a2e4, type: 3}
+  mTex: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mDepth: 0
@@ -2384,8 +2384,8 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mShader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  mTexture: {fileID: 2800000, guid: a6fcf0eb0bb694aeda19827cfed9a2e4, type: 3}
+  mShader: {fileID: 4800000, guid: 2133a98744545b34f9e7f820aace323c, type: 3}
+  mTexture: {fileID: 2800000, guid: b441f4fc0e8fb4458a2e9474e7390176, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2397,7 +2397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a93cec627655e4285965019341f977, type: 3}
   m_Name: 
   mMat: {fileID: 0}
-  mTex: {fileID: 2800000, guid: a7425fe4b3d194f4d90d0ae62847eec7, type: 3}
+  mTex: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mDepth: 0
@@ -2407,8 +2407,8 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mShader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  mTexture: {fileID: 2800000, guid: a7425fe4b3d194f4d90d0ae62847eec7, type: 3}
+  mShader: {fileID: 4800000, guid: 2133a98744545b34f9e7f820aace323c, type: 3}
+  mTexture: {fileID: 2800000, guid: a26f6e9a3acae4c4582e7f395c1fedaf, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2420,7 +2420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a93cec627655e4285965019341f977, type: 3}
   m_Name: 
   mMat: {fileID: 0}
-  mTex: {fileID: 2800000, guid: e7a6537dbe1e942e68a4c4ab69f29a26, type: 3}
+  mTex: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mDepth: 0
@@ -2430,8 +2430,8 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mShader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  mTexture: {fileID: 2800000, guid: e7a6537dbe1e942e68a4c4ab69f29a26, type: 3}
+  mShader: {fileID: 4800000, guid: 2133a98744545b34f9e7f820aace323c, type: 3}
+  mTexture: {fileID: 2800000, guid: 05e7162e22eae411c9e4425be26b4f81, type: 3}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2443,7 +2443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a93cec627655e4285965019341f977, type: 3}
   m_Name: 
   mMat: {fileID: 0}
-  mTex: {fileID: 2800000, guid: aab8cbd8153054ea1970b1cc6f28e3cf, type: 3}
+  mTex: {fileID: 0}
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
   mDepth: 0
@@ -2453,8 +2453,8 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mShader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  mTexture: {fileID: 2800000, guid: aab8cbd8153054ea1970b1cc6f28e3cf, type: 3}
+  mShader: {fileID: 4800000, guid: 2133a98744545b34f9e7f820aace323c, type: 3}
+  mTexture: {fileID: 2800000, guid: d31cf6ad756684ea4add410215383baf, type: 3}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2513,8 +2513,8 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  mShader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  mTexture: {fileID: 2800000, guid: 808accfded8044b2d8548c7574ea200f, type: 3}
+  mShader: {fileID: 4800000, guid: 2133a98744545b34f9e7f820aace323c, type: 3}
+  mTexture: {fileID: 2800000, guid: f3aa787cc3f10495a83202501267a17f, type: 3}
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
