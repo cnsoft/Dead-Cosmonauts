@@ -73,7 +73,7 @@ public class ServerManager : uLink.MonoBehaviour {
                 instance = uLink.Network.Instantiate (powerupPrefab, new Vector3 (powerup.x, powerup.y, 0f), Quaternion.identity, 0, powerup._id, powerup.type);
                 break;
             case 3: // barricade
-                instance = uLink.Network.Instantiate (barricadePrefab, new Vector3 (powerup.x, powerup.y, 0f), Random.rotationUniform, 0, powerup._id);
+                instance = uLink.Network.Instantiate (barricadePrefab, new Vector3 (powerup.x, powerup.y, 0f), Quaternion.Euler(0.0f,0.0f,Random.value*360.0f) , 0, powerup._id);
                 break;
             }
 
