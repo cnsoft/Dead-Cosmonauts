@@ -65,8 +65,6 @@ if (Meteor.isServer) {
   });
 }
 
-var scale = 10.0;
-var origin = [160.0, 240.0];
 var bounds = [
   [- 30, - 40],
   [30, 40]
@@ -82,51 +80,57 @@ if (Meteor.isClient) {
     popupAnchor: [0, - 16]
   });
 
+  var powerupIcon = L.icon({
+    iconUrl: '/crate.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, - 8]
+  });
+
   Template.mapTemplate.rendered = function () {
     L.Icon.Default.imagePath = 'packages/leaflet/images';
 
-    window.map = L.map('map').setMaxBounds(bounds).fitBounds(bounds);
+    window.map = L.map('map',
+      {doubleClickZoom: false, attributionControl: false}).setMaxBounds(bounds).fitBounds(bounds);
     L.imageOverlay('/map.jpg', bounds).addTo(window.map);
+
+    window.map.on('dblclick', function (e) {
+      var lt = e.latlng;
+      Powerups.insert({x: lt.lat, y: lt.lng, type: 2, delivered: false});
+    });
 
     var playersObserve = Players.find({}).observe({
       added: function (player) {
-        markers[player._id] = new L.Marker([player.x, player.y], {icon: playerIcon});
+        markers[player._id] =
+          new L.Marker([player.x, player.y], {icon: playerIcon});
         window.map.addLayer(markers[player._id]);
       },
       removed: function (player) {
         window.map.removeLayer(markers[player._id]);
       },
-      changed: function(player) {
+      changed: function (player) {
         var lat = (player.x);
         var lng = (player.y);
         var newLatLng = new L.LatLng(lat, lng);
         markers[player._id].setLatLng(newLatLng);
       }
     });
-  };
 
-  Template.radarTemplate.events = {
-    'tap, click #container': function (e) {
-      Powerups.insert({x: e.pageX, y: e.pageY, type: 2, delivered: false});
-    }
-  };
-
-  Template.radarTemplate.players = function () {
-    return _.map(Players.find({}).fetch(), function (p) {
-      p.y *= - 1;
-      p.y *= scale;
-      p.x *= scale;
-      p.x += origin[0];
-      p.y += origin[1];
-      p.x -= 24.0 / 2.0;
-      p.y -= 24.0 / 2.0;
-      return p;
+    var powerupsObserve = Powerups.find({}).observe({
+      added: function (powerup) {
+        markers[powerup._id] =
+          new L.Marker([powerup.x, powerup.y], {icon: powerupIcon});
+        window.map.addLayer(markers[powerup._id]);
+      },
+      removed: function (powerup) {
+        window.map.removeLayer(markers[powerup._id]);
+      },
+      changed: function (powerup) {
+        var lat = (powerup.x);
+        var lng = (powerup.y);
+        var newLatLng = new L.LatLng(lat, lng);
+        markers[powerup._id].setLatLng(newLatLng);
+      }
     });
   };
-
-  Template.radarTemplate.powerups = function () {
-    return Powerups.find({}).fetch();
-  }
-
-  Template.radarTemplate.preserve = defaultPreserve;
 }
