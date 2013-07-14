@@ -84,8 +84,8 @@ if (Meteor.isServer) {
 }
 
 var bounds = [
-  [- 30, - 40],
-  [30, 40]
+  [- 32, - 50],
+  [32, 50]
 ];
 
 if (Meteor.isClient) {
