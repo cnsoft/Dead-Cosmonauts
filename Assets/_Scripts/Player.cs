@@ -238,6 +238,8 @@ public class Player : uLink.MonoBehaviour
                 break;
             }
 
+			torsoAnim.Play(heroColorName+"_Shoot");
+
 			//AudioSource.PlayClipAtPoint(PREFAB.audio.shootSound, transform.position);
 
             networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
