@@ -1,15 +1,42 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(uLinkSimpleServer))]
 public class ServerManager : uLink.MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    public uLinkSimpleServer simpleServer;
 	
+    public float updateFrequency = 0.1f;
+
+    void Awake() {
+        if (simpleServer == null) {
+            simpleServer = gameObject.GetComponent<uLinkSimpleServer> ();
+        }
+    }
+
+    // Use this for initialization
+	void Start () {
+	    
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
+
+    void uLink_OnPlayerDisconnected(uLink.NetworkPlayer player)
+    {
+        if (simpleServer.cleanupAfterPlayers)
+        {
+
+        }
+    }
+
+    void uLink_OnPlayerConnected(uLink.NetworkPlayer player)
+    {
+
+    }
+
+    void UpdatePlayers() {
+
+    }
 }
