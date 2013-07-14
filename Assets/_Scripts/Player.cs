@@ -66,18 +66,21 @@ public class Player : uLink.MonoBehaviour
 	void Update ()
 	{
         if (!networkView.isOwner) {
-            return;
+        	return;
         }
 
 		currentMovement[0] = Mathf.Abs(Input.GetAxis(leftStickAxis[0])) > 0.1f ? Input.GetAxis(leftStickAxis[0]) : 0;
 		currentMovement[1] = Mathf.Abs(Input.GetAxis(leftStickAxis[1])) > 0.1f ? Input.GetAxis(leftStickAxis[1]) : 0;
 
-	    controller.Move(currentMovement*moveSpeed*Time.deltaTime);
+		if (Input.GetAxisRaw("LeftTrigger") > -0.5f)
+	    	controller.Move(currentMovement*moveSpeed*Time.deltaTime);
+		else
+			controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.36f);
 
 		float y = Input.GetAxis(rightStickAxis[1]);
 		float x = Input.GetAxis(rightStickAxis[0]);
 
-		if (Mathf.Abs(Input.GetAxis(rightStickAxis[0])) <= 0.1f && Mathf.Abs(Input.GetAxis(rightStickAxis[1])) <= 0.1f)
+		if (Mathf.Abs(Input.GetAxis(rightStickAxis[0])) <= 0.1f && Mathf.Abs(Input.GetAxis(rightStickAxis[1])) <= 0.1f && Input.GetAxisRaw("RightTrigger") > -0.5f)
 		{
 			noShootTimer -= Time.deltaTime;
 		}else
@@ -92,7 +95,7 @@ public class Player : uLink.MonoBehaviour
 				transform.localEulerAngles = new Vector3(0,0,Mathf.LerpAngle(transform.localEulerAngles.z, targetEuler.z, Time.deltaTime * rotationSpeed));
 
 				if (Mathf.Abs(y) > 0.6f || Mathf.Abs(x) > 0.6f ){
-					WeaponShoot();
+					//WeaponShoot();
 				}
 			}
 		}else
@@ -105,6 +108,9 @@ public class Player : uLink.MonoBehaviour
 				transform.localEulerAngles = new Vector3(0,0,Mathf.LerpAngle(transform.localEulerAngles.z, targetEuler.z, Time.deltaTime * 7));
 			}
 		}
+
+		if (Input.GetAxisRaw("RightTrigger") < -0.5f)
+			WeaponShoot();
 
 		weaponTimer -= Time.deltaTime;
 
