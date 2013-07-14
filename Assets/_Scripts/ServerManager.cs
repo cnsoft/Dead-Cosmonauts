@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(uLinkSimpleServer))]
 public class ServerManager : uLink.MonoBehaviour {
     public uLinkSimpleServer simpleServer;
-	
+	public List<Player> players = new List<Player> ();
+
     public float updateFrequency = 0.1f;
 
     void Awake() {
@@ -33,7 +35,7 @@ public class ServerManager : uLink.MonoBehaviour {
 
     void uLink_OnPlayerConnected(uLink.NetworkPlayer player)
     {
-
+        
     }
 
     void UpdatePlayers() {

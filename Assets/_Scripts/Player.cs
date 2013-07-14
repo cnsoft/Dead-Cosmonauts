@@ -3,11 +3,13 @@ using System.Collections;
 
 public class Player : uLink.MonoBehaviour
 {
-
     public Vector3 currentMovement;
     public float moveSpeed = 5;
     public CharacterController controller;
 
+
+    public float meteorUpdateSpeed = 0.1f;
+    private float meteorUpdateTimer = 0f;
 
 	public float weaponCooldown = 0.1f;
 	private float weaponTimer;
@@ -117,7 +119,20 @@ public class Player : uLink.MonoBehaviour
 		}
 
 		damageCooldownTimer -= Time.deltaTime;
+
+        meteorUpdateTimer -= Time.deltaTime;
+        if (meteorUpdateTimer < 0f) {
+
+
+
+            meteorUpdateTimer = meteorUpdateSpeed;
+        }
 	}
+
+    IEnumerator UpdateMeteor() {
+//        WWW www = new WWW ();
+        yield return new WaitForEndOfFrame ();
+    }
 
     void WeaponShoot() {
         if (weaponTimer <= 0) {
@@ -180,16 +195,22 @@ public class Player : uLink.MonoBehaviour
 
 			int damage = bullet.damage;
 
-			if (networkView.isOwner) {
-				if (damageCooldownTimer <= 0){
-		            networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage);
-		            networkView.RPC ("HitCosmetics", uLink.RPCMode.OthersExceptOwner, damage, bullet.transform.position [0], bullet.transform.position [1]);
-					HitCosmetics(damage, bullet.transform.position [0], bullet.transform.position [1]);
-		            UpdateHealth();
-		            damageCooldownTimer = damageCooldown;
-				}
-			}
+            if (damageCooldownTimer <= 0){
+                if (networkView.isOwner) {
+                    networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage);
+                    UpdateHealth();
+                }
 
+                StartCoroutine(Blink());
+                TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
+                txtPop.ChangeText(damage.ToString("f0"));
+
+                damageCooldownTimer = damageCooldown;
+                AudioSource.PlayClipAtPoint(PREFAB.audio.hitSound, transform.position);
+
+            }
+
+            HitCosmetics(damage, bullet.transform.position [0], bullet.transform.position [1]);
 			PREFAB.DespawnPrefab(other.transform, "1");
 		}
 	}
@@ -201,11 +222,7 @@ public class Player : uLink.MonoBehaviour
 
     [RPC]
     void HitCosmetics(int damage, float positionX, float positionY) {
-        TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
-        txtPop.ChangeText(damage.ToString("f0"));
         PREFAB.SpawnPrefab(PREFAB.HIT_IMPACT, new Vector3(positionX,positionY,0.0f) - new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f),5), "1");
-        AudioSource.PlayClipAtPoint(PREFAB.audio.hitSound, transform.position);
-        StartCoroutine(Blink());
     }
 
 	IEnumerator Blink()
