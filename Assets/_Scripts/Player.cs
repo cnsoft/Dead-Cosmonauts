@@ -53,8 +53,6 @@ public class Player : uLink.MonoBehaviour
 
 	public Color runColor;
 
-	private SpawnPoints spawnPoints;
-
 	public string heroColorName = "Blue";
 
 	public Transform bulletSpawnPoint;
@@ -78,7 +76,6 @@ public class Player : uLink.MonoBehaviour
 
     void uLink_OnNetworkInstantiate(uLink.NetworkMessageInfo info) {
         spriteTorso = GetComponentInChildren<tk2dSprite>();
-        spawnPoints = (SpawnPoints)FindObjectOfType(typeof(SpawnPoints));
         statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
 
         if (!info.networkView.isOwner) {
@@ -93,7 +90,6 @@ public class Player : uLink.MonoBehaviour
 		staminaBar = GameObject.Find("StaminaBarSliced").GetComponent<tk2dTiledSprite>();
 		statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
 		spriteTorso = GetComponentInChildren<tk2dSprite>();
-		spawnPoints = (SpawnPoints)FindObjectOfType(typeof(SpawnPoints));
 		UpdateHealth();
 
 		torsoAnim.Play(heroColorName+"_2");
@@ -298,7 +294,6 @@ public class Player : uLink.MonoBehaviour
 
             if (damageCooldownTimer <= 0){
                 if (networkView.isOwner) {
-                    int spawn = Random.Range(0, spawnPoints.spawnPoint.Length-1);
                     networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage, bullet.owner);
                     UpdateHealth();
                 }
