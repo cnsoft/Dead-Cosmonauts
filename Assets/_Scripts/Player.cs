@@ -97,7 +97,7 @@ public class Player : uLink.MonoBehaviour
 
 	void Update ()
 	{
-        if (!networkView.isOwner || dead) {
+        if (!networkView.isOwner) {
         	return;
         }
 
@@ -222,6 +222,9 @@ public class Player : uLink.MonoBehaviour
 	}
 
     void WeaponShoot() {
+		if (dead)
+			return;
+
         if (weaponTimer <= 0) {
             switch (weaponId) {
             case 0:
@@ -328,6 +331,10 @@ public class Player : uLink.MonoBehaviour
     [RPC]
     void SetDead(bool isDead) {
         dead = isDead;
+		if (dead)
+			torsoAnim.Play("Ghost");
+		else 
+			torsoAnim.Play(heroColorName+"_2");
     }
 
     string name {
