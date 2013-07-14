@@ -91,7 +91,7 @@ var bounds = [
 if (Meteor.isClient) {
   var markers = {};
 
-  var powerupCounter = 0;
+  var powerupCounter = _.random(0,100);
   var availablePowerups = [
     {type: 1, text: 'machinegun'},
     {type: 2, text: 'shotgun'},
@@ -122,10 +122,17 @@ if (Meteor.isClient) {
     labelAnchor: [16, - 16]
   });
 
-  var powerupIcon = L.icon({
-    iconUrl: '/crate.png',
-    iconSize: [32, 32],
-    iconAnchor: [16, 16],
+  var machinegunIcon = L.icon({
+    iconUrl: '/MachineGun.png',
+    iconSize: [86, 36],
+    iconAnchor: [43, 18],
+    labelAnchor: [16, - 16]
+  });
+
+  var shotgunIcon = L.icon({
+    iconUrl: '/Shotgun.png',
+    iconSize: [86, 36],
+    iconAnchor: [43, 18],
     labelAnchor: [16, - 16]
   });
 
@@ -138,23 +145,23 @@ if (Meteor.isClient) {
 
   var brickIcons = _.shuffle([
     L.icon({
-      iconUrl: '/brick0.png',
-      iconSize: [32, 32],
-      iconAnchor: [16, 16],
-      labelAnchor: [16, - 16]
-    }),
-    L.icon({
-      iconUrl: '/brick1.png',
-      iconSize: [32, 32],
-      iconAnchor: [16, 16],
-      labelAnchor: [16, - 16]
-    }),
-    L.icon({
-      iconUrl: '/brick2.png',
-      iconSize: [32, 32],
-      iconAnchor: [16, 16],
+      iconUrl: '/Obstacle1.png',
+      iconSize: [108, 36],
+      iconAnchor: [54, 18],
       labelAnchor: [16, - 16]
     })
+//    L.icon({
+//      iconUrl: '/brick1.png',
+//      iconSize: [32, 32],
+//      iconAnchor: [16, 16],
+//      labelAnchor: [16, - 16]
+//    }),
+//    L.icon({
+//      iconUrl: '/brick2.png',
+//      iconSize: [32, 32],
+//      iconAnchor: [16, 16],
+//      labelAnchor: [16, - 16]
+//    })
   ]);
 
   Template.mapTemplate.rendered = function () {
@@ -204,8 +211,11 @@ if (Meteor.isClient) {
 
     var powerupsObserve = Powerups.find({}).observe({
       added: function (powerup) {
-        var icon = powerupIcon;
-        if (powerup.type == 3) {
+        if (powerup.type == 1) {
+          icon = machinegunIcon;
+        } else if (powerup.type == 2) {
+          icon = shotgunIcon;
+        } else if (powerup.type == 3) {
           icon = _.first(_.shuffle(brickIcons));
         } else if (powerup.type == 4) {
           icon = medpackIcon;
