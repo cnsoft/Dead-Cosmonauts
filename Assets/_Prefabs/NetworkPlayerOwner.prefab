@@ -261,6 +261,7 @@ MonoBehaviour:
   currentMovement: {x: 0, y: 0, z: 0}
   moveSpeed: 8
   controller: {fileID: 0}
+  meteorRoot: 
   meteorUpdateSpeed: .100000001
   weaponCooldown: .159999996
   rotationSpeed: 10
@@ -331,8 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1eb949a92b66546af2eb1c65bab5a4, type: 3}
   m_Name: 
   maxSpeed: 10.6000004
-  maxDistance: 100
-  arrivalDistance: .100000001
+  maxDistance: 24
+  arrivalDistance: 0
   velocity: {x: 0, y: 0, z: 0}
   moveCharacter: 0
   arrivalSpeed: 0
