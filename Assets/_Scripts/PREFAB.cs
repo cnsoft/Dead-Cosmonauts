@@ -7,6 +7,7 @@ public class PREFAB : MonoBehaviour {
 	public static GameObject		BULLET_SHOTGUN;
 	public static GameObject		DAMAGE_TEXT;
 	public static GameObject		EXPLOSION;
+	public static GameObject		EXPLOSION2;
 	public static GameObject		HIT_IMPACT;
 
 	public static AudioClip			AUDIO_HIT;
@@ -18,6 +19,7 @@ public class PREFAB : MonoBehaviour {
 		BULLET = (GameObject)Resources.Load("Bullet");
 		DAMAGE_TEXT = (GameObject)Resources.Load("DamageText");
 		EXPLOSION = (GameObject)Resources.Load("Explosion");
+		EXPLOSION2 = (GameObject)Resources.Load("Explosion2");
 		HIT_IMPACT = (GameObject)Resources.Load("HitImpact");
 		BULLET_SHOTGUN = (GameObject)Resources.Load("Bullet_Shotgun");
 

@@ -50,6 +50,8 @@ public class Player : uLink.MonoBehaviour
 	private tk2dSprite sprite;
 	public Color runColor;
 
+	private SpawnPoints spawnPoints;
+
 	void Awake ()
 	{
         if (controller == null)
@@ -78,12 +80,13 @@ public class Player : uLink.MonoBehaviour
 		staminaBar = GameObject.Find("StaminaBarSliced").GetComponent<tk2dTiledSprite>();
 		statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
 		sprite = GetComponentInChildren<tk2dSprite>();
+		spawnPoints = (SpawnPoints)FindObjectOfType(typeof(SpawnPoints));
 		UpdateHealth();
     }
 
 	void Update ()
 	{
-        if (!networkView.isOwner) {
+        if (!networkView.isOwner || dead) {
         	return;
         }
 
@@ -151,12 +154,6 @@ public class Player : uLink.MonoBehaviour
 			WeaponShoot();
 
 		weaponTimer -= Time.deltaTime;
-
-		if (Input.GetKeyDown(KeyCode.A))
-		{
-			TextPopup dmgTxt = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position - new Vector3(0,0,5), "1").GetComponent<TextPopup>();
-			dmgTxt.ChangeText("DEAD COSMONAUGHTS", Color.red);
-		}
 
 		damageCooldownTimer -= Time.deltaTime;
 
@@ -248,7 +245,7 @@ public class Player : uLink.MonoBehaviour
                     UpdateHealth();
                 }
 
-                StartCoroutine(Blink());
+                StartCoroutine("Blink");
                 TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
                 txtPop.ChangeText(damage.ToString("f0"));
 
@@ -279,7 +276,12 @@ public class Player : uLink.MonoBehaviour
 		if (health <= 0 && !dead && networkView.isOwner)
 		{
 			dead = true;
-			print ("DEAD");
+
+			PREFAB.SpawnPrefab(PREFAB.EXPLOSION2, transform.position, "1");
+			PREFAB.audio.PlayRandomKillSound();
+			StopCoroutine("Blink");
+
+			StartCoroutine(DeathWait());
 		}
     }
 
@@ -293,6 +295,25 @@ public class Player : uLink.MonoBehaviour
 		//renderer.material.color = Color.red;
 		yield return new WaitForSeconds(0.1f);
 		//renderer.material.color = Color.white;
+	}
+
+	IEnumerator DeathWait()
+	{
+		int spawn = Random.Range(0, spawnPoints.spawnPoint.Length-1);
+
+		sprite.color = Color.clear;
+		flashlight.LightRadius = 0;
+
+
+		yield return new WaitForSeconds(5);
+
+		transform.position = spawnPoints.spawnPoint[spawn].position;
+		health = maxHealth;
+		UpdateHealth();
+
+		sprite.color = Color.white;
+
+		dead = false;
 	}
 
 	void DeathEvent()
