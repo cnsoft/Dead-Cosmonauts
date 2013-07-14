@@ -1,5 +1,6 @@
 // (c)2011 MuchDifferent. All Rights Reserved.
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using uLink;
@@ -17,6 +18,8 @@ using uLink;
 [RequireComponent(typeof(uLinkNetworkView))]
 public class uLinkChatGUI : uLink.MonoBehaviour
 {
+    public string meteorRoot = "http://cosmo.meteor.com";
+
 	public enum Position
 	{
 		BottomLeft,
@@ -158,23 +161,25 @@ public class uLinkChatGUI : uLink.MonoBehaviour
 		entries.Add(entry);
 
 		if (autoScroll) scrollPosition.y = float.MaxValue;
-		
-		if (uLink.Network.isServer)
-		{
-			networkView.RPC("Chat", uLink.RPCMode.Others, entry);
-		}
 	}
 
 	void SwitchMode()
 	{
 		if (isTyping && inputField.Length > 0)
 		{
-			networkView.RPC("Chat", uLink.NetworkPlayer.server, inputPrefix + inputField);
+			networkView.RPC("Chat", uLink.RPCMode.All, inputPrefix + inputField);
+            StartCoroutine (ChatToMeteor (inputField));
 			inputField = "";
 		}
 
 		SetTyping(!isTyping);
 	}
+
+    IEnumerator ChatToMeteor(string message) {
+        string url = WWW.EscapeURL(string.Format ("{0}/chat/{1}/{2}", meteorRoot, networkView.owner.id, message));
+        WWW www = new WWW (url);
+        yield return www;
+    }
 
 	void SetTyping(bool value)
 	{

@@ -34,6 +34,11 @@ public class ServerManager : uLink.MonoBehaviour {
         }
 	}
 
+    void uLink_OnPlayerConnected(uLink.NetworkPlayer player)
+    {
+        StartCoroutine (AddMeToMeteor (player));
+    }
+
     void uLink_OnPlayerDisconnected(uLink.NetworkPlayer player)
     {
         if (simpleServer.cleanupAfterPlayers)
@@ -66,7 +71,10 @@ public class ServerManager : uLink.MonoBehaviour {
         }
     }
 
-    void UpdatePlayers() {
-
+    IEnumerator AddMeToMeteor(uLink.NetworkPlayer player) {
+        string name = "Anonymous";
+        player.loginData.TryRead<string> (out name);
+        WWW www = new WWW (string.Format ("{0}/add/{1}/{2}", meteorRoot, player.id, name));
+        yield return www;
     }
 }

@@ -53,7 +53,7 @@ MonoBehaviour:
   guiSkin: {fileID: 0}
   guiDepth: 0
   dontDestroyOnLoad: 0
-  lockCursor: 1
+  lockCursor: 0
   hideCursor: 1
 --- !u!1001 &100100000
 Prefab:

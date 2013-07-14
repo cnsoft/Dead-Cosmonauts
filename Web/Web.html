@@ -5,6 +5,17 @@
 
 <body>
     {{> mapTemplate}}
+    <div class="controlpanel-container">
+        <div id="controlMessage" class="controlpanel-message">Loading
+            powerup</div>
+        <div class="controlpanel-progress-bg">
+            <div id="progressBar" class="controlpanel-progress"></div>
+        </div>
+        <div style="margin-top: 5px; font-size:18px; visibility: hidden;"
+             id="tutorialMessage"
+             class="controlpanel-message">double
+            tap to drop</div>
+    </div>
 </body>
 
 <template name="mapTemplate">
