@@ -1548,6 +1548,7 @@ GameObject:
   - 23: {fileID: 825130387}
   - 33: {fileID: 825130386}
   - 114: {fileID: 825130385}
+  - 114: {fileID: 825130389}
   m_Layer: 0
   m_Name: New Light
   m_TagString: Untagged
@@ -1617,6 +1618,21 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &825130389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 825130384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba8e7805da8349eb8e94b217105161e, type: 3}
+  m_Name: 
+  minRadius: 12
+  maxRadius: 20
+  time: .5
+  delay: 0
+  easetype: Spring
 --- !u!1 &862411133
 GameObject:
   m_ObjectHideFlags: 0
