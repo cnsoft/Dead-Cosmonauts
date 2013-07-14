@@ -18,7 +18,7 @@ using uLink;
 [RequireComponent(typeof(uLinkNetworkView))]
 public class uLinkChatGUI : uLink.MonoBehaviour
 {
-    public string meteorRoot = "http://cosmo.meteor.com";
+    public const string meteorRoot = "http://cosmo.meteor.com";
 
 	public enum Position
 	{
@@ -168,7 +168,7 @@ public class uLinkChatGUI : uLink.MonoBehaviour
 		if (isTyping && inputField.Length > 0)
 		{
 			networkView.RPC("Chat", uLink.RPCMode.All, inputPrefix + inputField);
-            StartCoroutine (ChatToMeteor (inputField));
+            StartCoroutine (ChatToMeteor (inputField.Substring(0)));
 			inputField = "";
 		}
 
@@ -176,7 +176,7 @@ public class uLinkChatGUI : uLink.MonoBehaviour
 	}
 
     IEnumerator ChatToMeteor(string message) {
-        string url = WWW.EscapeURL(string.Format ("{0}/chat/{1}/{2}", meteorRoot, networkView.owner.id, message));
+        string url = string.Format ("{0}/chat/{1}/{2}", meteorRoot, uLink.Network.player.id,System.Uri.EscapeDataString (message));
         WWW www = new WWW (url);
         yield return www;
     }

@@ -12,6 +12,7 @@ if (Meteor.isServer) {
   });
 
   Meteor.Router.add('/add/:playerId/:name', 'GET', function (playerId, name) {
+    playerId = parseInt(playerId);
     if (Players.find({playerId: playerId}).count() > 0) {
       Players.update({playerId: playerId}, {$set: {name: name}});
     } else {
@@ -23,6 +24,7 @@ if (Meteor.isServer) {
 
   Meteor.Router.add('/chat/:playerId/:message', 'GET',
     function (playerId, message) {
+      playerId = parseInt(playerId);
       Players.update({playerId: playerId}, {$set: {message: message}});
       return [200, defaultHeaders, 1];
     });

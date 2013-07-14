@@ -9,6 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
+  - 114: {fileID: 11400004}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: ClientPrefab
   m_TagString: Untagged
@@ -55,6 +57,53 @@ MonoBehaviour:
   dontDestroyOnLoad: 0
   lockCursor: 0
   hideCursor: 1
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba8c4c95c4ec384a96a7da288071d4d, type: 3}
+  m_Name: 
+  meteorRoot: http://cosmo.meteor.com
+  position: 0
+  typeByKey: 13
+  isTyping: 0
+  whenNotTyping: Press Enter to chat...
+  maxEntries: 50
+  windowWidth: 200
+  windowheight: 100
+  useLoginData: 1
+  enableWhenTyping: []
+  disableWhenTyping: []
+  guiSkin: {fileID: 0}
+  guiDepth: 0
+  autoScroll: 1
+--- !u!114 &11400004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9be5429cbf387c4f9140f7d1908fb9c, type: 3}
+  m_Name: 
+  proxyPrefab: 
+  ownerPrefab: 
+  serverPrefab: 
+  _parent: {fileID: 0}
+  _childIndex: -1
+  _children: []
+  stateSynchronization: 2
+  securable: 0
+  observed: {fileID: 11400002}
+  _manualViewID: 1
+  rpcReceiver: 2
+  listOfGameObjects: []
+  _prefabRoot: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
