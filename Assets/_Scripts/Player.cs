@@ -292,7 +292,6 @@ public class Player : uLink.MonoBehaviour
             if (networkView.isOwner) {
                 dead = true;
 
-
                 StartCoroutine (UnsetDead (potentialSpawnpoint));
 
             }
@@ -303,12 +302,19 @@ public class Player : uLink.MonoBehaviour
 
     IEnumerator UnsetDead(int spawn) {
         yield return new WaitForSeconds (5.0f);
-        transform.position = spawnPoints.spawnPoint[spawn].position;
-        health = maxHealth;
+
+        // fancy move
+        Vector3 destination = spawnPoints.spawnPoint[spawn].position;
+
+
+        FullHealth();
+        SetDead(false);
+        networkView.RPC ("FullHealth",uLink.RPCMode.Others);
+        networkView.RPC ("SetDead", uLink.RPCMode.Others, false);
+
         stamina = maxStamina;
         UpdateStaminaHUD();
         UpdateHealth();
-        networkView.RPC ("SetDead", uLink.RPCMode.All, false);
     }
 
     void DeathCosmetics() {
