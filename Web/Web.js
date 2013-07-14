@@ -1,14 +1,11 @@
 Players = new Meteor.Collection("players");
 Powerups = new Meteor.Collection("powerups");
-Map = null;
-
-defaultPreserve = {
-  'div[id]': function (node) {
-    return node.id;
-  }
-};
 
 if (Meteor.isServer) {
+  var defaultHeaders = {
+    "Access-Control-Allow-Origin": "*"
+  };
+
   Meteor.startup(function () {
     Players.remove({});
     Powerups.remove({});
@@ -18,50 +15,51 @@ if (Meteor.isServer) {
     function (playerId, x, y, rotationZ, color) {
       var id = 0;
       playerId = parseInt(playerId);
+      x = parseFloat(x);
+      y = parseFloat(y);
+      rotationZ = parseFloat(rotationZ);
       try {
         if (Players.find({playerId: playerId}).count() > 0) {
           Players.update({playerId: playerId},
-            {$set: {x: x, y: y, rotationZ: rotationZ, color: color}});
+            {$set: {x: y, y: x, rotationZ: rotationZ, color: color}});
         } else {
           id =
-            Players.insert({playerId: playerId, x: x, y: y,
+            Players.insert({playerId: playerId, x: y, y: x,
               rotationZ: rotationZ, color: color});
         }
       } catch (e) {
         return [500, '0'];
       }
-      return [200, Players.find({}).count().toString()];
+      return [200, defaultHeaders, Players.find({}).count().toString()];
     });
 
   Meteor.Router.add('/powerups', 'GET', function () {
-    var data = _.map(Powerups.find({delivered: false}).fetch(), function (p) {
-      p.x -= origin[0];
-      p.y -= origin[1];
-      p.x /= scale;
-      p.y /= scale;
-      p.y *= - 1;
+    var data = _.map(Powerups.find({delivered: false}).fetch(),function(p){
+      var _y = p.y;
+      p.y = p.x;
+      p.x = _y;
       return p;
     });
 
     Powerups.update({delivered: false}, {$set: {delivered: true}},
       {multi: true});
 
-    return [200, JSON.stringify({success: true, data: data})];
+    return [200, defaultHeaders, JSON.stringify({success: true, data: data})];
   });
 
   Meteor.Router.add('/powerups/pickup/:powerupId', function (powerupId) {
     Powerups.remove({_id: powerupId});
-    return [200, '1'];
+    return [200, defaultHeaders, '1'];
   });
 
   Meteor.Router.add('/clear', 'GET', function () {
     Players.remove({});
-    return [200, '1'];
+    return [200, defaultHeaders, '1'];
   });
 
   Meteor.Router.add('/delete/:id', 'GET', function (playerId) {
     Players.remove({playerId: playerId}, {multi: true});
-    return [200, '1'];
+    return [200, defaultHeaders, '1'];
   });
 }
 
