@@ -32,12 +32,15 @@ MonoBehaviour:
     spriteNames:
     - 1
     - SkelletonAvatar
+    - angle
     spriteTextureGUIDs:
     - 2f6935637a53d4ea0a0dcb6bafac24e8
     - 237f966c1551d4a6e9243bce8ca404ff
+    - 0dd1246e5c36443f7b84fe29961297a5
     spriteTextureTimeStamps:
     - 1373214941
     - 1373743397
+    - 1373743219
     managedSpriteCollection: 0
     loadable: 0
     assetName: 

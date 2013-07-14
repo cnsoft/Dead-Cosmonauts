@@ -115,7 +115,7 @@ Renderer:
   m_ScaleInLightmap: 1
 --- !u!23 &2300002
 Renderer:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
@@ -158,7 +158,7 @@ MeshFilter:
   m_Mesh: {fileID: 0}
 --- !u!33 &3300002
 MeshFilter:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
@@ -194,8 +194,8 @@ MonoBehaviour:
   m_Name: 
   collection: {fileID: 11400000, guid: 1ed54f34ac8bb481e8abc4493344b203, type: 2}
   _color: {r: 1, g: 1, b: 1, a: 1}
-  _scale: {x: 1, y: 1, z: 1}
-  _spriteId: 0
+  _scale: {x: .5, y: .5, z: 1}
+  _spriteId: 2
   boxCollider: {fileID: 0}
   meshCollider: {fileID: 0}
   meshColliderPositions: []
@@ -258,6 +258,7 @@ MonoBehaviour:
   damageCooldown: .200000003
   healthBar: {fileID: 0}
   staminaBar: {fileID: 0}
+  runColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1

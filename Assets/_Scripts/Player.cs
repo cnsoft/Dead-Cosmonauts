@@ -47,6 +47,9 @@ public class Player : uLink.MonoBehaviour
 
 	private StatsScreen statsScreen;
 
+	private tk2dSprite sprite;
+	public Color runColor;
+
 	void Awake ()
 	{
         if (controller == null)
@@ -74,6 +77,7 @@ public class Player : uLink.MonoBehaviour
 		healthBar = GameObject.Find("HealthBarSliced").GetComponent<tk2dTiledSprite>();
 		staminaBar = GameObject.Find("StaminaBarSliced").GetComponent<tk2dTiledSprite>();
 		statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
+		sprite = GetComponentInChildren<tk2dSprite>();
 		UpdateHealth();
     }
 
@@ -104,10 +108,11 @@ public class Player : uLink.MonoBehaviour
 
 		if (Input.GetAxisRaw("LeftTrigger") > -0.5f || staminaEmpty){
 	    	controller.Move(currentMovement*moveSpeed*Time.deltaTime);
-
+			sprite.color = Color.white;
 		}else if (!staminaEmpty){
 			controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.4f);
 			stamina -= Time.deltaTime * 2.5f;
+			sprite.color = runColor;
 		}
 
 		float y = Input.GetAxis(rightStickAxis[1]);
