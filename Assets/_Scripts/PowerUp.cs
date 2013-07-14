@@ -39,13 +39,13 @@ public class PowerUp : uLink.MonoBehaviour {
                     case(2): txtPop.ChangeText("SHOTGUN", Color.yellow); break;
                 }
 
-                networkView.RPC ("Take", uLink.RPCMode.All);
+                StartCoroutine (DeferredDestroy ());
             }
 		}
 	}
 
-    [RPC]
-    public void Take() {
-        gameObject.SetActive (false);
+    IEnumerator DeferredDestroy() {
+        yield return new WaitForEndOfFrame ();
+        uLink.Network.Destroy (this.gameObject);
     }
 }

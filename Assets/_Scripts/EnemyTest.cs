@@ -1,9 +1,20 @@
 using UnityEngine;
 using System.Collections;
 
-public class EnemyTest : MonoBehaviour {
+[RequireComponent(typeof(uLinkNetworkView))]
+public class EnemyTest : uLink.MonoBehaviour {
 
 	public int health = 5;
+
+    public void Start() {
+        if (networkView == null) {
+            gameObject.AddComponent<uLinkNetworkView> ();
+        }
+
+        if (networkView.observed == null) {
+            networkView.observed = this;
+        }
+    }
 
 	void BulletDamage()
 	{
@@ -50,11 +61,18 @@ public class EnemyTest : MonoBehaviour {
 			{
 				PREFAB.SpawnPrefab(PREFAB.EXPLOSION, transform.position, "1");
 				AudioSource.PlayClipAtPoint(PREFAB.audio.explosionSound, transform.position);
-				this.gameObject.SetActive(false);
+                if (bullet.mine) {
+                    StartCoroutine (DeferredDestroy ());
+                }
 			}
 
 			PREFAB.DespawnPrefab(other.transform, "1");
 
 		}
 	}
+
+    IEnumerator DeferredDestroy() {
+        yield return new WaitForEndOfFrame ();
+        uLink.Network.Destroy (this.gameObject);
+    }
 }

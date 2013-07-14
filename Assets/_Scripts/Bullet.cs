@@ -5,6 +5,8 @@ public class Bullet : MonoBehaviour {
 
 	public float flySpeed = 5;
 	public float lifetime = 2;
+    public bool mine;
+    public int owner;
 
 	public int damage = 1;
 

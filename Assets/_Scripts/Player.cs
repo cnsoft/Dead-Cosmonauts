@@ -160,16 +160,21 @@ public class Player : uLink.MonoBehaviour
 
     [RPC]
     void SpawnBullets(int _weaponId) {
+        Transform instance = null;
+        bool mine = networkView.isOwner;
         switch (_weaponId) {
         case 0:
-            PREFAB.SpawnPrefab (PREFAB.BULLET, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
+            instance = PREFAB.SpawnPrefab (PREFAB.BULLET, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
+            instance.GetComponent<Bullet> ().mine = mine ;
             break;
         case 1:
-            PREFAB.SpawnPrefab (PREFAB.BULLET, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
+            instance = PREFAB.SpawnPrefab (PREFAB.BULLET, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 90), "1");
+            instance.GetComponent<Bullet> ().mine = mine;
             break;
         case 2:
             for (int i = 0; i < 5; i++) {
-                PREFAB.SpawnPrefab (PREFAB.BULLET_SHOTGUN, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 76 + (i * 7)), "1");
+                instance = PREFAB.SpawnPrefab (PREFAB.BULLET_SHOTGUN, transform.position, transform.localEulerAngles - new Vector3 (0, 0, 76 + (i * 7)), "1");
+                instance.GetComponent<Bullet> ().mine = mine;
             }
             break;
         }

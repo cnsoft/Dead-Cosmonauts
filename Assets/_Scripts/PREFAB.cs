@@ -31,7 +31,7 @@ public class PREFAB : MonoBehaviour {
 		
 		return instance;
 	}
-	
+
 	public static Transform SpawnPrefab (GameObject obj, Vector3 pos, Vector3 rot, string pool)
 	{
 		Transform instance = PoolManager.Pools[pool].Spawn(obj.transform, pos, Quaternion.identity);
