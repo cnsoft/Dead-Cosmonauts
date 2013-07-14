@@ -394,7 +394,7 @@ public class Player : uLink.MonoBehaviour
     void DeathCosmetics() {
         PREFAB.SpawnPrefab(PREFAB.EXPLOSION2, transform.position, "1");
         PREFAB.audio.PlayRandomKillSound();
-        StopCoroutine("Blink");
+        //StopCoroutine("Blink");
         spriteTorso.color = Color.clear;
         flashlight.LightRadius = 0;
 
