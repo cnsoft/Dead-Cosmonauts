@@ -168,17 +168,24 @@ public class Player : uLink.MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.CompareTag("Bullet") && damageCooldownTimer <= 0 && networkView.isOwner)
+		if (other.CompareTag("Bullet"))
 		{
 			Bullet bullet = other.GetComponent<Bullet>();
+
+
 			int damage = bullet.damage;
 
+			if (networkView.isOwner) {
+				if (damageCooldownTimer <= 0){
+		            networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage);
+		            networkView.RPC ("HitCosmetics", uLink.RPCMode.OthersExceptOwner, damage, bullet.transform.position [0], bullet.transform.position [1]);
+					HitCosmetics(damage, bullet.transform.position [0], bullet.transform.position [1]);
+		            UpdateHealth();
+		            damageCooldownTimer = damageCooldown;
+				}
+			}
 
-            networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage);
-            networkView.RPC ("HitCosmetics", uLink.RPCMode.All, damage, bullet.transform.position [0], bullet.transform.position [1]);
-
-            UpdateHealth();
-            damageCooldownTimer = damageCooldown;
+			PREFAB.DespawnPrefab(other.transform, "1");
 		}
 	}
 
