@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class StatsScreen : MonoBehaviour {
+public class StatsScreen : uLink.MonoBehaviour {
 
 	public GameObject statsParent;
 	private bool statsActive;

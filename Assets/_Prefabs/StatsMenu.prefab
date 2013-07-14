@@ -822,7 +822,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100096
 GameObject:
   m_ObjectHideFlags: 1
@@ -2566,7 +2566,7 @@ MonoBehaviour:
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
     text: 'KILLS
 
-      23'
+      0'
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -2694,7 +2694,7 @@ MonoBehaviour:
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
     text: 'KILLS
 
-      23'
+      0'
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -2780,7 +2780,7 @@ MonoBehaviour:
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
     text: 'DEATHS
 
-      23'
+      0'
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -2899,7 +2899,7 @@ MonoBehaviour:
   - {fileID: 11400068}
   - {fileID: 11400062}
   avatarTexture: []
-  firstColor: {r: 0, g: 0, b: 0, a: 0}
+  firstColor: {r: 1, g: .70588237, b: .0509803928, a: 1}
 --- !u!114 &11400032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2993,7 +2993,7 @@ MonoBehaviour:
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
     text: 'KILLS
 
-      23'
+      0'
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -3037,7 +3037,7 @@ MonoBehaviour:
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
     text: 'KILLS
 
-      23'
+      0'
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -3142,7 +3142,7 @@ MonoBehaviour:
   data:
     version: 1
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
-    text: TRAVIS
+    text: PLAYER 4
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -3186,7 +3186,7 @@ MonoBehaviour:
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
     text: 'KILLS
 
-      23'
+      0'
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -3270,7 +3270,7 @@ MonoBehaviour:
   data:
     version: 1
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
-    text: CRAIG
+    text: PLAYER 5
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -3312,7 +3312,7 @@ MonoBehaviour:
   data:
     version: 1
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
-    text: KARLO
+    text: PLAYER 2
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -3375,7 +3375,7 @@ MonoBehaviour:
   data:
     version: 1
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
-    text: BEN
+    text: PLAYER 1
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -3440,7 +3440,7 @@ MonoBehaviour:
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
     text: 'DEATHS
 
-      23'
+      0'
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -3547,7 +3547,7 @@ MonoBehaviour:
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
     text: 'DEATHS
 
-      23'
+      0'
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -3652,7 +3652,7 @@ MonoBehaviour:
   data:
     version: 1
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
-    text: SERGIO
+    text: PLAYER 3
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -3696,7 +3696,7 @@ MonoBehaviour:
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
     text: 'DEATHS
 
-      23'
+      0'
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
@@ -3803,7 +3803,7 @@ MonoBehaviour:
     font: {fileID: 11400000, guid: 4cf63ff638dc445eeb34140dbcef1741, type: 2}
     text: 'DEATHS
 
-      23'
+      0'
     color: {r: 1, g: 1, b: 1, a: 1}
     color2: {r: 1, g: 1, b: 1, a: 1}
     useGradient: 0
