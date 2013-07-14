@@ -45,6 +45,15 @@ public class PowerUp : uLink.MonoBehaviour {
 		}
 	}
 
+    void uLink_OnNetworkInstantiate(uLink.NetworkMessageInfo info) {
+        if (!info.networkView.initialData.TryRead<string>(out id)) {
+            Debug.LogError ("No initial id for powerup.");
+        }
+        if (!info.networkView.initialData.TryRead<int>(out weaponId)) {
+            Debug.LogError ("No initial id for powerup.");
+        }
+    }
+
     IEnumerator DeferredDestroy() {
         yield return new WaitForEndOfFrame ();
 

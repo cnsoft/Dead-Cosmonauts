@@ -8,6 +8,11 @@ defaultPreserve = {
 };
 
 if (Meteor.isServer) {
+  Meteor.startup(function() {
+    Players.remove({});
+    Powerups.remove({});
+  });
+
   Meteor.Router.add('/update/:playerId/:x/:y/:rotationZ/:color', 'GET',
     function (playerId, x, y, rotationZ, color) {
       var id = 0;
@@ -45,6 +50,7 @@ if (Meteor.isServer) {
 
   Meteor.Router.add('/powerups/pickup/:powerupId',function(powerupId) {
     Powerups.remove({_id:powerupId});
+    return [200, '1'];
   });
 
   Meteor.Router.add('/clear', 'GET', function () {
@@ -54,11 +60,12 @@ if (Meteor.isServer) {
 
   Meteor.Router.add('/delete/:id', 'GET', function (playerId) {
     Players.remove({playerId: playerId}, {multi: true});
+    return [200, '1'];
   });
 }
 
-var scale = 10;
-var origin = [160, 240];
+var scale = 10.0;
+var origin = [160.0, 240.0];
 
 if (Meteor.isClient) {
 
@@ -75,6 +82,8 @@ if (Meteor.isClient) {
       p.x *= scale;
       p.x += origin[0];
       p.y += origin[1];
+      p.x -= 24.0/2.0;
+      p.y -= 24.0/2.0;
       return p;
     });
   };
