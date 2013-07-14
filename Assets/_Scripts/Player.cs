@@ -239,9 +239,11 @@ public class Player : uLink.MonoBehaviour
 
 			int damage = bullet.damage;
 
+
             if (damageCooldownTimer <= 0){
                 if (networkView.isOwner) {
-                    networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage);
+                    int spawn = Random.Range(0, spawnPoints.spawnPoint.Length-1);
+                    networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage, spawn);
                     UpdateHealth();
                 }
 
@@ -273,7 +275,7 @@ public class Player : uLink.MonoBehaviour
     }
 
     [RPC]
-    void SubtractHealth(int damage) {
+    void SubtractHealth(int damage, int potentialSpawnpoint) {
         health -= damage;
 
 		if (health <= 0 && !dead)
@@ -286,7 +288,7 @@ public class Player : uLink.MonoBehaviour
             sprite.color = Color.clear;
             flashlight.LightRadius = 0;
 
-			StartCoroutine(DeathWait());
+			StartCoroutine(DeathWait(potentialSpawnpoint));
 		}
     }
 
@@ -302,14 +304,15 @@ public class Player : uLink.MonoBehaviour
 		//renderer.material.color = Color.white;
 	}
 
-	IEnumerator DeathWait()
+	IEnumerator DeathWait(int spawn)
 	{
 
 		yield return new WaitForSeconds(5);
 
+        transform.position = spawnPoints.spawnPoint[spawn].position;
+
         if (networkView.isOwner) {
-            int spawn = Random.Range(0, spawnPoints.spawnPoint.Length-1);
-            transform.position = spawnPoints.spawnPoint[spawn].position;
+
             health = maxHealth;
             stamina = maxStamina;
             UpdateStaminaHUD();
