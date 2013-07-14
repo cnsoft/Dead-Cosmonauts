@@ -4,7 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(uLinkNetworkView))]
 [RequireComponent(typeof(BoxCollider))]
 public class PowerUp : uLink.MonoBehaviour {
-
+    public const string meteorRoot = "http://cosmo.meteor.com";
+    public string id;
 	private Player player;
 
 	public int weaponId = 2;
@@ -46,6 +47,12 @@ public class PowerUp : uLink.MonoBehaviour {
 
     IEnumerator DeferredDestroy() {
         yield return new WaitForEndOfFrame ();
+
+        if (!string.IsNullOrEmpty(id)) {
+            WWW www = new WWW (string.Format("{0}/powerups/pickup/{1}",meteorRoot,id));
+            yield return www;
+        }
+
         uLink.Network.Destroy (this.gameObject);
     }
 }

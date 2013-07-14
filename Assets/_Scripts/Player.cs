@@ -9,7 +9,7 @@ public class Player : uLink.MonoBehaviour
 
     public string meteorRoot = "http://cosmo.meteor.com";
 
-    public float meteorUpdateSpeed = 0.1f;
+    public float meteorUpdateSpeed = 0.2f;
     private float meteorUpdateTimer = 0f;
 
 	public float weaponCooldown = 0.1f;
@@ -143,6 +143,7 @@ public class Player : uLink.MonoBehaviour
 
     IEnumerator UpdateMeteor() {
         WWW www = new WWW(string.Format("{0}/update/{1}/{2}/{3}/{4}/{5}",meteorRoot,networkView.owner.id,transform.position.x,transform.position.y,transform.eulerAngles.z,"white"));
+        Debug.Log (www.url);
         yield return www;
     }
 

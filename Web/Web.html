@@ -15,6 +15,10 @@
          style="-webkit-transform: translate3d({{x}}px, {{y}}px, 0px)
          rotate({{rotationZ}}deg); background-color: {{color}};"></div>
     {{/each}}
+    {{#each powerups}}
+        <div class="powerup" id="{{_id}}"
+             style="-webkit-transform: translate3d({{x}}px, {{y}}px, 0px)"></div>
+    {{/each}}
     </div>
 
 </template>

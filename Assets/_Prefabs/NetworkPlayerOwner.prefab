@@ -261,8 +261,8 @@ MonoBehaviour:
   currentMovement: {x: 0, y: 0, z: 0}
   moveSpeed: 8
   controller: {fileID: 0}
-  meteorRoot: 
-  meteorUpdateSpeed: .100000001
+  meteorRoot: http://cosmo.meteor.com
+  meteorUpdateSpeed: .200000003
   weaponCooldown: .159999996
   rotationSpeed: 10
   leftStickAxis:

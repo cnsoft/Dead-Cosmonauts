@@ -11,6 +11,7 @@ if (Meteor.isServer) {
   Meteor.Router.add('/update/:playerId/:x/:y/:rotationZ/:color', 'GET',
     function (playerId, x, y, rotationZ, color) {
       var id = 0;
+      playerId = parseInt(playerId);
       try {
         if (Players.find({playerId: playerId}).count() > 0) {
           Players.update({playerId: playerId},
@@ -27,9 +28,23 @@ if (Meteor.isServer) {
     });
 
   Meteor.Router.add('/powerups', 'GET', function () {
-    var data = Powerups.find({}).fetch();
-    Powerups.remove({});
+    var data = _.map(Powerups.find({delivered: false}).fetch(), function (p) {
+      p.x -= origin[0];
+      p.y -= origin[1];
+      p.x /= scale;
+      p.y /= scale;
+      p.y *= - 1;
+      return p;
+    });
+
+    Powerups.update({delivered: false}, {$set: {delivered: true}},
+      {multi: true});
+
     return [200, JSON.stringify({success: true, data: data})];
+  });
+
+  Meteor.Router.add('/powerups/pickup/:powerupId',function(powerupId) {
+    Powerups.remove({_id:powerupId});
   });
 
   Meteor.Router.add('/clear', 'GET', function () {
@@ -37,7 +52,7 @@ if (Meteor.isServer) {
     return [200, '1'];
   });
 
-  Meteor.Router.add('/delete/:id', 'GET', function () {
+  Meteor.Router.add('/delete/:id', 'GET', function (playerId) {
     Players.remove({playerId: playerId}, {multi: true});
   });
 }
@@ -49,8 +64,7 @@ if (Meteor.isClient) {
 
   Template.radarTemplate.events = {
     'tap, click #container': function (e) {
-      Powerups.insert({x: (e.pageX - origin[0]) / scale,
-        y: (e.pageY - origin[1]) / -scale, type: 2});
+      Powerups.insert({x: e.pageX, y: e.pageY, type: 2, delivered: false});
     }
   };
 
@@ -60,10 +74,14 @@ if (Meteor.isClient) {
       p.y *= scale;
       p.x *= scale;
       p.x += origin[0];
-      p.y += origin[0];
+      p.y += origin[1];
       return p;
     });
   };
+
+  Template.radarTemplate.powerups = function () {
+    return Powerups.find({}).fetch();
+  }
 
   Template.radarTemplate.preserve = defaultPreserve;
 }
