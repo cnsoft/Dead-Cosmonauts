@@ -6,6 +6,8 @@ using System.Collections;
 public class PowerUp : uLink.MonoBehaviour {
 
 	private Player player;
+	private Light2D light;
+
 
 	public int weaponId = 2;
 
@@ -40,6 +42,8 @@ public class PowerUp : uLink.MonoBehaviour {
                 }
 
                 StartCoroutine (DeferredDestroy ());
+
+				AudioSource.PlayClipAtPoint( PREFAB.audio.collectSound, transform.position);
             }
 		}
 	}
