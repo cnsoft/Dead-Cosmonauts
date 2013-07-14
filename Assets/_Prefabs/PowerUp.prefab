@@ -151,12 +151,12 @@ MonoBehaviour:
   _childIndex: -1
   _children: []
   stateSynchronization: 0
-  securable: 3
+  securable: 0
   observed: {fileID: 11400000}
   _manualViewID: 0
   rpcReceiver: 2
   listOfGameObjects: []
-  _prefabRoot: {fileID: 0}
+  _prefabRoot: {fileID: 100000}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
