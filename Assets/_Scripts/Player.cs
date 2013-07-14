@@ -74,7 +74,7 @@ public class Player : uLink.MonoBehaviour
 		if (Input.GetAxisRaw("LeftTrigger") > -0.5f)
 	    	controller.Move(currentMovement*moveSpeed*Time.deltaTime);
 		else
-			controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.35f);
+			controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.36f);
 
 		float y = Input.GetAxis(rightStickAxis[1]);
 		float x = Input.GetAxis(rightStickAxis[0]);

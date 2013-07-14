@@ -31,10 +31,13 @@ MonoBehaviour:
     spriteCollectionDataGUID: 1ed54f34ac8bb481e8abc4493344b203
     spriteNames:
     - 1
+    - SkelletonAvatar
     spriteTextureGUIDs:
     - 2f6935637a53d4ea0a0dcb6bafac24e8
+    - 237f966c1551d4a6e9243bce8ca404ff
     spriteTextureTimeStamps:
     - 1373214941
+    - 1373743397
     managedSpriteCollection: 0
     loadable: 0
     assetName: 
