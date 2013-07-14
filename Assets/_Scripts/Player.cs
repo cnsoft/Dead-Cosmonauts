@@ -299,6 +299,8 @@ public class Player : uLink.MonoBehaviour
 
 		transform.position = spawnPoints.spawnPoint[spawn].position;
 		health = maxHealth;
+		stamina = maxStamina;
+		UpdateStaminaHUD();
 		UpdateHealth();
 
 		sprite.color = Color.white;
