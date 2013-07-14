@@ -1,10 +1,17 @@
 <head>
-<title>Web</title>
+    <title>Dead Cosmonauts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 
 <body>
-    {{> radarTemplate}}
+    {{> mapTemplate}}
 </body>
+
+<template name="mapTemplate">
+    {{#constant}}
+    <div id="map"></div>
+    {{/constant}}
+</template>
 
 <template name="radarTemplate">
     <div id="container"

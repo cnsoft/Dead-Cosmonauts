@@ -1,5 +1,6 @@
 Players = new Meteor.Collection("players");
 Powerups = new Meteor.Collection("powerups");
+Map = null;
 
 defaultPreserve = {
   'div[id]': function (node) {
@@ -8,7 +9,7 @@ defaultPreserve = {
 };
 
 if (Meteor.isServer) {
-  Meteor.startup(function() {
+  Meteor.startup(function () {
     Players.remove({});
     Powerups.remove({});
   });
@@ -48,8 +49,8 @@ if (Meteor.isServer) {
     return [200, JSON.stringify({success: true, data: data})];
   });
 
-  Meteor.Router.add('/powerups/pickup/:powerupId',function(powerupId) {
-    Powerups.remove({_id:powerupId});
+  Meteor.Router.add('/powerups/pickup/:powerupId', function (powerupId) {
+    Powerups.remove({_id: powerupId});
     return [200, '1'];
   });
 
@@ -66,8 +67,43 @@ if (Meteor.isServer) {
 
 var scale = 10.0;
 var origin = [160.0, 240.0];
+var bounds = [
+  [- 30, - 40],
+  [30, 40]
+];
 
 if (Meteor.isClient) {
+  var markers = {};
+
+  var playerIcon = L.icon({
+    iconUrl: '/pin.png',
+    iconSize: [64, 64],
+    iconAnchor: [32, 32],
+    popupAnchor: [0, - 16]
+  });
+
+  Template.mapTemplate.rendered = function () {
+    L.Icon.Default.imagePath = 'packages/leaflet/images';
+
+    window.map = L.map('map').setMaxBounds(bounds).fitBounds(bounds);
+    L.imageOverlay('/map.jpg', bounds).addTo(window.map);
+
+    var playersObserve = Players.find({}).observe({
+      added: function (player) {
+        markers[player._id] = new L.Marker([player.x, player.y], {icon: playerIcon});
+        window.map.addLayer(markers[player._id]);
+      },
+      removed: function (player) {
+        window.map.removeLayer(markers[player._id]);
+      },
+      changed: function(player) {
+        var lat = (player.x);
+        var lng = (player.y);
+        var newLatLng = new L.LatLng(lat, lng);
+        markers[player._id].setLatLng(newLatLng);
+      }
+    });
+  };
 
   Template.radarTemplate.events = {
     'tap, click #container': function (e) {
@@ -82,8 +118,8 @@ if (Meteor.isClient) {
       p.x *= scale;
       p.x += origin[0];
       p.y += origin[1];
-      p.x -= 24.0/2.0;
-      p.y -= 24.0/2.0;
+      p.x -= 24.0 / 2.0;
+      p.y -= 24.0 / 2.0;
       return p;
     });
   };
