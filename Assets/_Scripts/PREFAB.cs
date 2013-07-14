@@ -16,7 +16,7 @@ public class PREFAB : MonoBehaviour {
 	
 	void Awake()
 	{
-		BULLET = (GameObject)Resources.Load("Bullet");
+		BULLET = (GameObject)Resources.Load("BulletAnim");
 		DAMAGE_TEXT = (GameObject)Resources.Load("DamageText");
 		EXPLOSION = (GameObject)Resources.Load("Explosion");
 		EXPLOSION2 = (GameObject)Resources.Load("Explosion2");

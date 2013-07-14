@@ -126,7 +126,7 @@ public class Player : uLink.MonoBehaviour
 			spriteTorso.color = Color.white;
 		}else if (!staminaEmpty){
 			controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.4f);
-			stamina -= Time.deltaTime * 2.5f;
+			stamina -= Time.deltaTime * 2f;
 			spriteTorso.color = runColor;
 		}
 
@@ -449,7 +449,7 @@ public class Player : uLink.MonoBehaviour
 		{
 			stamina = maxStamina;
 		}else if (stamina < maxStamina && Input.GetAxisRaw("LeftTrigger") > 0.5f)
-			stamina += Time.deltaTime * 3;
+			stamina += Time.deltaTime * 5;
 
 		if (!staminaEmpty && stamina <= 0)
 			staminaEmpty = true;

@@ -216,6 +216,11 @@ MonoBehaviour:
     - Soldier-Green0000
     - Soldier-Purple0001
     - Soldier-Purple0000
+    - FirePit1
+    - FirePit2
+    - Missle0000
+    - Missle0001
+    - Missle0002
     spriteTextureGUIDs:
     - 0165ed1b31d27472d8657f4ac8978bca
     - 03296b7a3fe524fcfbffd6cdee4d1619
@@ -307,6 +312,11 @@ MonoBehaviour:
     - f8971bd9cd39246679af7a215668927e
     - 9f0113acc1e7c425aacbbfb7642c02c2
     - ca37d0ea123ac4a75a1c35c15f1ca8e4
+    - 569823d544b6a4634ba8729fb866c17f
+    - d941a2f48fe5f47d9b347760aed230b4
+    - 45b652c6cb6644a19a080f35b036d1a0
+    - b53ff1d67c384488598cbb57ace70dbb
+    - c35bdef487e624363a49de32d4e290e2
     spriteTextureTimeStamps:
     - 1373791753
     - 1373791753
@@ -388,16 +398,21 @@ MonoBehaviour:
     - 1373798089
     - 1373798089
     - 1373798752
-    - 1373814723
-    - 1373814724
-    - 1373814750
-    - 1373814751
-    - 1373814648
-    - 1373814648
-    - 1373814682
-    - 1373814681
-    - 1373814911
-    - 1373814911
+    - 1373817349
+    - 1373817348
+    - 1373817368
+    - 1373817369
+    - 1373817284
+    - 1373817285
+    - 1373817307
+    - 1373817306
+    - 1373817327
+    - 1373817326
+    - 1373816023
+    - 1373816023
+    - 1373818212
+    - 1373818213
+    - 1373818214
     managedSpriteCollection: 0
     loadable: 0
     assetName: 

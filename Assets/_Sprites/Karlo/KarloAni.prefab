@@ -936,6 +936,51 @@ MonoBehaviour:
     fps: 30
     loopStart: 0
     wrapMode: 0
+  - name: FirePit
+    frames:
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 90
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 91
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 1
+    loopStart: 0
+    wrapMode: 0
+  - name: Bullet
+    frames:
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 92
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 93
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 94
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 20
+    loopStart: 0
+    wrapMode: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
