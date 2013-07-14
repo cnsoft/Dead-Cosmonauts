@@ -340,6 +340,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 949fdba1f3a754ce697fac9ee4f37375, type: 3}
   m_Name: 
+  id: 
   weaponId: 1
 --- !u!114 &161656348
 MonoBehaviour:
@@ -842,6 +843,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 949fdba1f3a754ce697fac9ee4f37375, type: 3}
   m_Name: 
+  id: 
   weaponId: 2
 --- !u!114 &302549095
 MonoBehaviour:
@@ -1802,7 +1804,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: ed8ca81ba8b0c464eadafa872dfd21d6, type: 2}
       propertyPath: _manualViewID
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ed8ca81ba8b0c464eadafa872dfd21d6, type: 2}
@@ -3148,6 +3150,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 949fdba1f3a754ce697fac9ee4f37375, type: 3}
   m_Name: 
+  id: 
   weaponId: 2
 --- !u!114 &905247258
 MonoBehaviour:
@@ -3169,7 +3172,7 @@ MonoBehaviour:
   stateSynchronization: 0
   securable: 0
   observed: {fileID: 905247257}
-  _manualViewID: 1
+  _manualViewID: 5
   rpcReceiver: 2
   listOfGameObjects: []
   _prefabRoot: {fileID: 905247256}
@@ -7278,6 +7281,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1715898742}
   - 114: {fileID: 1715898741}
+  - 114: {fileID: 1715898744}
+  - 114: {fileID: 1715898743}
   m_Layer: 0
   m_Name: ClientPrefab
   m_TagString: Untagged
@@ -7312,7 +7317,7 @@ MonoBehaviour:
   guiSkin: {fileID: 0}
   guiDepth: 0
   dontDestroyOnLoad: 0
-  lockCursor: 1
+  lockCursor: 0
   hideCursor: 1
 --- !u!4 &1715898742
 Transform:
@@ -7325,6 +7330,54 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1715898743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400002, guid: 842c29c56fc67c046bae730feae8f562,
+    type: 2}
+  m_PrefabInternal: {fileID: 710475865}
+  m_GameObject: {fileID: 1715898740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba8c4c95c4ec384a96a7da288071d4d, type: 3}
+  m_Name: 
+  position: 0
+  typeByKey: 13
+  isTyping: 0
+  whenNotTyping: Press Enter to chat...
+  maxEntries: 50
+  windowWidth: 200
+  windowheight: 100
+  useLoginData: 1
+  enableWhenTyping: []
+  disableWhenTyping: []
+  guiSkin: {fileID: 0}
+  guiDepth: 0
+  autoScroll: 1
+--- !u!114 &1715898744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400004, guid: 842c29c56fc67c046bae730feae8f562,
+    type: 2}
+  m_PrefabInternal: {fileID: 710475865}
+  m_GameObject: {fileID: 1715898740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9be5429cbf387c4f9140f7d1908fb9c, type: 3}
+  m_Name: 
+  proxyPrefab: 
+  ownerPrefab: 
+  serverPrefab: 
+  _parent: {fileID: 0}
+  _childIndex: -1
+  _children: []
+  stateSynchronization: 2
+  securable: 0
+  observed: {fileID: 1715898743}
+  _manualViewID: 1
+  rpcReceiver: 2
+  listOfGameObjects: []
+  _prefabRoot: {fileID: 0}
 --- !u!1 &1725899427
 GameObject:
   m_ObjectHideFlags: 0
@@ -8268,6 +8321,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 949fdba1f3a754ce697fac9ee4f37375, type: 3}
   m_Name: 
+  id: 
   weaponId: 1
 --- !u!114 &1885256228
 MonoBehaviour:
