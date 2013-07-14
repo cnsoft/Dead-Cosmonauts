@@ -76,6 +76,10 @@ public class Player : uLink.MonoBehaviour
 	}
 
     void uLink_OnNetworkInstantiate(uLink.NetworkMessageInfo info) {
+        sprite = GetComponentInChildren<tk2dSprite>();
+        spawnPoints = (SpawnPoints)FindObjectOfType(typeof(SpawnPoints));
+        statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
+
         if (!info.networkView.isOwner) {
             return;
         }
@@ -279,16 +283,18 @@ public class Player : uLink.MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.CompareTag("Bullet"))
+		if (!dead && other.CompareTag("Bullet"))
 		{
 			Bullet bullet = other.GetComponent<Bullet>();
 
 
 			int damage = bullet.damage;
 
+
             if (damageCooldownTimer <= 0){
                 if (networkView.isOwner) {
-                    networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage);
+                    int spawn = Random.Range(0, spawnPoints.spawnPoint.Length-1);
+                    networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage, spawn);
                     UpdateHealth();
                 }
 
@@ -320,21 +326,53 @@ public class Player : uLink.MonoBehaviour
     }
 
     [RPC]
-    void SubtractHealth(int damage) {
+    void SetDead(bool isDead) {
+        dead = isDead;
+    }
+
+    [RPC]
+    void SubtractHealth(int damage, int potentialSpawnpoint) {
         health -= damage;
 
 		if (health <= 0 && !dead)
 		{
-			dead = true;
+            DeathCosmetics ();
 
-			PREFAB.SpawnPrefab(PREFAB.EXPLOSION2, transform.position, "1");
-			PREFAB.audio.PlayRandomKillSound();
-			StopCoroutine("Blink");
-            spriteTorso.color = Color.clear;
-            flashlight.LightRadius = 0;
+            if (networkView.isOwner) {
+                dead = true;
 
-			StartCoroutine(DeathWait());
+
+                StartCoroutine (UnsetDead (potentialSpawnpoint));
+
+            }
+
+            networkView.RPC ("SetDead", uLink.RPCMode.All, true);
 		}
+    }
+
+    IEnumerator UnsetDead(int spawn) {
+        yield return new WaitForSeconds (5.0f);
+        transform.position = spawnPoints.spawnPoint[spawn].position;
+        health = maxHealth;
+        stamina = maxStamina;
+        UpdateStaminaHUD();
+        UpdateHealth();
+        networkView.RPC ("SetDead", uLink.RPCMode.All, false);
+    }
+
+    void DeathCosmetics() {
+        PREFAB.SpawnPrefab(PREFAB.EXPLOSION2, transform.position, "1");
+        PREFAB.audio.PlayRandomKillSound();
+        StopCoroutine("Blink");
+        sprite.color = Color.clear;
+        flashlight.LightRadius = 0;
+
+        StartCoroutine (DeathCosmeticsCoroutine ());
+    }
+
+    IEnumerator DeathCosmeticsCoroutine() {
+        yield return new WaitForSeconds (5.0f);
+        sprite.color = Color.white;
     }
 
     [RPC]
@@ -349,25 +387,6 @@ public class Player : uLink.MonoBehaviour
 		//renderer.material.color = Color.white;
 	}
 
-	IEnumerator DeathWait()
-	{
-
-		yield return new WaitForSeconds(5);
-
-        if (networkView.isOwner) {
-            int spawn = Random.Range(0, spawnPoints.spawnPoint.Length-1);
-            transform.position = spawnPoints.spawnPoint[spawn].position;
-            health = maxHealth;
-            stamina = maxStamina;
-            UpdateStaminaHUD();
-            UpdateHealth();
-        }
-
-
-		spriteTorso.color = Color.white;
-
-		dead = false;
-	}
 
 	void DeathEvent()
 	{
