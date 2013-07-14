@@ -4,7 +4,8 @@ using System.Collections;
 [RequireComponent(typeof(uLinkNetworkView))]
 [RequireComponent(typeof(BoxCollider))]
 public class PowerUp : uLink.MonoBehaviour {
-
+    public const string meteorRoot = "http://cosmo.meteor.com";
+    public string id;
 	private Player player;
 	private Light2D light;
 
@@ -48,8 +49,23 @@ public class PowerUp : uLink.MonoBehaviour {
 		}
 	}
 
+    void uLink_OnNetworkInstantiate(uLink.NetworkMessageInfo info) {
+        if (!info.networkView.initialData.TryRead<string>(out id)) {
+            Debug.LogError ("No initial id for powerup.");
+        }
+        if (!info.networkView.initialData.TryRead<int>(out weaponId)) {
+            Debug.LogError ("No initial id for powerup.");
+        }
+    }
+
     IEnumerator DeferredDestroy() {
         yield return new WaitForEndOfFrame ();
+
+        if (!string.IsNullOrEmpty(id)) {
+            WWW www = new WWW (string.Format("{0}/powerups/pickup/{1}",meteorRoot,id));
+            yield return www;
+        }
+
         uLink.Network.Destroy (this.gameObject);
     }
 }

@@ -1,20 +1,25 @@
 <head>
-<title>Web</title>
+    <title>Dead Cosmonauts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 
 <body>
-    {{> radarTemplate}}
+    {{> mapTemplate}}
+    <div class="controlpanel-container">
+        <div id="controlMessage" class="controlpanel-message">Loading
+            powerup</div>
+        <div class="controlpanel-progress-bg">
+            <div id="progressBar" class="controlpanel-progress"></div>
+        </div>
+        <div style="margin-top: 5px; font-size:18px; visibility: hidden;"
+             id="tutorialMessage"
+             class="controlpanel-message">double
+            tap to drop</div>
+    </div>
 </body>
 
-<template name="radarTemplate">
-    <div id="container"
-            style="width:320px; height:480px; display: block !important;
-        position: relative; margin: 0; padding:0;">
-    {{#each players}}
-    <div class="player" id="{{_id}}"
-         style="-webkit-transform: translate3d({{x}}px, {{y}}px, 0px)
-         rotate({{rotationZ}}deg); background-color: {{color}};"></div>
-    {{/each}}
-    </div>
-
+<template name="mapTemplate">
+    {{#constant}}
+    <div id="map"></div>
+    {{/constant}}
 </template>

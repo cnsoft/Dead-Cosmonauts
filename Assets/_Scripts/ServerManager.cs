@@ -34,6 +34,11 @@ public class ServerManager : uLink.MonoBehaviour {
         }
 	}
 
+    void uLink_OnPlayerConnected(uLink.NetworkPlayer player)
+    {
+        StartCoroutine (AddMeToMeteor (player));
+    }
+
     void uLink_OnPlayerDisconnected(uLink.NetworkPlayer player)
     {
         if (simpleServer.cleanupAfterPlayers)
@@ -61,12 +66,15 @@ public class ServerManager : uLink.MonoBehaviour {
         for (int i = 0; i < response.data.Count; i++) {
             PowerupResponseDto powerup = response.data [i];
 
-            uLink.Network.Instantiate (powerupPrefab, new Vector3 (powerup.x, powerup.y, 0f), Quaternion.identity, 0);
+            Transform instance = uLink.Network.Instantiate (powerupPrefab, new Vector3 (powerup.x, powerup.y, 0f), Quaternion.identity, 0,powerup._id,powerup.type);
             Debug.Log ("powerup instantiated");
         }
     }
 
-    void UpdatePlayers() {
-
+    IEnumerator AddMeToMeteor(uLink.NetworkPlayer player) {
+        string name = "Anonymous";
+        player.loginData.TryRead<string> (out name);
+        WWW www = new WWW (string.Format ("{0}/add/{1}/{2}", meteorRoot, player.id, name));
+        yield return www;
     }
 }

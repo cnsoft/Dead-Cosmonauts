@@ -1,69 +1,193 @@
 Players = new Meteor.Collection("players");
 Powerups = new Meteor.Collection("powerups");
 
-defaultPreserve = {
-  'div[id]': function (node) {
-    return node.id;
-  }
-};
-
 if (Meteor.isServer) {
-  Meteor.Router.add('/update/:playerId/:x/:y/:rotationZ/:color', 'GET',
+  var defaultHeaders = {
+    "Access-Control-Allow-Origin": "*"
+  };
+
+  Meteor.startup(function () {
+    Players.remove({});
+    Powerups.remove({});
+  });
+
+  Meteor.Router.add('/add/:playerId/:name', 'GET', function (playerId, name) {
+    playerId = parseInt(playerId);
+    if (Players.find({playerId: playerId}).count() > 0) {
+      Players.update({playerId: playerId}, {$set: {name: name}});
+    } else {
+      Players.insert({playerId: playerId, name: name, x: 0.0, y: 0.0, rotationZ: 0.0, message: null});
+    }
+
+    return [200, defaultHeaders, Players.find({}).count().toString()];
+  });
+
+  Meteor.Router.add('/chat/:playerId/:message', 'GET',
+    function (playerId, message) {
+      playerId = parseInt(playerId);
+      Players.update({playerId: playerId}, {$set: {message: message}});
+      return [200, defaultHeaders, 1];
+    });
+
+  Meteor.Router.add('/update/:playerId/:x/:y/:rotationZ', 'GET',
     function (playerId, x, y, rotationZ, color) {
       var id = 0;
+      playerId = parseInt(playerId);
+      x = parseFloat(x);
+      y = parseFloat(y);
+      rotationZ = parseFloat(rotationZ);
       try {
         if (Players.find({playerId: playerId}).count() > 0) {
           Players.update({playerId: playerId},
-            {$set: {x: x, y: y, rotationZ: rotationZ, color: color}});
+            {$set: {x: y, y: x, rotationZ: rotationZ}});
         } else {
           id =
-            Players.insert({playerId: playerId, x: x, y: y,
-              rotationZ: rotationZ, color: color});
+            Players.insert({playerId: playerId, x: y, y: x,
+              rotationZ: rotationZ});
         }
       } catch (e) {
         return [500, '0'];
       }
-      return [200, Players.find({}).count().toString()];
+      return [200, defaultHeaders, Players.find({}).count().toString()];
     });
 
   Meteor.Router.add('/powerups', 'GET', function () {
-    var data = Powerups.find({}).fetch();
-    Powerups.remove({});
-    return [200, JSON.stringify({success: true, data: data})];
+    var data = _.map(Powerups.find({delivered: false}).fetch(), function (p) {
+      var _y = p.y;
+      p.y = p.x;
+      p.x = _y;
+      return p;
+    });
+
+    Powerups.update({delivered: false}, {$set: {delivered: true}},
+      {multi: true});
+
+    return [200, defaultHeaders, JSON.stringify({success: true, data: data})];
+  });
+
+  Meteor.Router.add('/powerups/pickup/:powerupId', function (powerupId) {
+    Powerups.remove({_id: powerupId});
+    return [200, defaultHeaders, '1'];
   });
 
   Meteor.Router.add('/clear', 'GET', function () {
     Players.remove({});
-    return [200, '1'];
+    return [200, defaultHeaders, '1'];
   });
 
-  Meteor.Router.add('/delete/:id', 'GET', function () {
+  Meteor.Router.add('/delete/:id', 'GET', function (playerId) {
+    playerId = parseInt(playerId);
     Players.remove({playerId: playerId}, {multi: true});
+    return [200, defaultHeaders, '1'];
   });
 }
 
-var scale = 10;
-var origin = [160, 240];
+var bounds = [
+  [- 30, - 40],
+  [30, 40]
+];
 
 if (Meteor.isClient) {
+  var markers = {};
 
-  Template.radarTemplate.events = {
-    'tap, click #container': function (e) {
-      Powerups.insert({x: (e.pageX - origin[0]) / scale,
-        y: (e.pageY - origin[1]) / -scale, type: 2});
-    }
+  var powerupCounter = 0;
+  var availablePowerups = [
+    {type: 1, text: 'machinegun'},
+    {type: 2, text: 'shotgun'}
+//    {type: 3, text: 'barricade'},
+//    {type: 4, text: '1x healthpack'},
+//    {type: 5, text: 'autocannon'}
+  ];
+
+  var availablePowerup = null;
+
+  var loadPowerup = function () {
+    window.controlMessage.innerText = 'charging up';
+    window.progressBar.className =
+      'controlpanel-progress controlpanel-progress-load';
+    Meteor.setTimeout(function () {
+      availablePowerup =
+        availablePowerups[powerupCounter % availablePowerups.length];
+      window.controlMessage.innerText = availablePowerup.text;
+      powerupCounter ++;
+      window.tutorialMessage.style.visibility = 'visible';
+    }, 5000);
   };
 
-  Template.radarTemplate.players = function () {
-    return _.map(Players.find({}).fetch(), function (p) {
-      p.y *= - 1;
-      p.y *= scale;
-      p.x *= scale;
-      p.x += origin[0];
-      p.y += origin[0];
-      return p;
+  var playerIcon = L.icon({
+    iconUrl: '/pin.png',
+    iconSize: [64, 64],
+    iconAnchor: [32, 32],
+    labelAnchor: [16, - 16]
+  });
+
+  var powerupIcon = L.icon({
+    iconUrl: '/crate.png',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    labelAnchor: [16, - 16]
+  });
+
+  Template.mapTemplate.rendered = function () {
+    loadPowerup();
+
+    L.Icon.Default.imagePath = 'packages/leaflet/images';
+
+    window.map = L.map('map',
+      {doubleClickZoom: false, zoomControl: false, attributionControl: false}).setMaxBounds(bounds).fitBounds(bounds);
+    L.imageOverlay('/map.jpg', bounds).addTo(window.map);
+
+    window.map.on('dblclick', function (e) {
+      if (availablePowerup) {
+        var lt = e.latlng;
+        Powerups.insert({x: lt.lat, y: lt.lng, type: availablePowerup.type, delivered: false});
+        availablePowerup = null;
+        window.progressBar.className = 'controlpanel-progress';
+        window.tutorialMessage.style.visibility = 'hidden';
+        Meteor.defer(function () {
+          loadPowerup();
+        });
+      }
+    });
+
+    var playersObserve = Players.find({}).observe({
+      added: function (player) {
+        markers[player._id] =
+          new L.Marker([player.x, player.y],
+            {icon: playerIcon}).bindLabel(player.name, {noHide: true});
+        window.map.addLayer(markers[player._id]);
+        markers[player._id].showLabel();
+      },
+      removed: function (player) {
+        window.map.removeLayer(markers[player._id]);
+      },
+      changed: function (player) {
+        var lat = (player.x);
+        var lng = (player.y);
+        var newLatLng = new L.LatLng(lat, lng);
+        markers[player._id].setLatLng(newLatLng);
+        if (player.message != null) {
+          markers[player._id].updateLabelContent(player.name + ": " +
+            player.message);
+        }
+      }
+    });
+
+    var powerupsObserve = Powerups.find({}).observe({
+      added: function (powerup) {
+        markers[powerup._id] =
+          new L.Marker([powerup.x, powerup.y], {icon: powerupIcon});
+        window.map.addLayer(markers[powerup._id]);
+      },
+      removed: function (powerup) {
+        window.map.removeLayer(markers[powerup._id]);
+      },
+      changed: function (powerup) {
+        var lat = (powerup.x);
+        var lng = (powerup.y);
+        var newLatLng = new L.LatLng(lat, lng);
+        markers[powerup._id].setLatLng(newLatLng);
+      }
     });
   };
-
-  Template.radarTemplate.preserve = defaultPreserve;
 }

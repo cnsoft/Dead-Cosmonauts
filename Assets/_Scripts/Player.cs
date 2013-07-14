@@ -9,7 +9,7 @@ public class Player : uLink.MonoBehaviour
 
     public string meteorRoot = "http://cosmo.meteor.com";
 
-    public float meteorUpdateSpeed = 0.1f;
+    public float meteorUpdateSpeed = 0.2f;
     private float meteorUpdateTimer = 0f;
 
 	public float weaponCooldown = 0.1f;
@@ -170,7 +170,7 @@ public class Player : uLink.MonoBehaviour
 	}
 
     IEnumerator UpdateMeteor() {
-        WWW www = new WWW(string.Format("{0}/update/{1}/{2}/{3}/{4}/{5}",meteorRoot,networkView.owner.id,transform.position.x,transform.position.y,transform.eulerAngles.z,"white"));
+        WWW www = new WWW(string.Format("{0}/update/{1}/{2}/{3}/{4}",meteorRoot,networkView.owner.id,transform.position.x,transform.position.y,transform.eulerAngles.z));
         yield return www;
     }
 
@@ -339,8 +339,7 @@ public class Player : uLink.MonoBehaviour
 			staminaEmpty = true;
 		else if (staminaEmpty && stamina > 3)
 			staminaEmpty = false;
-
-
+     
 		if (stamina > 0)
 		{
 			staminaBar.dimensions = new Vector2((stamina / maxStamina)*150,staminaBar.dimensions.y);
