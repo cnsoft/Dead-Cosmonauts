@@ -309,7 +309,7 @@ public class Player : uLink.MonoBehaviour
 
             }
 
-            HitCosmetics(damage, bullet.transform.position [0], bullet.transform.position [1]);
+            networkView.RPC("HitCosmetics", uLink.RPCMode.All, damage, bullet.transform.position [0], bullet.transform.position [1]);
 			PREFAB.DespawnPrefab(other.transform, "1");
 		}
 	}
