@@ -280,9 +280,9 @@ public class Player : uLink.MonoBehaviour
 
 	IEnumerator Blink()
 	{
-		renderer.material.color = Color.red;
+		//renderer.material.color = Color.red;
 		yield return new WaitForSeconds(0.1f);
-		renderer.material.color = Color.white;
+		//renderer.material.color = Color.white;
 	}
 
 	void DeathEvent()

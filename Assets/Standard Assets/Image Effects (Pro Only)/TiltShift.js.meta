@@ -2,7 +2,8 @@ fileFormatVersion: 2
 guid: 15c969cc4c1776c428bc2df90b6e3217
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - tiltShiftShader: {fileID: 4800000, guid: 926e6b8704ae248539bd7d7d6bdb7f16, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
