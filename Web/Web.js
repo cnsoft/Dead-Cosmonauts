@@ -92,8 +92,8 @@ if (Meteor.isClient) {
 
   var powerupCounter = 0;
   var availablePowerups = [
-    {type: 1, text: '30x machinegun'},
-    {type: 2, text: '12x shotgun'}
+    {type: 1, text: 'machinegun'},
+    {type: 2, text: 'shotgun'}
 //    {type: 3, text: 'barricade'},
 //    {type: 4, text: '1x healthpack'},
 //    {type: 5, text: 'autocannon'}
