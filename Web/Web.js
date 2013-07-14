@@ -72,6 +72,7 @@ if (Meteor.isServer) {
 
   Meteor.Router.add('/clear', 'GET', function () {
     Players.remove({});
+    Powerups.remove({});
     return [200, defaultHeaders, '1'];
   });
 
