@@ -115,34 +115,26 @@ public class Player : uLink.MonoBehaviour
 	}
 
     void WeaponShoot() {
-        if (weaponId == 0)
-        {
-            if (weaponTimer <= 0)
-            {
+        if (weaponTimer <= 0) {
+            switch (weaponId) {
+            case 0:
                 weaponTimer = weaponCooldown;
-                networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
+                break;
+            case 1:
+                weaponTimer = weaponCooldown * 0.8f;
+                weaponAmmo--;
+                break;
+            case 2:
+                weaponTimer = weaponCooldown * 4f;
+                weaponAmmo--;
+                break;
             }
-        }else if (weaponId == 1)
-        {
-            if (weaponTimer <= 0)
-            {
-                weaponTimer = weaponCooldown*0.8f;
-                weaponAmmo -= 1;
-                networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
 
-            }
-        }
-        else if (weaponId == 2)
-        {
-            if (weaponTimer <= 0)
-            {
-                weaponTimer = weaponCooldown*4f;
-                weaponAmmo -= 1;
-                networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
-            }
+            networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
+
         }
 
-       UpdateAmmoHUD();
+        UpdateAmmoHUD();
     }
 
     [RPC]
