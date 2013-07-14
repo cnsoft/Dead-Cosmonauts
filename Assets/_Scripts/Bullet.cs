@@ -5,7 +5,11 @@ public class Bullet : MonoBehaviour {
 
 	public float flySpeed = 5;
 	public float lifetime = 2;
-    public bool mine;
+    public bool mine {
+        get {
+            return owner == uLink.Network.player.id;
+        }
+    }
     public int owner;
 
 	public int damage = 1;
