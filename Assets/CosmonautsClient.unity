@@ -416,7 +416,7 @@ MonoBehaviour:
   ignoreOptimizations: 0
 --- !u!33 &289081278
 MeshFilter:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 3300002, guid: ed8ca81ba8b0c464eadafa872dfd21d6,
     type: 2}
   m_PrefabInternal: {fileID: 1896396679}
@@ -424,7 +424,7 @@ MeshFilter:
   m_Mesh: {fileID: 0}
 --- !u!23 &289081279
 Renderer:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 2300002, guid: ed8ca81ba8b0c464eadafa872dfd21d6,
     type: 2}
   m_PrefabInternal: {fileID: 1896396679}
@@ -1683,7 +1683,7 @@ MonoBehaviour:
   ignoreOptimizations: 0
 --- !u!33 &1147051813
 MeshFilter:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 3300002, guid: ed8ca81ba8b0c464eadafa872dfd21d6,
     type: 2}
   m_PrefabInternal: {fileID: 538869601}
@@ -1691,7 +1691,7 @@ MeshFilter:
   m_Mesh: {fileID: 0}
 --- !u!23 &1147051814
 Renderer:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_PrefabParentObject: {fileID: 2300002, guid: ed8ca81ba8b0c464eadafa872dfd21d6,
     type: 2}
   m_PrefabInternal: {fileID: 538869601}
