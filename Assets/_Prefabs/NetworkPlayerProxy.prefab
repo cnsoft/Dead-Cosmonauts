@@ -52,6 +52,7 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400010}
   - 114: {fileID: 11400012}
+  - 23: {fileID: 2300004}
   m_Layer: 0
   m_Name: NetworkPlayerProxy
   m_TagString: Player
@@ -159,7 +160,7 @@ Renderer:
   m_ScaleInLightmap: 1
 --- !u!23 &2300004
 Renderer:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}

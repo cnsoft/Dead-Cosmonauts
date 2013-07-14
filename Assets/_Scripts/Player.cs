@@ -76,7 +76,7 @@ public class Player : uLink.MonoBehaviour
 	}
 
     void uLink_OnNetworkInstantiate(uLink.NetworkMessageInfo info) {
-        sprite = GetComponentInChildren<tk2dSprite>();
+        spriteTorso = GetComponentInChildren<tk2dSprite>();
         spawnPoints = (SpawnPoints)FindObjectOfType(typeof(SpawnPoints));
         statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
 
@@ -370,7 +370,7 @@ public class Player : uLink.MonoBehaviour
         PREFAB.SpawnPrefab(PREFAB.EXPLOSION2, transform.position, "1");
         PREFAB.audio.PlayRandomKillSound();
         StopCoroutine("Blink");
-        sprite.color = Color.clear;
+        spriteTorso.color = Color.clear;
         flashlight.LightRadius = 0;
 
         StartCoroutine (DeathCosmeticsCoroutine ());
@@ -378,7 +378,7 @@ public class Player : uLink.MonoBehaviour
 
     IEnumerator DeathCosmeticsCoroutine() {
         yield return new WaitForSeconds (5.0f);
-        sprite.color = Color.white;
+        spriteTorso.color = Color.white;
     }
 
     [RPC]
