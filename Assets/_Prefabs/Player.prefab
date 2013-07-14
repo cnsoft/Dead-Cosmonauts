@@ -217,6 +217,8 @@ MonoBehaviour:
   currentMovement: {x: 0, y: 0, z: 0}
   moveSpeed: 8
   controller: {fileID: 0}
+  meteorRoot: 
+  meteorUpdateSpeed: .200000003
   weaponCooldown: .159999996
   rotationSpeed: 14
   leftStickAxis:
@@ -226,6 +228,18 @@ MonoBehaviour:
   - RSHorizontal
   - RSVertical
   weaponId: 0
+  weaponAmmo: 0
+  health: 10
+  maxHealth: 10
+  stamina: 10
+  maxStamina: 10
+  damageCooldown: .0500000007
+  healthBar: {fileID: 0}
+  staminaBar: {fileID: 0}
+  torsoAnim: {fileID: 0}
+  runColor: {r: 0, g: 0, b: 0, a: 0}
+  heroColorName: 
+  bulletSpawnPoint: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
