@@ -66,6 +66,8 @@ public class Player : uLink.MonoBehaviour
             return;
         }
 
+		print (Input.GetAxisRaw("RightTrigger"));
+
 		currentMovement[0] = Mathf.Abs(Input.GetAxis(leftStickAxis[0])) > 0.1f ? Input.GetAxis(leftStickAxis[0]) : 0;
 		currentMovement[1] = Mathf.Abs(Input.GetAxis(leftStickAxis[1])) > 0.1f ? Input.GetAxis(leftStickAxis[1]) : 0;
 
@@ -102,6 +104,9 @@ public class Player : uLink.MonoBehaviour
 				transform.localEulerAngles = new Vector3(0,0,Mathf.LerpAngle(transform.localEulerAngles.z, targetEuler.z, Time.deltaTime * 7));
 			}
 		}
+
+		if (Input.GetAxisRaw("RightTrigger") < 0)
+			WeaponShoot();
 
 		weaponTimer -= Time.deltaTime;
 
