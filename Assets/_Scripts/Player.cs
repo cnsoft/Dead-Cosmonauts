@@ -3,11 +3,13 @@ using System.Collections;
 
 public class Player : uLink.MonoBehaviour
 {
-
     public Vector3 currentMovement;
     public float moveSpeed = 5;
     public CharacterController controller;
 
+
+    public float meteorUpdateSpeed = 0.1f;
+    private float meteorUpdateTimer = 0f;
 
 	public float weaponCooldown = 0.1f;
 	private float weaponTimer;
@@ -112,7 +114,20 @@ public class Player : uLink.MonoBehaviour
 		}
 
 		damageCooldownTimer -= Time.deltaTime;
+
+        meteorUpdateTimer -= Time.deltaTime;
+        if (meteorUpdateTimer < 0f) {
+
+
+
+            meteorUpdateTimer = meteorUpdateSpeed;
+        }
 	}
+
+    IEnumerator UpdateMeteor() {
+//        WWW www = new WWW ();
+        yield return new WaitForEndOfFrame ();
+    }
 
     void WeaponShoot() {
         if (weaponTimer <= 0) {
