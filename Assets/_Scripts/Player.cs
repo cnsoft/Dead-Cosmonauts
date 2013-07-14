@@ -389,7 +389,12 @@ public class Player : uLink.MonoBehaviour
 	IEnumerator Blink()
 	{
 		//renderer.material.color = Color.red;
+
+		spriteTorso.color = Color.red;
+
 		yield return new WaitForSeconds(0.1f);
+
+		spriteTorso.color = Color.red;
 		//renderer.material.color = Color.white;
 	}
 
