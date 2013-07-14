@@ -30,12 +30,17 @@ public class Player : uLink.MonoBehaviour
 
 	public float health = 10;
 	public float maxHealth = 10;
+	public float stamina = 10;
+	public float maxStamina = 10;
+	private bool staminaEmpty;
+
 	public float damageCooldown = 0.2f;
 	private float damageCooldownTimer;
 
     private CameraFollow _cameraFollow;
 
 	public tk2dTiledSprite healthBar;
+	public tk2dTiledSprite  staminaBar;
 
 	void Awake ()
 	{
@@ -48,6 +53,7 @@ public class Player : uLink.MonoBehaviour
 		weaponText = GameObject.Find("WeaponText").GetComponent<tk2dTextMesh>();
 
 		health = maxHealth;
+		stamina = maxStamina;
 
 		UpdateAmmoHUD();
 	}
@@ -60,6 +66,7 @@ public class Player : uLink.MonoBehaviour
         _cameraFollow = GameObject.Find ("_Cam").GetComponent<CameraFollow> ();
         _cameraFollow.playerTransform = this.transform;
 		healthBar = GameObject.Find("HealthBarSliced").GetComponent<tk2dTiledSprite>();
+		staminaBar = GameObject.Find("StaminaBarSliced").GetComponent<tk2dTiledSprite>();
 		UpdateHealth();
     }
 
@@ -72,10 +79,13 @@ public class Player : uLink.MonoBehaviour
 		currentMovement[0] = Mathf.Abs(Input.GetAxis(leftStickAxis[0])) > 0.1f ? Input.GetAxis(leftStickAxis[0]) : 0;
 		currentMovement[1] = Mathf.Abs(Input.GetAxis(leftStickAxis[1])) > 0.1f ? Input.GetAxis(leftStickAxis[1]) : 0;
 
-		if (Input.GetAxisRaw("LeftTrigger") > -0.5f)
+		if (Input.GetAxisRaw("LeftTrigger") > -0.5f || staminaEmpty){
 	    	controller.Move(currentMovement*moveSpeed*Time.deltaTime);
-		else
-			controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.36f);
+
+		}else if (!staminaEmpty){
+			controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.4f);
+			stamina -= Time.deltaTime * 4;
+		}
 
 		float y = Input.GetAxis(rightStickAxis[1]);
 		float x = Input.GetAxis(rightStickAxis[0]);
@@ -128,6 +138,7 @@ public class Player : uLink.MonoBehaviour
 
             meteorUpdateTimer = meteorUpdateSpeed;
         }
+		UpdateStaminaHUD();
 	}
 
     IEnumerator UpdateMeteor() {
@@ -273,5 +284,29 @@ public class Player : uLink.MonoBehaviour
 
 		ammoText.Commit();
 		weaponText.Commit();
+	}
+
+	void UpdateStaminaHUD()
+	{
+		if (stamina > maxStamina)
+		{
+			stamina = maxStamina;
+		}else if (stamina < maxStamina && Input.GetAxisRaw("LeftTrigger") > 0.5f)
+			stamina += Time.deltaTime * 3;
+
+		if (!staminaEmpty && stamina <= 0)
+			staminaEmpty = true;
+		else if (staminaEmpty && stamina > 3)
+			staminaEmpty = false;
+
+		print (stamina);
+
+		if (stamina > 0)
+		{
+			staminaBar.dimensions = new Vector2((stamina / maxStamina)*150,staminaBar.dimensions.y);
+		}else
+		{
+			staminaBar.dimensions = new Vector2(0,staminaBar.dimensions.y);
+		}
 	}
 }
