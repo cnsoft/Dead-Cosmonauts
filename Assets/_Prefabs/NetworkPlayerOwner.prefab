@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Name: 
   maxSpeed: 10.6000004
   maxDistance: 24
-  arrivalDistance: 0
+  arrivalDistance: .100000001
   velocity: {x: 0, y: 0, z: 0}
   moveCharacter: 0
   arrivalSpeed: 0
