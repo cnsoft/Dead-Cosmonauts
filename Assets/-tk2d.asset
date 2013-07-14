@@ -206,6 +206,16 @@ MonoBehaviour:
     - GunBullets0001
     - GunBullets0000
     - Ghost
+    - Soldier-Red0000
+    - Soldier-Red0001
+    - Soldier-Yellow0000
+    - Soldier-Yellow0001
+    - Soldier-Blue0000
+    - Soldier-Blue0001
+    - Soldier-Green0001
+    - Soldier-Green0000
+    - Soldier-Purple0001
+    - Soldier-Purple0000
     spriteTextureGUIDs:
     - 0165ed1b31d27472d8657f4ac8978bca
     - 03296b7a3fe524fcfbffd6cdee4d1619
@@ -287,6 +297,16 @@ MonoBehaviour:
     - 52142ede210b34819ab954d6a2f8def8
     - c5b85b39b0f7c403b9a8118c337aa4e5
     - 96451ea95fd7a4d7d9ccba24bcbe53ed
+    - 5de95d4490b324eb89e94f86cb1fd8ff
+    - 94ab607710a9d40f5b7ef066ad706bb2
+    - b43cd1440ebf74d4dac908e58d68ac2f
+    - b463d4892a7614149b975d1a6ae86245
+    - 287f526d21c1641e1955e34549be07fc
+    - b34a520aae7d140428b4fc7e2972f4d2
+    - 92de23744f84e4e30aa6bbca7d6fc10f
+    - f8971bd9cd39246679af7a215668927e
+    - 9f0113acc1e7c425aacbbfb7642c02c2
+    - ca37d0ea123ac4a75a1c35c15f1ca8e4
     spriteTextureTimeStamps:
     - 1373791753
     - 1373791753
@@ -368,6 +388,16 @@ MonoBehaviour:
     - 1373798089
     - 1373798089
     - 1373798752
+    - 1373814723
+    - 1373814724
+    - 1373814750
+    - 1373814751
+    - 1373814648
+    - 1373814648
+    - 1373814682
+    - 1373814681
+    - 1373814911
+    - 1373814911
     managedSpriteCollection: 0
     loadable: 0
     assetName: 

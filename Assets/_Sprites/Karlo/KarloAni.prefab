@@ -114,7 +114,7 @@ MonoBehaviour:
     frames:
     - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
         type: 2}
-      spriteId: 42
+      spriteId: 82
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
@@ -150,7 +150,7 @@ MonoBehaviour:
     frames:
     - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
         type: 2}
-      spriteId: 56
+      spriteId: 87
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
@@ -246,7 +246,7 @@ MonoBehaviour:
     frames:
     - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
         type: 2}
-      spriteId: 48
+      spriteId: 80
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
@@ -342,7 +342,7 @@ MonoBehaviour:
     frames:
     - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
         type: 2}
-      spriteId: 67
+      spriteId: 84
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
@@ -787,6 +787,148 @@ MonoBehaviour:
     - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
         type: 2}
       spriteId: 79
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 30
+    loopStart: 0
+    wrapMode: 0
+  - name: Yellow_Shoot
+    frames:
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 82
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 83
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 82
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 20
+    loopStart: 0
+    wrapMode: 2
+  - name: Purple_Shoot
+    frames:
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 89
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 88
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 89
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 20
+    loopStart: 0
+    wrapMode: 2
+  - name: Red_Shoot
+    frames:
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 80
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 81
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 80
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 20
+    loopStart: 0
+    wrapMode: 2
+  - name: Blue_Shoot
+    frames:
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 84
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 85
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 84
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 20
+    loopStart: 0
+    wrapMode: 2
+  - name: Green_Shoot
+    frames:
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 87
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 86
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 87
+      triggerEvent: 0
+      eventInfo: 
+      eventInt: 0
+      eventFloat: 0
+    fps: 20
+    loopStart: 0
+    wrapMode: 2
+  - name: Purple_2
+    frames:
+    - spriteCollection: {fileID: 11400000, guid: fb19dd006aa3f4da6809185695acfbbe,
+        type: 2}
+      spriteId: 89
       triggerEvent: 0
       eventInfo: 
       eventInt: 0
