@@ -300,13 +300,14 @@ public class Player : uLink.MonoBehaviour
                     networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage, bullet.owner);
                     UpdateHealth();
                 }
+
+                damageCooldownTimer = damageCooldown;
+                StartCoroutine("Blink");
             }
 
-            StartCoroutine("Blink");
             TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
             txtPop.ChangeText(damage.ToString("f0"));
 
-            damageCooldownTimer = damageCooldown;
             AudioSource.PlayClipAtPoint(PREFAB.audio.hitSound, transform.position);
 
             HitCosmetics(damage, bullet.transform.position [0], bullet.transform.position [1]);
