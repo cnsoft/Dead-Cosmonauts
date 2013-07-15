@@ -77,6 +77,8 @@ public class Player : uLink.MonoBehaviour
     void uLink_OnNetworkInstantiate(uLink.NetworkMessageInfo info) {
         spriteTorso = GetComponentInChildren<tk2dSprite>();
         statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
+        string[] colors = new string[] { "Purple", "Blue", "Red", "Yellow", "Green" };
+        heroColorName = colors [info.sender.id % colors.Length];
 
         if (!info.networkView.isOwner) {
             return;
@@ -91,7 +93,6 @@ public class Player : uLink.MonoBehaviour
 		statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
 		spriteTorso = GetComponentInChildren<tk2dSprite>();
 		UpdateHealth();
-
 		torsoAnim.Play(heroColorName+"_2");
     }
 
