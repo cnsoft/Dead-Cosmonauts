@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a93c314494caad74da5f6361d28c70d4, type: 3}
   m_Name: 
   currentMovement: {x: 0, y: 0, z: 0}
-  moveSpeed: 9
+  moveSpeed: 7.5
   controller: {fileID: 0}
   meteorRoot: http://cosmo.meteor.com
   meteorUpdateSpeed: .200000003
