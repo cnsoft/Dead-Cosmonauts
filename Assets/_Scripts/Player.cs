@@ -98,8 +98,6 @@ public class Player : uLink.MonoBehaviour
 
 	void Update ()
 	{
-        damageCooldownTimer -= Time.deltaTime;
-
         if (!networkView.isOwner) {
         	return;
         }
@@ -168,8 +166,7 @@ public class Player : uLink.MonoBehaviour
 			WeaponShoot();
 
 		weaponTimer -= Time.deltaTime;
-
-		
+        damageCooldownTimer -= Time.deltaTime;
 
         meteorUpdateTimer -= Time.deltaTime;
         if (meteorUpdateTimer < 0f) {
@@ -298,15 +295,13 @@ public class Player : uLink.MonoBehaviour
 			int damage = bullet.damage;
 
 
-            if (damageCooldownTimer <= 0){
-                if (networkView.isOwner) {
-                    networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage, bullet.owner);
-                    UpdateHealth();
-                }
-
+            if (networkView.isOwner && damageCooldownTimer <= 0) {
+                networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage, bullet.owner);
+                UpdateHealth();
                 damageCooldownTimer = damageCooldown;
-                StartCoroutine(Blink());
             }
+
+            StartCoroutine(Blink());
 
             TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
             txtPop.ChangeText(damage.ToString("f0"));
@@ -334,10 +329,6 @@ public class Player : uLink.MonoBehaviour
     [RPC]
     void SetDead(bool isDead) {
         dead = isDead;
-		if (dead && torsoAnim != null)
-			torsoAnim.Play("Ghost");
-		else if (torsoAnim != null)
-			torsoAnim.Play(heroColorName+"_2");
     }
 
     string name {
@@ -398,14 +389,15 @@ public class Player : uLink.MonoBehaviour
         PREFAB.SpawnPrefab(PREFAB.EXPLOSION2, transform.position, "1");
         PREFAB.audio.PlayRandomKillSound();
         //StopCoroutine("Blink");
-        spriteTorso.color = Color.clear;
+//        spriteTorso.color = Color.clear;
         flashlight.LightRadius = 0;
-
+        torsoAnim.Play("Ghost");
         StartCoroutine (DeathCosmeticsCoroutine ());
     }
 
     IEnumerator DeathCosmeticsCoroutine() {
         yield return new WaitForSeconds (5.0f);
+        torsoAnim.Play(heroColorName+"_2");
         spriteTorso.color = Color.white;
     }
 
