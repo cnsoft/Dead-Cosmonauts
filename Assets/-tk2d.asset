@@ -426,3 +426,16 @@ MonoBehaviour:
     loadable: 0
     assetName: 
     version: 3
+  - name: KarloSplash
+    spriteCollectionGUID: 900705d6800d34197bab2d49be4392eb
+    spriteCollectionDataGUID: 79574ebba6e1244468e60cca83258bfd
+    spriteNames:
+    - Splash
+    spriteTextureGUIDs:
+    - c2c7c4923072a4214bb0d796da19692d
+    spriteTextureTimeStamps:
+    - 1373823130
+    managedSpriteCollection: 0
+    loadable: 0
+    assetName: 
+    version: 3
