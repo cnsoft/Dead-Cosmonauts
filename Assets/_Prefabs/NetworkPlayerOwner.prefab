@@ -278,7 +278,6 @@ MonoBehaviour:
   staminaBar: {fileID: 0}
   torsoAnim: {fileID: 11400018}
   runColor: {r: .556025803, g: .770978689, b: .955223858, a: 1}
-  heroColorName: Yellow
   bulletSpawnPoint: {fileID: 400004}
 --- !u!114 &11400008
 MonoBehaviour:
