@@ -97,9 +97,8 @@ MonoBehaviour:
   m_Name: 
   flySpeed: 41
   lifetime: 1
-  mine: 0
   owner: 0
-  damage: 1
+  damage: 2
   launched: 1
 --- !u!114 &11400002
 MonoBehaviour:

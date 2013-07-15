@@ -98,6 +98,8 @@ public class Player : uLink.MonoBehaviour
 
 	void Update ()
 	{
+        damageCooldownTimer -= Time.deltaTime;
+
         if (!networkView.isOwner) {
         	return;
         }
@@ -167,7 +169,7 @@ public class Player : uLink.MonoBehaviour
 
 		weaponTimer -= Time.deltaTime;
 
-		damageCooldownTimer -= Time.deltaTime;
+		
 
         meteorUpdateTimer -= Time.deltaTime;
         if (meteorUpdateTimer < 0f) {
@@ -303,7 +305,7 @@ public class Player : uLink.MonoBehaviour
                 }
 
                 damageCooldownTimer = damageCooldown;
-                StartCoroutine("Blink");
+                StartCoroutine(Blink());
             }
 
             TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
@@ -420,7 +422,7 @@ public class Player : uLink.MonoBehaviour
 
 		yield return new WaitForSeconds(0.1f);
 
-		spriteTorso.color = Color.red;
+		spriteTorso.color = Color.white;
 		//renderer.material.color = Color.white;
 	}
 
