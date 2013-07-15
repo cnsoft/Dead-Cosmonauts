@@ -244,8 +244,7 @@ public class Player : uLink.MonoBehaviour
 
 			//AudioSource.PlayClipAtPoint(PREFAB.audio.shootSound, transform.position);
 
-            this.networkView.RPC ("SpawnBullets", uLink.RPCMode.All, weaponId);
-
+            this.networkView.RPC (uLink.NetworkFlags.Unbuffered, "SpawnBullets", uLink.RPCMode.All, weaponId);
         }
 
         UpdateAmmoHUD();
