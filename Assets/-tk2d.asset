@@ -221,6 +221,9 @@ MonoBehaviour:
     - Missle0000
     - Missle0001
     - Missle0002
+    - Shotgun
+    - MachineGun
+    - HealthPack
     spriteTextureGUIDs:
     - 0165ed1b31d27472d8657f4ac8978bca
     - 03296b7a3fe524fcfbffd6cdee4d1619
@@ -317,6 +320,9 @@ MonoBehaviour:
     - 45b652c6cb6644a19a080f35b036d1a0
     - b53ff1d67c384488598cbb57ace70dbb
     - c35bdef487e624363a49de32d4e290e2
+    - a16d3be502f2c43e5ab5fcb24e59fc4a
+    - cbc5b88d93ff04a2a8b3b4a949d76de3
+    - 984940c87458248deac171426251134a
     spriteTextureTimeStamps:
     - 1373791753
     - 1373791753
@@ -413,6 +419,9 @@ MonoBehaviour:
     - 1373818212
     - 1373818213
     - 1373818214
+    - 1373811666
+    - 1373811665
+    - 1373811621
     managedSpriteCollection: 0
     loadable: 0
     assetName: 

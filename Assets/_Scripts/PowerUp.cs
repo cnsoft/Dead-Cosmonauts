@@ -8,6 +8,7 @@ public class PowerUp : uLink.MonoBehaviour {
     public string id;
 	private Player player;
 	private Light2D light;
+	private tk2dSprite sprite;
 
 
 	public int weaponId = 2;
@@ -24,6 +25,16 @@ public class PowerUp : uLink.MonoBehaviour {
         if (networkView.observed == null) {
             networkView.observed = this;
         }
+
+		sprite = GetComponent<tk2dSprite>();
+
+		switch (weaponId)
+		{
+			case(1): sprite.SetSprite("MachineGun"); break;
+			case(2): sprite.SetSprite("Shotgun"); break;
+			case(4): sprite.SetSprite("HealthPack"); break;
+		}
+
     }
 
 	void OnTriggerEnter(Collider other)
@@ -64,6 +75,17 @@ public class PowerUp : uLink.MonoBehaviour {
         if (!info.networkView.initialData.TryRead<int>(out weaponId)) {
             Debug.LogError ("No initial id for powerup.");
         }
+
+		sprite = GetComponent<tk2dSprite>();
+
+		switch (weaponId)
+		{
+			case(1): sprite.SetSprite("MachineGun"); break;
+			case(2): sprite.SetSprite("Shotgun"); break;
+			case(4): sprite.SetSprite("HealthPack"); break;
+		}
+
+
     }
 
     IEnumerator DeferredDestroy() {
