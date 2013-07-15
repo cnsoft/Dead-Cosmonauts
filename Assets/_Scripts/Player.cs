@@ -300,17 +300,16 @@ public class Player : uLink.MonoBehaviour
                     networkView.RPC ("SubtractHealth", uLink.RPCMode.All, damage, bullet.owner);
                     UpdateHealth();
                 }
-
-                StartCoroutine("Blink");
-                TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
-                txtPop.ChangeText(damage.ToString("f0"));
-
-                damageCooldownTimer = damageCooldown;
-                AudioSource.PlayClipAtPoint(PREFAB.audio.hitSound, transform.position);
-
             }
 
-            networkView.RPC("HitCosmetics", uLink.RPCMode.All, damage, bullet.transform.position [0], bullet.transform.position [1]);
+            StartCoroutine("Blink");
+            TextPopup txtPop = PREFAB.SpawnPrefab(PREFAB.DAMAGE_TEXT, transform.position-new Vector3(0,0,5), "1").GetComponent<TextPopup>();
+            txtPop.ChangeText(damage.ToString("f0"));
+
+            damageCooldownTimer = damageCooldown;
+            AudioSource.PlayClipAtPoint(PREFAB.audio.hitSound, transform.position);
+
+            HitCosmetics(damage, bullet.transform.position [0], bullet.transform.position [1]);
 			PREFAB.DespawnPrefab(other.transform, "1");
 		}
 	}
@@ -331,7 +330,7 @@ public class Player : uLink.MonoBehaviour
     [RPC]
     void SetDead(bool isDead) {
         dead = isDead;
-		if (dead)
+		if (dead && torsoAnim != null)
 			torsoAnim.Play("Ghost");
 		else 
 			torsoAnim.Play(heroColorName+"_2");
