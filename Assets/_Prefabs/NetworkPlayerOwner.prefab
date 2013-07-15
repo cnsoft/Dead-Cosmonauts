@@ -259,7 +259,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   meteorRoot: http://cosmo.meteor.com
   meteorUpdateSpeed: .200000003
-  weaponCooldown: .159999996
+  weaponCooldown: .200000003
   rotationSpeed: 8
   leftStickAxis:
   - Horizontal
@@ -278,6 +278,7 @@ MonoBehaviour:
   staminaBar: {fileID: 0}
   torsoAnim: {fileID: 11400018}
   runColor: {r: .556025803, g: .770978689, b: .955223858, a: 1}
+  heroColorName: 
   bulletSpawnPoint: {fileID: 400004}
 --- !u!114 &11400008
 MonoBehaviour:

@@ -13,10 +13,11 @@ if (Meteor.isServer) {
 
   Meteor.Router.add('/add/:playerId/:name', 'GET', function (playerId, name) {
     playerId = parseInt(playerId);
+    name = name || "Anonymous";
     if (Players.find({playerId: playerId}).count() > 0) {
       Players.update({playerId: playerId}, {$set: {name: name}});
     } else {
-      Players.insert({playerId: playerId, name: name, x: 0.0, y: 0.0, rotationZ: 0.0, message: null});
+      Players.insert({playerId: playerId, name: name, x: 0.0, y: 0.0, rotationZ: 0.0, message: ""});
     }
 
     return [200, defaultHeaders, Players.find({}).count().toString()];
@@ -24,6 +25,9 @@ if (Meteor.isServer) {
 
   Meteor.Router.add('/chat/:playerId/:message', 'GET',
     function (playerId, message) {
+      if (message == null || message == "") {
+        return [200,defaultHeaders,0];
+      }
       playerId = parseInt(playerId);
       Players.update({playerId: playerId}, {$set: {message: message}});
       return [200, defaultHeaders, 1];
@@ -202,9 +206,11 @@ if (Meteor.isClient) {
         var lng = (player.y);
         var newLatLng = new L.LatLng(lat, lng);
         markers[player._id].setLatLng(newLatLng);
-        if (player.message != null) {
+        if (player.message != null && player.message !== "") {
           markers[player._id].updateLabelContent(player.name + ": " +
             player.message);
+        } else {
+          markers[player._id].updateLabelContent(player.name);
         }
       }
     });

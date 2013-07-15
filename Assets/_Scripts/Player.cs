@@ -78,13 +78,14 @@ public class Player : uLink.MonoBehaviour
         spriteTorso = GetComponentInChildren<tk2dSprite>();
         statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
         string[] colors = new string[] { "Purple", "Blue", "Red", "Yellow", "Green" };
-        heroColorName = colors [info.sender.id % colors.Length];
+        heroColorName = colors [info.networkView.owner.id % colors.Length];
+        SetName (info.networkView.owner.id, name);
+        torsoAnim.Play(heroColorName+"_2");
 
         if (!info.networkView.isOwner) {
             return;
         }
-        SetName (info.networkView.owner.id, name);
-        this.networkView.RPC ("SetName", uLink.RPCMode.Others, info.networkView.owner.id, name);
+//        this.networkView.RPC ("SetName", uLink.RPCMode.Others, info.networkView.owner.id, name);
 
         _cameraFollow = GameObject.Find ("_Cam").GetComponent<CameraFollow> ();
         _cameraFollow.playerTransform = this.transform;
@@ -93,7 +94,6 @@ public class Player : uLink.MonoBehaviour
 		statsScreen = (StatsScreen)FindObjectOfType(typeof(StatsScreen));
 		spriteTorso = GetComponentInChildren<tk2dSprite>();
 		UpdateHealth();
-		torsoAnim.Play(heroColorName+"_2");
     }
 
 	void Update ()
@@ -366,7 +366,7 @@ public class Player : uLink.MonoBehaviour
         stat.name = name;
         stat.id = id;
 
-        if (networkView.isOwner) {
+        if (statsScreen != null) {
             statsScreen.UpdateStats (stats);
         }
     }

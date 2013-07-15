@@ -95,7 +95,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afbea697d15e64826a1713eb4d94be85, type: 3}
   m_Name: 
-  flySpeed: 41
+  flySpeed: 33
   lifetime: 1
   owner: 0
   damage: 2
