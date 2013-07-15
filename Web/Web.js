@@ -171,7 +171,7 @@ if (Meteor.isClient) {
 
     window.map = L.map('map',
       {doubleClickZoom: false, zoomControl: false, attributionControl: false}).setMaxBounds(bounds).fitBounds(bounds);
-    L.imageOverlay('/map.jpg', bounds).addTo(window.map);
+    L.imageOverlay('/map2.jpg', bounds).addTo(window.map);
 
     window.map.on('dblclick', function (e) {
       if (availablePowerup) {
