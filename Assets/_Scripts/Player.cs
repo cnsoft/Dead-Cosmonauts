@@ -333,7 +333,7 @@ public class Player : uLink.MonoBehaviour
         dead = isDead;
 		if (dead && torsoAnim != null)
 			torsoAnim.Play("Ghost");
-		else 
+		else if (torsoAnim != null)
 			torsoAnim.Play(heroColorName+"_2");
     }
 
