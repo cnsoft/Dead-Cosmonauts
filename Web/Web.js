@@ -46,8 +46,7 @@ if (Meteor.isServer) {
             {$set: {x: y, y: x, rotationZ: rotationZ}});
         } else {
           id =
-            Players.insert({playerId: playerId, x: y, y: x,
-              rotationZ: rotationZ});
+            Players.insert({playerId: playerId, name: "Anonymous", x: x, y: 0.0, rotationZ: 0.0, message: ""});
         }
       } catch (e) {
         return [500, '0'];
