@@ -118,16 +118,33 @@ public class Player : uLink.MonoBehaviour
 			statsScreen.ToggleStats();
 		}
 
-		currentMovement[0] = Mathf.Abs(Input.GetAxis(leftStickAxis[0])) > 0.1f ? Input.GetAxis(leftStickAxis[0]) : 0;
-		currentMovement[1] = Mathf.Abs(Input.GetAxis(leftStickAxis[1])) > 0.1f ? Input.GetAxis(leftStickAxis[1]) : 0;
+		if (PlayerManager.mouseControls){
+			currentMovement[0] = Mathf.Abs(Input.GetAxisRaw(leftStickAxis[0])) > 0.1f ? Input.GetAxisRaw(leftStickAxis[0]) : 0;
+			currentMovement[1] = Mathf.Abs(Input.GetAxisRaw(leftStickAxis[1])) > 0.1f ? Input.GetAxisRaw(leftStickAxis[1]) : 0;
+		}
+		else{
+			currentMovement[0] = Mathf.Abs(Input.GetAxis(leftStickAxis[0])) > 0.1f ? Input.GetAxis(leftStickAxis[0]) : 0;
+			currentMovement[1] = Mathf.Abs(Input.GetAxis(leftStickAxis[1])) > 0.1f ? Input.GetAxis(leftStickAxis[1]) : 0;
+		}
 
-		if (Input.GetAxisRaw("LeftTrigger") > -0.5f || staminaEmpty){
-	    	controller.Move(currentMovement*moveSpeed*Time.deltaTime);
-			spriteTorso.color = Color.white;
-		}else if (!staminaEmpty){
-			controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.4f);
-			stamina -= Time.deltaTime * 2f;
-			spriteTorso.color = runColor;
+		if (!PlayerManager.mouseControls){
+			if (Input.GetAxisRaw("LeftTrigger") > -0.5f || staminaEmpty){
+		    	controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.1f);
+				spriteTorso.color = Color.white;
+			}else if (!staminaEmpty){
+				controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.3f);
+				stamina -= Time.deltaTime * 2f;
+				spriteTorso.color = runColor;
+			}
+		}else{
+			if (Input.GetKey(KeyCode.LeftShift) && !staminaEmpty){
+				controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.3f);
+				stamina -= Time.deltaTime * 2f;
+				spriteTorso.color = runColor;
+			}else{
+				controller.Move(currentMovement*moveSpeed*Time.deltaTime*1.1f);
+				spriteTorso.color = Color.white;
+			}
 		}
 
 		float y = Input.GetAxis(rightStickAxis[1]);
@@ -141,28 +158,31 @@ public class Player : uLink.MonoBehaviour
 			noShootTimer = 1.5f;
 		}
 
-		if (noShootTimer > 0){
-			if (Mathf.Abs(y) > 0.1f || Mathf.Abs(x) > 0.1f ){
-				Vector3 targetEuler = new Vector3(0,0, (Mathf.Atan2(y, x))*180/(Mathf.PI));
+		if (!PlayerManager.mouseControls){
 
-				transform.localEulerAngles = new Vector3(0,0,Mathf.LerpAngle(transform.localEulerAngles.z, targetEuler.z, Time.deltaTime * rotationSpeed));
+			if (noShootTimer > 0){
+				if (Mathf.Abs(y) > 0.1f || Mathf.Abs(x) > 0.1f ){
+					Vector3 targetEuler = new Vector3(0,0, (Mathf.Atan2(y, x))*180/(Mathf.PI));
 
-				if (Mathf.Abs(y) > 0.6f || Mathf.Abs(x) > 0.6f ){
-					//WeaponShoot();
+					transform.localEulerAngles = new Vector3(0,0,Mathf.LerpAngle(transform.localEulerAngles.z, targetEuler.z, Time.deltaTime * rotationSpeed));
+
+					if (Mathf.Abs(y) > 0.6f || Mathf.Abs(x) > 0.6f ){
+						//WeaponShoot();
+					}
 				}
-			}
-		}else
-		{
-			y = Input.GetAxis(leftStickAxis[1]);
-			x = Input.GetAxis(leftStickAxis[0]);
+			}else
+			{
+				y = Input.GetAxis(leftStickAxis[1]);
+				x = Input.GetAxis(leftStickAxis[0]);
 
-			if (Mathf.Abs(y) > 0.1f || Mathf.Abs(x) > 0.1f ){
-				Vector3 targetEuler = new Vector3(0,0, (Mathf.Atan2(y, x))*180/(Mathf.PI));
-				transform.localEulerAngles = new Vector3(0,0,Mathf.LerpAngle(transform.localEulerAngles.z, targetEuler.z, Time.deltaTime * 7));
+				if (Mathf.Abs(y) > 0.1f || Mathf.Abs(x) > 0.1f ){
+					Vector3 targetEuler = new Vector3(0,0, (Mathf.Atan2(y, x))*180/(Mathf.PI));
+					transform.localEulerAngles = new Vector3(0,0,Mathf.LerpAngle(transform.localEulerAngles.z, targetEuler.z, Time.deltaTime * 7));
+				}
 			}
 		}
 
-		if (Input.GetAxisRaw("RightTrigger") < -0.5f)
+		if ((Input.GetAxisRaw("RightTrigger") < -0.5f && !PlayerManager.mouseControls) || (Input.GetMouseButton(0) && PlayerManager.mouseControls))
 			WeaponShoot();
 
 		weaponTimer -= Time.deltaTime;
@@ -505,7 +525,7 @@ public class Player : uLink.MonoBehaviour
 		if (stamina > maxStamina)
 		{
 			stamina = maxStamina;
-		}else if (stamina < maxStamina && Input.GetAxisRaw("LeftTrigger") > 0.5f)
+		}else if (stamina < maxStamina && ((Input.GetAxisRaw("LeftTrigger") > 0.5f && !PlayerManager.mouseControls) || (!Input.GetKey(KeyCode.LeftShift) && PlayerManager.mouseControls)))
 			stamina += Time.deltaTime * 5;
 
 		if (!staminaEmpty && stamina <= 0)
